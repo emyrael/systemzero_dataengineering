@@ -1,0 +1,23 @@
+[project]
+name = "systemzero-data-engineering"
+version = "0.1.0"
+description = "E-commerce data pipeline: ingestion, validation, cleaning, features and SurrealDB graph loading"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: end-to-end tests that run the pipeline on real files",
+    "surrealdb_server: needs a running SurrealDB server (docker compose up surrealdb)",
+]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true

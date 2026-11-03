@@ -1,0 +1,41 @@
+# Docker Compose for Coding Test Infrastructure
+# Used by both data-engineering and ai-engineering assessments
+
+services:
+  # SurrealDB - Graph database for GraphRAG
+  surrealdb:
+    # Pinned to match the engine embedded in the surrealdb 2.0 Python client (surrealdb-core 4).
+    image: surrealdb/surrealdb:v4.0.0
+    container_name: coding-test-surrealdb
+    user: root
+    command: start --user root --pass root --log debug file:/data/database.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - surrealdb_data:/data
+    environment:
+      - SURREAL_USER=root
+      - SURREAL_PASS=root
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis - Optional caching layer
+  redis:
+    image: redis:7-alpine
+    container_name: coding-test-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  surrealdb_data:
+  redis_data:

@@ -1,0 +1,90 @@
+# Pipeline configuration. Relative paths resolve against the project root.
+# Override the file location with the PIPELINE_CONFIG environment variable.
+
+run:
+  # Reference date for recency/overdue features. Fixed (never "now") so reruns are reproducible.
+  # Day after the last transaction in the dataset (2024-12-31).
+  as_of_date: "2025-01-01"
+  log_level: INFO
+
+paths:
+  raw_dir: data
+  output_dir: outputs
+  bronze_dir: outputs/processed/bronze
+  silver_dir: outputs/processed/silver
+  gold_dir: outputs/processed/gold
+  quarantine_dir: outputs/quarantine
+  log_dir: outputs/logs
+  quality_report: outputs/quality_report.md
+  dashboard: outputs/dashboard/index.html
+
+sources:
+  products:
+    file: products.csv
+    format: csv
+  customers:
+    file: customers.json
+    format: json
+    record_path: customers
+  transactions:
+    file: sales_transactions.parquet
+    format: parquet
+  vendors:
+    file: vendors.json
+    format: json
+    record_path: vendors
+  invoices:
+    file: invoices.csv
+    format: csv
+  support_tickets:
+    file: support_tickets.json
+    format: json
+    record_path: support_tickets
+  product_reviews:
+    file: product_reviews.json
+    format: json
+    record_path: reviews
+  call_transcripts:
+    file: call_transcripts.json
+    format: json
+    record_path: call_transcripts
+
+reference:
+  base_currency: USD
+  # Static FX rates to USD, approximate as of run.as_of_date. Documented assumption:
+  # the dataset ships no FX source, and invoices are billed in vendor home currencies.
+  fx_rates_to_usd:
+    USD: 1.0
+    EUR: 1.04
+    GBP: 1.25
+    AUD: 0.62
+    CAD: 0.70
+    JPY: 0.0064
+  payment_terms_days:
+    NET15: 15
+    NET30: 30
+    NET45: 45
+    NET60: 60
+  # Single source of truth for country -> region (vendors.json uses the same regions).
+  country_regions:
+    USA: North America
+    Canada: North America
+    United Kingdom: Europe
+    France: Europe
+    Germany: Europe
+    Netherlands: Europe
+    Sweden: Europe
+    Italy: Europe
+    Australia: Asia Pacific
+    Japan: Asia Pacific
+    China: Asia Pacific
+
+surrealdb:
+  # ws://localhost:8000/rpc for the Docker server; mem:// for the embedded engine (tests).
+  url: ws://localhost:8000/rpc
+  namespace: test
+  database: ecommerce
+  # Credentials are read from these environment variables, never stored here.
+  username_env: SURREAL_USER
+  password_env: SURREAL_PASS
+  batch_size: 500

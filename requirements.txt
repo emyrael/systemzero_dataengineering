@@ -1,0 +1,31 @@
+# Core Data Engineering
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=14.0.0  # For parquet support
+polars>=0.19.0   # Alternative high-performance dataframe library
+
+# Data Validation
+pydantic>=2.0.0
+pandera>=0.18.0
+
+# SurrealDB
+surrealdb>=0.3.0  # Python client for SurrealDB
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0  # For async SurrealDB tests
+
+# Utilities
+pyyaml>=6.0.0
+python-dateutil>=2.8.0
+phonenumbers>=8.13.0  # For phone number validation/standardization
+
+# Logging
+loguru>=0.7.0
+
+# Optional but recommended
+# great-expectations>=0.18.0  # Advanced data quality
+# duckdb>=0.9.0              # In-process SQL analytics
+# mlflow>=2.9.0              # Experiment tracking
+# faker>=20.0.0              # For generating test data

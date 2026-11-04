@@ -1,10 +1,14 @@
-"""Registry of every data-quality rule the validation layer can raise.
+"""Registry of every data-quality rule the pipeline can raise.
 
-Each rule has exactly one action:
+Record-level rules are raised by the schemas in ``src/validation/schemas``; dataset-level
+rules (duplicates, cross-entity references, evidence from other tables) by
+``src/cleaning/clean.py``. Each rule has exactly one action:
 
-* ``fix``        – a representation was standardised; the record is unchanged in meaning.
+* ``fix``        – a value was standardised or derived from evidence; recorded in ``dq_fixes``.
 * ``flag``       – the record is kept, but the issue is recorded in its ``dq_flags``.
 * ``quarantine`` – the record is rejected and written to the quarantine file.
+* ``drop``       – the record repeats another one's key and is removed; logged in
+  ``outputs/quarantine/_duplicates.csv``.
 
 Principle: quarantine only when the record as a whole cannot be trusted (no usable
 identifier, an impossible business event). A single bad attribute is nulled and flagged
@@ -21,6 +25,7 @@ class Action(str, Enum):  # StrEnum needs 3.11; the brief allows 3.10
     FIX = "fix"
     FLAG = "flag"
     QUARANTINE = "quarantine"
+    DROP = "drop"
 
 
 @dataclass(frozen=True)
@@ -38,7 +43,7 @@ def _rules(action: Action, **descriptions: str) -> list[Rule]:
     return [Rule(rule_id.replace("__", "."), action, text) for rule_id, text in descriptions.items()]
 
 
-FIX, FLAG, QUARANTINE = Action.FIX, Action.FLAG, Action.QUARANTINE
+FIX, FLAG, QUARANTINE, DROP = Action.FIX, Action.FLAG, Action.QUARANTINE, Action.DROP
 
 RULES: dict[str, Rule] = {
     rule.id: rule
@@ -211,6 +216,45 @@ RULES: dict[str, Rule] = {
             call_transcripts__invalid_duration="duration negative and not recomputable; nulled",
             call_transcripts__missing_utterances="utterance array empty or missing",
             call_transcripts__invalid_quality_score="quality_score outside 0-100; nulled",
+        ),
+        # ══ dataset-level rules (src/cleaning/clean.py) ═══════════════════════
+        *_rules(
+            DROP,
+            **{
+                f"{entity}__duplicate": "primary key seen before; latest version kept, the rest removed"
+                for entity in (
+                    "products", "customers", "transactions", "vendors", "invoices", "invoice_lines",
+                    "support_tickets", "product_reviews", "call_transcripts",
+                )
+            },
+        ),
+        *_rules(
+            FIX,
+            products__category_from_name="missing category inferred from product name (unambiguous mapping)",
+            transactions__currency_relabelled="non-USD label but unit_price equals USD catalog price; set to USD",
+            invoices__currency_relabelled="non-USD label but line costs equal USD catalog costs; set to USD",
+        ),
+        *_rules(
+            FLAG,
+            products__unknown_vendor="vendor_id not in vendors",
+            products__sku_conflict="SKU shared with a different product",
+            customers__shared_email="email shared with a different customer",
+            transactions__unknown_customer="customer_id not in customers",
+            transactions__unknown_product="product_id not in products",
+            transactions__currency_unverified="non-USD label not checkable against the catalog; still set to USD",
+            invoices__unknown_vendor="vendor_id not in vendors",
+            invoices__duplicate_number="invoice_number shared with a different invoice",
+            invoices__currency_unverified="non-USD label not checkable against line costs; still set to USD",
+            invoice_lines__unknown_invoice="invoice_id not in invoices (header quarantined)",
+            invoice_lines__unknown_product="product_id not in products (external item)",
+            invoice_lines__vendor_mismatch="product belongs to a different vendor than the invoice",
+            support_tickets__unknown_customer="customer_id not in customers",
+            support_tickets__unknown_product="product_id not in products",
+            product_reviews__unknown_customer="customer_id not in customers",
+            product_reviews__unknown_product="product_id not in products",
+            product_reviews__unverified_purchase="verified_purchase is true but no matching transaction",
+            call_transcripts__unknown_customer="customer_id not in customers",
+            call_transcripts__unknown_ticket="ticket_id not in support tickets",
         ),
     ]
 }

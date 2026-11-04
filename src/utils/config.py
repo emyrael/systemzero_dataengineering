@@ -69,15 +69,8 @@ class SourceConfig(_Strict):
 
 class ReferenceConfig(_Strict):
     base_currency: str
-    fx_rates_to_usd: dict[str, float]
     payment_terms_days: dict[str, int]
     country_regions: dict[str, str]
-
-    @model_validator(mode="after")
-    def _base_currency_has_rate(self) -> ReferenceConfig:
-        if self.fx_rates_to_usd.get(self.base_currency) != 1.0:
-            raise ValueError(f"fx_rates_to_usd must map {self.base_currency} to 1.0")
-        return self
 
 
 class SurrealConfig(_Strict):

@@ -586,6 +586,49 @@ async with Surreal("ws://localhost:8000/rpc") as db:
 
 ---
 
+## Data Profiling
+
+**Why first.** The brief lists known data-quality issues, but cleaning rules written from a list
+are guesses. The raw files were profiled before any rule was written, so every rule rests on a
+measured count. Profiling also found issues the brief does not mention, and showed that some
+it does mention are absent from this extract.
+
+**Run it** (standalone and read-only: it needs no pipeline stage to have run and changes nothing):
+
+```bash
+python scripts/data_profile.py              # optional: --config PATH --out-dir DIR
+```
+
+**Outputs** (deterministic: the same input files produce byte-identical reports):
+
+- `outputs/profiling/raw_data_profile.md`: a short summary (about three pages): issues per
+  dataset, all Critical and High findings with the pipeline rule that handles them, broken
+  references, the evidence behind key decisions, and the business events kept
+- `outputs/profiling/raw_data_profile.json`: everything: schema, column statistics, all findings
+  with samples, and recommendations
+
+Each finding is classified as a *confirmed violation*, a *suspicious anomaly* or a *legitimate
+business exception* (returns, credit lines and system/supervisor speakers are kept, not
+"fixed"). Each one also names the pipeline rule in `src/validation/rules.py` that handles it.
+Counts are on raw records, so they can differ slightly from the pipeline's quality report,
+which counts after duplicates are removed.
+
+**How the findings shaped the pipeline:**
+
+| Profiling evidence | Decision |
+|---|---|
+| Ambiguous dates checked against the ISO `metadata.created_at` copy: `nn/nn/yyyy` agrees day-first 185/185, `nn-nn-yyyy` month-first 203/203; epoch values never agree (one day early) | Format-specific date parser; customer registration taken from metadata |
+| Every checkable amount equals the USD catalog value whatever the currency label (transactions 4,901/4,901, invoice lines 2,998/2,998) | Currency labels relabelled to USD; no FX conversion |
+| `due_date` equals `invoice_date` on 805/805 invoices despite NET terms | `due_date` derived from terms; source kept as `src_due_date` |
+| Every duplicate key is an exact copy (5 products, 3 customers, 10 transactions, 5 invoices) | Deduplicate on primary key, keep one, log the rest |
+| 4% of transactions reference `CUS-INVALID-*` / `PRD-DELETED-*` | Keep and flag orphans; the graph skips the edge |
+| Negative quantities (236 transactions, 67 invoice lines) are returns and credits | Classified as business events, not quarantined |
+| All 387 non-null `last_purchase_date` values are after `as_of_date` | Nulled and flagged; recency recomputed from transactions |
+
+The full rule set and the reasoning behind it are in [`docs/CLEANING_RULES.md`](docs/CLEANING_RULES.md).
+
+---
+
 
 ## Questions?
 

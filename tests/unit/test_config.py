@@ -58,12 +58,6 @@ def test_json_source_requires_record_path(tmp_path, raw_config):
         load_config(_write(tmp_path, raw_config))
 
 
-def test_base_currency_must_have_unit_rate(tmp_path, raw_config):
-    raw_config["reference"]["fx_rates_to_usd"]["USD"] = 0.9
-    with pytest.raises(ValidationError, match="USD"):
-        load_config(_write(tmp_path, raw_config))
-
-
 def test_surreal_credentials_come_from_env(monkeypatch):
     cfg = load_config()
     monkeypatch.setenv("SURREAL_USER", "alice")

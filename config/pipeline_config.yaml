@@ -59,16 +59,9 @@ sources:
     primary_key: [call_id]
 
 reference:
+  # Currency all monetary amounts are in. Transaction and invoice currency labels are not
+  # trusted: every checkable amount equals the USD catalog value (docs/CLEANING_RULES.md).
   base_currency: USD
-  # Static FX rates to USD, approximate as of run.as_of_date. Documented assumption:
-  # the dataset ships no FX source, and invoices are billed in vendor home currencies.
-  fx_rates_to_usd:
-    USD: 1.0
-    EUR: 1.04
-    GBP: 1.25
-    AUD: 0.62
-    CAD: 0.70
-    JPY: 0.0064
   payment_terms_days:
     NET15: 15
     NET30: 30

@@ -7,17 +7,21 @@ and is therefore identical across reruns on the same input.
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 from loguru import logger
 
+from src.cleaning.clean import CLEAN_SUBDIR, DUPLICATES_FILE
+from src.cleaning.clean import METRICS_FILE as CLEANING_METRICS_FILE
 from src.ingestion.loaders import MANIFEST_FILE
 from src.utils.config import PipelineConfig
 from src.validation.rules import RULES, Action
 from src.validation.validator import METRICS_FILE, VALIDATED_SUBDIR
 
-_ACTION_LABEL = {Action.QUARANTINE: "Rejected", Action.FLAG: "Flagged", Action.FIX: "Fixed"}
+_ACTION_LABEL = {Action.QUARANTINE: "Rejected", Action.DROP: "Removed", Action.FLAG: "Flagged", Action.FIX: "Fixed"}
+_COUNTERS = (("rejections", Action.QUARANTINE), ("removals", Action.DROP), ("flags", Action.FLAG), ("fixes", Action.FIX))
 
 
 def _pct(part: int, whole: int) -> str:
@@ -38,27 +42,51 @@ def _describe(rule_id: str) -> str:
     return "schema violation: " + rule_id.split(".schema:", 1)[-1].replace(":", " → ")
 
 
+def merge_metrics(validation: dict[str, dict], cleaning: dict[str, dict]) -> dict[str, dict]:
+    """Per-entity view over both stages: rule counts summed, record counts after cleaning."""
+    merged = {}
+    for name, v in validation.items():
+        c = cleaning[name]
+        merged[name] = {
+            "total": v["total"],
+            "quarantined": v["quarantined"],
+            "removed": sum(c["removals"].values()),
+            "rows_out": c["rows_out"],
+            "records_fixed": c["records_fixed"],
+            "records_flagged": c["records_flagged"],
+            "rejections": v["rejections"],
+            "removals": c["removals"],
+            "flags": dict((Counter(v["flags"]) + Counter(c["flags"])).most_common()),
+            "fixes": dict((Counter(v["fixes"]) + Counter(c["fixes"])).most_common()),
+        }
+    return merged
+
+
 def _summary(manifest: list[dict], entities: dict[str, dict]) -> list[str]:
     rows = []
     for name, m in entities.items():
-        clean = m["valid"] - m["records_flagged"]
+        unflagged = m["rows_out"] - m["records_flagged"]
         rows.append([
-            f"`{name}`", m["total"], m["valid"], m["quarantined"], m["records_fixed"],
-            m["records_flagged"], _pct(clean, m["total"]),
+            f"`{name}`", m["total"], m["quarantined"], m["removed"], m["rows_out"], m["records_fixed"],
+            m["records_flagged"], _pct(unflagged, m["rows_out"]),
         ])
     failed = [m for m in manifest if m["status"] != "ok"]
     out = ["## 1. Summary", ""]
     out += _table(
-        ["Entity", "Records in", "Valid", "Quarantined", "With fixes", "Flagged", "Clean (no flags)"], rows
+        ["Entity", "Records in", "Quarantined", "Duplicates removed", "Rows out", "With fixes", "Flagged",
+         "No flags"],
+        rows,
     )
     if failed:
         out += ["", "**Sources that failed to load:**", ""]
         out += [f"- `{m['source']}` ({m['file']}): {m['error']}" for m in failed]
     out += [
         "",
-        "*Fixed* = a representation was standardised (meaning unchanged). *Flagged* = kept, "
-        "with the issue recorded in the record's `dq_flags`. *Quarantined* = rejected; see "
-        "`outputs/quarantine/<entity>.csv` for the raw record and reasons.",
+        "*Fixed* = a value was standardised or derived from evidence (`dq_fixes`). *Flagged* = "
+        "kept, with the issue recorded in the record's `dq_flags`. *Quarantined* = rejected; see "
+        "`outputs/quarantine/<entity>.csv` for the raw record and reasons. *Duplicates removed* = "
+        f"repeated primary keys, logged in `outputs/quarantine/{DUPLICATES_FILE}`. *Rows out* = rows in "
+        "`outputs/processed/silver/clean/`.",
     ]
     return out
 
@@ -74,7 +102,7 @@ def _completeness(manifest: list[dict]) -> list[str]:
 
 def _entity_section(name: str, m: dict) -> list[str]:
     rows = []
-    for key, action in (("rejections", Action.QUARANTINE), ("flags", Action.FLAG), ("fixes", Action.FIX)):
+    for key, action in _COUNTERS:
         for rule_id, count in m[key].items():
             rows.append([_ACTION_LABEL[action], f"`{rule_id}`", count, _pct(count, m["total"]), _describe(rule_id)])
     if not rows:
@@ -83,7 +111,7 @@ def _entity_section(name: str, m: dict) -> list[str]:
 
 
 def _not_observed(entities: dict[str, dict]) -> list[str]:
-    fired = {rule for m in entities.values() for key in ("rejections", "flags", "fixes") for rule in m[key]}
+    fired = {rule for m in entities.values() for key, _ in _COUNTERS for rule in m[key]}
     silent = [r for r in RULES.values() if r.id not in fired and r.entity in entities]
     rows = [[f"`{r.id}`", _ACTION_LABEL[r.action], r.description] for r in silent]
     return [
@@ -97,8 +125,8 @@ def _not_observed(entities: dict[str, dict]) -> list[str]:
     ]
 
 
-def render_quality_report(manifest: list[dict], validation: dict[str, Any]) -> str:
-    entities = validation["entities"]
+def render_quality_report(manifest: list[dict], validation: dict[str, Any], cleaning: dict[str, Any]) -> str:
+    entities = merge_metrics(validation["entities"], cleaning["entities"])
     lines = [
         "# Data Quality Report",
         "",
@@ -121,8 +149,9 @@ def render_quality_report(manifest: list[dict], validation: dict[str, Any]) -> s
 def write_quality_report(config: PipelineConfig) -> Path:
     manifest = json.loads((config.paths.bronze_dir / MANIFEST_FILE).read_text())
     validation = json.loads((config.paths.silver_dir / VALIDATED_SUBDIR / METRICS_FILE).read_text())
+    cleaning = json.loads((config.paths.silver_dir / CLEAN_SUBDIR / CLEANING_METRICS_FILE).read_text())
     path = config.paths.quality_report
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(render_quality_report(manifest, validation))
+    path.write_text(render_quality_report(manifest, validation, cleaning))
     logger.bind(stage="report").info("Quality report written", path=str(path))
     return path

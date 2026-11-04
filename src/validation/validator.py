@@ -7,7 +7,7 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, get_args
 
 import pandas as pd
 from loguru import logger
@@ -92,6 +92,23 @@ def validate_record(
     return RecordOutcome(row=parsed.model_dump(), rejections=[], fixes=fixes, flags=flags)
 
 
+def _int_fields(model: type[RecordModel]) -> list[str]:
+    """Fields annotated ``int`` or ``int | None`` (``bool`` is its own type and excluded)."""
+    return [
+        name for name, field in model.model_fields.items()
+        if field.annotation is int or int in get_args(field.annotation)
+    ]
+
+
+def _typed_frame(model: type[RecordModel], rows: list[dict[str, Any]]) -> pd.DataFrame:
+    """Build the valid-rows frame; integer fields use nullable ``Int64`` so nulls don't make them float."""
+    df = pd.DataFrame(rows)
+    for name in _int_fields(model):
+        if name in df.columns:
+            df[name] = df[name].astype("Int64")
+    return df
+
+
 def validate_entity(
     entity: str, bronze_rows: list[dict[str, Any]], context: dict[str, Any]
 ) -> tuple[pd.DataFrame, pd.DataFrame, EntityMetrics]:
@@ -124,7 +141,7 @@ def validate_entity(
         valid_rows.append({**outcome.row, **lineage, "dq_fixes": outcome.fixes, "dq_flags": outcome.flags})
 
     quarantine_columns = [*LINEAGE_COLUMNS, "rejection_rules", "rejection_details", "raw_record"]
-    return pd.DataFrame(valid_rows), pd.DataFrame(quarantine_rows, columns=quarantine_columns), metrics
+    return _typed_frame(model, valid_rows), pd.DataFrame(quarantine_rows, columns=quarantine_columns), metrics
 
 
 def load_manifest(bronze_dir: Path) -> list[dict[str, Any]]:

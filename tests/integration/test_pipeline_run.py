@@ -7,16 +7,19 @@ import json
 import pandas as pd
 import pytest
 
+from src.cleaning.clean import CLEAN_SUBDIR, DUPLICATES_FILE
+from src.cleaning.clean import METRICS_FILE as CLEANING_METRICS_FILE
 from src.ingestion.loaders import BATCH_COLUMNS
 from src.pipeline import PipelineContext, run_pipeline
 from src.validation.validator import METRICS_FILE, VALIDATED_SUBDIR
 
 pytestmark = pytest.mark.integration
+STAGES = ["ingest", "validate", "clean", "report"]
 
 
 @pytest.fixture
 def ran(config):
-    summary = run_pipeline(PipelineContext(config=config, run_id="it"), ["ingest", "validate", "report"])
+    summary = run_pipeline(PipelineContext(config=config, run_id="it"), STAGES)
     assert summary.ok, summary
     metrics = json.loads((config.paths.silver_dir / VALIDATED_SUBDIR / METRICS_FILE).read_text())
     return config, metrics["entities"]
@@ -28,6 +31,29 @@ def test_every_record_is_accounted_for(ran):
         valid = pd.read_parquet(config.paths.silver_dir / VALIDATED_SUBDIR / f"{name}.parquet")
         quarantine = pd.read_csv(config.paths.quarantine_dir / f"{name}.csv")
         assert len(valid) + len(quarantine) == m["total"], name
+
+
+def test_cleaning_removes_only_duplicates(ran):
+    config, validated = ran
+    cleaning = json.loads((config.paths.silver_dir / CLEAN_SUBDIR / CLEANING_METRICS_FILE).read_text())
+    duplicates = pd.read_csv(config.paths.quarantine_dir / DUPLICATES_FILE)
+    for name, m in cleaning["entities"].items():
+        clean = pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / f"{name}.parquet")
+        assert m["rows_in"] == validated[name]["valid"]
+        assert len(clean) == m["rows_out"] == m["rows_in"] - (duplicates["entity"] == name).sum()
+        assert clean["_record_key"].is_unique, name
+    assert duplicates["identical_to_kept"].all()  # every duplicate in this extract is an exact copy
+
+
+def test_cross_table_issues_are_caught(ran):
+    config, _ = ran
+    m = json.loads((config.paths.silver_dir / CLEAN_SUBDIR / CLEANING_METRICS_FILE).read_text())["entities"]
+    assert m["transactions"]["flags"]["transactions.unknown_customer"] == 88
+    assert m["transactions"]["flags"]["transactions.unknown_product"] == 108
+    assert m["invoices"]["flags"]["invoices.unknown_vendor"] == 16
+    assert m["products"]["fixes"]["products.category_from_name"] == 14
+    tx = pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / "transactions.parquet")
+    assert set(tx["currency"]) == {"USD"} and set(tx["src_currency"]) == {"USD", "EUR", "GBP", "AUD"}
 
 
 def test_known_issues_are_caught(ran):
@@ -49,7 +75,7 @@ def test_validated_data_is_typed(ran):
 
 def _snapshot(config):
     """Report bytes plus every Silver and quarantine table, minus the per-run batch columns."""
-    silver = sorted((config.paths.silver_dir / VALIDATED_SUBDIR).glob("*.parquet"))
+    silver = sorted(config.paths.silver_dir.glob("*/*.parquet"))
     quarantine = sorted(config.paths.quarantine_dir.glob("*.csv"))
     tables = [pd.read_parquet(p) for p in silver] + [pd.read_csv(p) for p in quarantine]
     batch_ids = {b for t in tables for b in t["_batch_id"].dropna()}
@@ -60,7 +86,7 @@ def test_rerun_is_idempotent_apart_from_batch_metadata(ran):
     config, _ = ran
     report, tables, batch_ids = _snapshot(config)
 
-    run_pipeline(PipelineContext(config=config, run_id="it-2"), ["ingest", "validate", "report"])
+    run_pipeline(PipelineContext(config=config, run_id="it-2"), STAGES)
 
     report_2, tables_2, batch_ids_2 = _snapshot(config)
     assert report_2 == report

@@ -7,17 +7,21 @@ from pathlib import Path
 
 import pytest
 
+from src.cleaning import clean
 from src.validation import validator
 from src.validation.rules import RULES, Action
 from src.validation.schemas import SCHEMAS
 from src.validation.validator import validate_entity
 
 SCHEMA_DIR = Path(validator.__file__).parent / "schemas"
+RULE_SOURCES = [*SCHEMA_DIR.glob("*.py"), Path(clean.__file__)]
+# Duplicate rules are built per entity (f"{entity}.duplicate"), so they never appear as literals.
+DROP_RULES = {rule_id for rule_id, rule in RULES.items() if rule.action is Action.DROP}
 
 
 def _rule_ids_in_schema_code() -> set[str]:
     ids = set()
-    for path in SCHEMA_DIR.glob("*.py"):
+    for path in RULE_SOURCES:
         for node in ast.walk(ast.parse(path.read_text())):
             if isinstance(node, ast.Constant) and isinstance(node.value, str):
                 if re.fullmatch(r"[a-z_]+\.[a-z_]+", node.value) and node.value.split(".")[0] in SCHEMAS:
@@ -30,7 +34,11 @@ def test_every_rule_used_by_a_schema_is_registered():
 
 
 def test_every_registered_rule_is_used_by_a_schema():
-    assert set(RULES) - _rule_ids_in_schema_code() == set()
+    assert set(RULES) - DROP_RULES - _rule_ids_in_schema_code() == set()
+
+
+def test_every_entity_has_a_duplicate_rule():
+    assert DROP_RULES == {f"{entity}.duplicate" for entity in SCHEMAS}
 
 
 def test_rule_entities_match_schemas():

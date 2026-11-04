@@ -40,6 +40,12 @@ def _validate(ctx: PipelineContext) -> None:
     ctx.artifacts["validation"] = run_validation(ctx.config)
 
 
+def _clean(ctx: PipelineContext) -> None:
+    from src.cleaning.clean import run_cleaning
+
+    ctx.artifacts["cleaning"] = run_cleaning(ctx.config)
+
+
 def _report(ctx: PipelineContext) -> None:
     from src.reporting.quality_report import write_quality_report
 
@@ -52,7 +58,8 @@ STAGE_ORDER: tuple[str, ...] = ("ingest", "validate", "clean", "report", "featur
 STAGES: dict[str, Stage] = {
     "ingest": Stage("ingest", _ingest),
     "validate": Stage("validate", _validate, depends_on=("ingest",)),
-    "report": Stage("report", _report, depends_on=("validate",)),
+    "clean": Stage("clean", _clean, depends_on=("validate",)),
+    "report": Stage("report", _report, depends_on=("clean",)),
 }
 
 

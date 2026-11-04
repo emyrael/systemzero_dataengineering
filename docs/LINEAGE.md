@@ -10,7 +10,7 @@ radius of changes. Daygent reads source files only: it runs no code and connects
 pip install "daygent>=0.4"
 daygent scan . --full          # settings in daygent.yml (tests and scripts excluded)
 daygent graph --html --open    # interactive viewer, written to .daygent/ (gitignored)
-daygent impact python_function:utils.io.write_parquet
+daygent impact python_function:features.build.recognised_sales
 daygent gaps                   # data references that are only known at runtime
 ```
 
@@ -19,7 +19,7 @@ models), and here every data path is built from config, as explained [below](#da
 
 ## What it found
 
-**31 modules, 258 functions and 375 call edges** across `src/` and `run_pipeline.py` (Daygent 0.4.0).
+**32 modules, 279 functions and 411 call edges** across `src/` and `run_pipeline.py` (Daygent 0.4.0).
 
 The backbone, drawn from `.daygent/graph.json` (arrows point from caller to callee; Daygent's own
 convention is the reverse, "A → B means B depends on A"):
@@ -33,12 +33,19 @@ graph LR
     pipe --> REP[reporting.write_quality_report]
     pipe --> FEA[features.run_features]
     pipe --> GRA[graph.run_graph]
+    pipe --> DSH[reporting.write_dashboard]
 
     ING --> ingest_source & explode_invoice_lines
     VAL --> validate_entity & load_manifest
     CLN --> clean_tables
     FEA --> build_features & price_tier_bounds & render_samples
     GRA --> build_graph[model.build_graph] & load_graph[loader.load_graph] & run_queries
+    DSH --> dashboard_data & render_dashboard
+
+    build_features --> RS
+    build_graph --> RS
+    dashboard_data --> RS
+    RS[[features.recognised_sales: the one revenue rule]]
 
     ING --> write_jsonl
     VAL --> read_jsonl & write_parquet & write_csv
@@ -53,9 +60,36 @@ graph LR
     end
 ```
 
-Every stage is reachable from the entry point, and every table write (JSONL, Parquet, CSV) goes
+Every stage is reachable from the entry point. The features, the graph and the dashboard all take
+revenue from the same function, `recognised_sales`. Every table write (JSONL, Parquet, CSV) goes
 through the atomic helpers in `utils/io.py` (write to a temporary file, then rename), so a crashed
 stage never leaves a half-written table. Reports and metrics files are written directly.
+
+## Impact: changing the revenue rule
+
+```text
+$ daygent impact python_function:features.build.recognised_sales
+Impact: recognised_sales()
+
+Direct:
+  → build_features()
+  → build_graph()
+  → dashboard_data()
+
+Downstream:
+  → run_features()
+  → _run()
+  → write_dashboard()
+  → _features()
+  → run_graph()
+  → _dashboard()
+  → _graph()
+```
+
+This is the "one revenue definition" decision in [ARCHITECTURE.md](../ARCHITECTURE.md), checked by a
+tool rather than asserted: a change to what counts as revenue reaches the Gold features, the graph's
+`recognised` edges and the dashboard together, so they cannot drift apart. It also names the three
+stages to retest.
 
 ## Impact: changing the shared writer
 
@@ -79,7 +113,7 @@ and Gold table. That is the scope to test before shipping it; the integration te
 
 ## Data access points
 
-`daygent gaps` lists **12 file reads and writes, none resolvable statically**:
+`daygent gaps` lists **14 file reads and writes, none resolvable statically**:
 
 | Stage | Location | Kind | Path expression |
 |---|---|---|---|
@@ -93,11 +127,13 @@ and Gold table. That is the scope to test before shipping it; the integration te
 | features | `src/features/build.py:268` | write | `config.paths.gold_dir / f'{name}.parquet'` |
 | graph | `src/graph/stage.py:28` | read | `config.paths.silver_dir / CLEAN_SUBDIR / f'{n}.parquet'` |
 | graph | `src/graph/stage.py:29` | read | `config.paths.gold_dir / f'{n}.parquet'` |
+| dashboard | `src/reporting/dashboard.py:427` | read | `config.paths.gold_dir / f'{n}.parquet'` |
+| dashboard | `src/reporting/dashboard.py:428` | read | `config.paths.silver_dir / CLEAN_SUBDIR / 'transactions.parquet'` |
 | (helpers) | `src/utils/io.py:59`, `:66` | write | `tmp` (the atomic-write temporary file) |
 
 This is by design: the brief asks for no hardcoded paths, so every location comes from
 `config/pipeline_config.yaml`. A static tool cannot know those values, and Daygent reports them as
-gaps instead of guessing. The data flow itself (raw → Bronze → Silver → Gold → SurrealDB) is
+gaps instead of guessing. The data flow itself (raw → Bronze → Silver → Gold → SurrealDB and the dashboard) is
 documented in [ARCHITECTURE.md](../ARCHITECTURE.md#1-overview).
 
 ## What running it here changed in Daygent
@@ -106,7 +142,7 @@ Running Daygent on this repository exposed gaps that I fixed in Daygent 0.4.0:
 
 | Found on this repo (0.3.0) | Fixed in 0.4.0 |
 |---|---|
-| Imports written as `from src.cleaning.clean import …` did not resolve, so no call crossed a file (114 edges) | `src.`-prefixed imports resolve: 375 edges, the whole stage chain is connected |
+| Imports written as `from src.cleaning.clean import …` did not resolve, so no call crossed a file (114 edges) | `src.`-prefixed imports resolve: 375 edges on the same code, the whole stage chain is connected |
 | pandas file I/O (`read_parquet`, `to_parquet`, …) was invisible | file reads and writes are lineage when the path is literal, and listed as gaps otherwise |
 | `.daygent/` showed up as untracked | the scan output ignores itself |
 

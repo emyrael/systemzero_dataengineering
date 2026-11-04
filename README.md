@@ -567,7 +567,7 @@ pip install -r requirements.txt
 docker compose up -d surrealdb
 #    No Docker? SURREAL_URL=surrealkv://outputs/graph/ecommerce.db uses the embedded engine.
 
-# 4. Create and run the pipeline (this file does not exist yet but should be the entry point)
+# 4. Run the pipeline (ingest → validate → clean → report → features → graph → dashboard)
 python run_pipeline.py
 
 # 5. Run tests

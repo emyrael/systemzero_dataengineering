@@ -5,7 +5,7 @@ SurrealDB knowledge graph. This document records **why** it is built the way it 
 trade-offs I accepted, and what I would change before running it in production.
 
 Detailed references: [cleaning rules](docs/CLEANING_RULES.md) · [feature dictionary](docs/FEATURES.md) ·
-[graph model](docs/GRAPH_MODEL.md) · [logging examples](docs/LOGGING.md) · [raw data profile](outputs/profiling/raw_data_profile.md).
+[graph model](docs/GRAPH_MODEL.md) · [logging examples](docs/LOGGING.md) · [code map (Daygent)](docs/LINEAGE.md) · [raw data profile](outputs/profiling/raw_data_profile.md).
 
 ---
 

@@ -622,6 +622,7 @@ pytest --cov=src                   # 185 tests, 93% coverage
 | 5 | Architecture | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
 | 5 | Logging examples | [`docs/LOGGING.md`](docs/LOGGING.md) |
 | – | Raw data profile (done before any rule was written) | [`outputs/profiling/raw_data_profile.md`](outputs/profiling/raw_data_profile.md) |
+| – | Code map and change impact, made with my open-source tool [Daygent](https://github.com/emyrael/daygent) | [`docs/LINEAGE.md`](docs/LINEAGE.md) |
 
 ---
 

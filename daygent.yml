@@ -1,0 +1,5 @@
+# Daygent (https://github.com/emyrael/daygent): static code map and impact analysis.
+# daygent scan . --full && daygent graph --html --open
+exclude:
+  - tests/**
+  - scripts/**

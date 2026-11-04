@@ -560,8 +560,9 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Start SurrealDB (using Docker)
-docker run --rm -p 8000:8000 surrealdb/surrealdb:latest start --user root --pass root
+# 3. Start SurrealDB (using Docker; pinned v4.0.0, persistent volume, healthcheck)
+docker compose up -d surrealdb
+#    No Docker? SURREAL_URL=surrealkv://outputs/graph/ecommerce.db uses the embedded engine.
 
 # 4. Create and run the pipeline (this file does not exist yet but should be the entry point)
 python run_pipeline.py

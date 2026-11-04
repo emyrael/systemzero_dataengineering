@@ -8,7 +8,8 @@ services:
     image: surrealdb/surrealdb:v4.0.0
     container_name: coding-test-surrealdb
     user: root
-    command: start --user root --pass root --log debug file:/data/database.db
+    # SurrealDB 4 rejects the `file:` scheme; `surrealkv:` is its persistent storage engine.
+    command: start --user root --pass root --log info surrealkv:/data/database.db
     ports:
       - "8000:8000"
     volumes:
@@ -17,7 +18,8 @@ services:
       - SURREAL_USER=root
       - SURREAL_PASS=root
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      # The image is distroless (no curl or shell); the binary has its own readiness check.
+      test: ["CMD", "/surreal", "is-ready", "--endpoint", "http://localhost:8000"]
       interval: 10s
       timeout: 5s
       retries: 5

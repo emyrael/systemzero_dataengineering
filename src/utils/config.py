@@ -80,6 +80,7 @@ class FeaturesConfig(_Strict):
 
 class SurrealConfig(_Strict):
     url: str
+    url_env: str = "SURREAL_URL"
     namespace: str
     database: str
     username_env: str = "SURREAL_USER"
@@ -89,6 +90,14 @@ class SurrealConfig(_Strict):
     def credentials(self) -> tuple[str, str]:
         """Read credentials from the environment; local Docker defaults to root/root."""
         return os.getenv(self.username_env, "root"), os.getenv(self.password_env, "root")
+
+    def endpoint(self, root: Path) -> str:
+        """Connection URL: ``$SURREAL_URL`` if set, else ``url``; embedded file paths resolve against ``root``."""
+        url = os.getenv(self.url_env) or self.url
+        scheme, sep, location = url.partition("://")
+        if sep and scheme in ("surrealkv", "file") and not Path(location).is_absolute():
+            return f"{scheme}://{(root / location).resolve()}"
+        return url
 
 
 class PipelineConfig(_Strict):

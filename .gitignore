@@ -17,3 +17,6 @@ htmlcov/
 
 # Pipeline run logs (curated examples are committed separately)
 outputs/logs/
+
+# Embedded SurrealDB data file (rebuilt by the graph stage)
+outputs/graph/

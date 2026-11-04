@@ -88,8 +88,11 @@ features:
   turnover_window_days: 365
 
 surrealdb:
-  # ws://localhost:8000/rpc for the Docker server; mem:// for the embedded engine (tests).
+  # Default: the SurrealDB 4 server from docker-compose.yml (docker compose up -d surrealdb).
+  # Without Docker, set SURREAL_URL=surrealkv://outputs/graph/ecommerce.db to use the engine
+  # embedded in the Python client (SurrealDB 2, persisted to a local file). Tests use mem://.
   url: ws://localhost:8000/rpc
+  url_env: SURREAL_URL
   namespace: test
   database: ecommerce
   # Credentials are read from these environment variables, never stored here.

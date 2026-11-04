@@ -81,6 +81,12 @@ reference:
     Japan: Asia Pacific
     China: Asia Pacific
 
+features:
+  # Expected customer lifetime used to project CLV from observed monthly spend.
+  customer_lifetime_months: 36
+  # Look-back window for stock turnover (units sold in the window / current stock).
+  turnover_window_days: 365
+
 surrealdb:
   # ws://localhost:8000/rpc for the Docker server; mem:// for the embedded engine (tests).
   url: ws://localhost:8000/rpc

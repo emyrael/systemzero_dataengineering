@@ -73,6 +73,11 @@ class ReferenceConfig(_Strict):
     country_regions: dict[str, str]
 
 
+class FeaturesConfig(_Strict):
+    customer_lifetime_months: int = Field(default=36, gt=0)
+    turnover_window_days: int = Field(default=365, gt=0)
+
+
 class SurrealConfig(_Strict):
     url: str
     namespace: str
@@ -91,6 +96,7 @@ class PipelineConfig(_Strict):
     paths: PathsConfig
     sources: dict[str, SourceConfig]
     reference: ReferenceConfig
+    features: FeaturesConfig = FeaturesConfig()
     surrealdb: SurrealConfig
 
     def source_path(self, name: str) -> Path:

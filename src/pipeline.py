@@ -46,6 +46,12 @@ def _clean(ctx: PipelineContext) -> None:
     ctx.artifacts["cleaning"] = run_cleaning(ctx.config)
 
 
+def _features(ctx: PipelineContext) -> None:
+    from src.features.build import run_features
+
+    ctx.artifacts["features"] = run_features(ctx.config)
+
+
 def _report(ctx: PipelineContext) -> None:
     from src.reporting.quality_report import write_quality_report
 
@@ -60,6 +66,7 @@ STAGES: dict[str, Stage] = {
     "validate": Stage("validate", _validate, depends_on=("ingest",)),
     "clean": Stage("clean", _clean, depends_on=("validate",)),
     "report": Stage("report", _report, depends_on=("clean",)),
+    "features": Stage("features", _features, depends_on=("clean",)),
 }
 
 

@@ -14,7 +14,7 @@ from src.pipeline import PipelineContext, run_pipeline
 from src.validation.validator import METRICS_FILE, VALIDATED_SUBDIR
 
 pytestmark = pytest.mark.integration
-STAGES = ["ingest", "validate", "clean", "report"]
+STAGES = ["ingest", "validate", "clean", "report", "features"]
 
 
 @pytest.fixture
@@ -54,6 +54,21 @@ def test_cross_table_issues_are_caught(ran):
     assert m["products"]["fixes"]["products.category_from_name"] == 14
     tx = pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / "transactions.parquet")
     assert set(tx["currency"]) == {"USD"} and set(tx["src_currency"]) == {"USD", "EUR", "GBP", "AUD"}
+
+
+def test_feature_totals_reconcile_with_recognised_revenue(ran):
+    config, _ = ran
+    from src.features.build import recognised_sales
+
+    gold = {n: pd.read_parquet(config.paths.gold_dir / f"{n}_features.parquet")
+            for n in ("customer", "product", "vendor", "invoice")}
+    sales = recognised_sales(pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / "transactions.parquet"))
+    on_unknown_product = sales.loc[sales["product_id"].str.startswith("PRD-DELETED"), "net_revenue"].sum()
+    assert gold["product"]["revenue_contribution"].sum() == pytest.approx(sales["net_revenue"].sum() - on_unknown_product, abs=1)
+    assert gold["vendor"]["revenue_generated"].sum() == pytest.approx(gold["product"]["revenue_contribution"].sum(), abs=1)
+    assert (len(gold["customer"]), len(gold["product"]), len(gold["invoice"])) == (1000, 500, 800)
+    assert (gold["customer"]["customer_lifetime_value"] >= 0).all()
+    assert set(gold["invoice"]["discount_rate_achieved"].dropna()) == {0.0}  # vendors bill at catalog cost
 
 
 def test_known_issues_are_caught(ran):

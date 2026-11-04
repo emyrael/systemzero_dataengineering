@@ -28,9 +28,32 @@ class Stage:
     depends_on: tuple[str, ...] = ()
 
 
+def _ingest(ctx: PipelineContext) -> None:
+    from src.ingestion.loaders import run_ingestion
+
+    ctx.artifacts["manifest"] = run_ingestion(ctx.config, batch_id=ctx.run_id)
+
+
+def _validate(ctx: PipelineContext) -> None:
+    from src.validation.validator import run_validation
+
+    ctx.artifacts["validation"] = run_validation(ctx.config)
+
+
+def _report(ctx: PipelineContext) -> None:
+    from src.reporting.quality_report import write_quality_report
+
+    write_quality_report(ctx.config)
+
+
 # Canonical stage order. Each phase registers its stage in STAGES as it is implemented.
-STAGE_ORDER: tuple[str, ...] = ("ingest", "validate", "clean", "features", "graph", "dashboard")
-STAGES: dict[str, Stage] = {}
+# Stages exchange data through files (Bronze/Silver/Gold), so any stage can be re-run alone.
+STAGE_ORDER: tuple[str, ...] = ("ingest", "validate", "clean", "report", "features", "graph", "dashboard")
+STAGES: dict[str, Stage] = {
+    "ingest": Stage("ingest", _ingest),
+    "validate": Stage("validate", _validate, depends_on=("ingest",)),
+    "report": Stage("report", _report, depends_on=("validate",)),
+}
 
 
 @dataclass

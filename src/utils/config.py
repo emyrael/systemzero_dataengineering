@@ -57,6 +57,7 @@ class PathsConfig(_Strict):
 class SourceConfig(_Strict):
     file: str
     format: Literal["csv", "json", "parquet"]
+    primary_key: tuple[str, ...] = Field(min_length=1)
     record_path: str | None = None
 
     @model_validator(mode="after")

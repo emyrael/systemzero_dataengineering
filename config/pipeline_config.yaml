@@ -18,36 +18,45 @@ paths:
   quality_report: outputs/quality_report.md
   dashboard: outputs/dashboard/index.html
 
+# primary_key: business key of each record; becomes Bronze `_record_key`, the merge key for upserts.
 sources:
   products:
     file: products.csv
     format: csv
+    primary_key: [product_id]
   customers:
     file: customers.json
     format: json
     record_path: customers
+    primary_key: [customer_id]
   transactions:
     file: sales_transactions.parquet
     format: parquet
+    primary_key: [transaction_id]
   vendors:
     file: vendors.json
     format: json
     record_path: vendors
+    primary_key: [vendor_id]
   invoices:
     file: invoices.csv
     format: csv
+    primary_key: [invoice_id]
   support_tickets:
     file: support_tickets.json
     format: json
     record_path: support_tickets
+    primary_key: [ticket_id]
   product_reviews:
     file: product_reviews.json
     format: json
     record_path: reviews
+    primary_key: [review_id]
   call_transcripts:
     file: call_transcripts.json
     format: json
     record_path: call_transcripts
+    primary_key: [call_id]
 
 reference:
   base_currency: USD

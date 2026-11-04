@@ -1,0 +1,6855 @@
+{
+  "as_of_date": "2025-01-01",
+  "checks_without_issues": [
+    "call_transcripts:conflicting_duplicate_keys",
+    "call_transcripts:duration_mismatch",
+    "call_transcripts:exact_duplicate_records",
+    "call_transcripts:impossible_dates:call_end",
+    "call_transcripts:impossible_dates:call_start",
+    "call_transcripts:incomplete_speaker_info",
+    "call_transcripts:invalid_utterance_timestamp",
+    "call_transcripts:malformed_primary_key",
+    "call_transcripts:missing_agent",
+    "call_transcripts:missing_required:call_end",
+    "call_transcripts:missing_required:call_id",
+    "call_transcripts:missing_required:call_start",
+    "call_transcripts:missing_required:customer_id",
+    "call_transcripts:missing_utterances",
+    "call_transcripts:negative_duration",
+    "call_transcripts:orphan:ticket_id->support_tickets",
+    "call_transcripts:placeholder_nulls:action_items",
+    "call_transcripts:placeholder_nulls:agent_id",
+    "call_transcripts:placeholder_nulls:agent_name",
+    "call_transcripts:placeholder_nulls:call_end",
+    "call_transcripts:placeholder_nulls:call_id",
+    "call_transcripts:placeholder_nulls:call_start",
+    "call_transcripts:placeholder_nulls:call_type",
+    "call_transcripts:placeholder_nulls:customer_id",
+    "call_transcripts:placeholder_nulls:duration_seconds",
+    "call_transcripts:placeholder_nulls:hold_time_seconds",
+    "call_transcripts:placeholder_nulls:keywords_detected",
+    "call_transcripts:placeholder_nulls:language",
+    "call_transcripts:placeholder_nulls:phone_number",
+    "call_transcripts:placeholder_nulls:quality_score",
+    "call_transcripts:placeholder_nulls:queue_wait_seconds",
+    "call_transcripts:placeholder_nulls:resolution_achieved",
+    "call_transcripts:placeholder_nulls:sentiment_overall",
+    "call_transcripts:placeholder_nulls:ticket_id",
+    "call_transcripts:placeholder_nulls:transfers",
+    "call_transcripts:placeholder_nulls:utterances",
+    "call_transcripts:quality_out_of_range",
+    "call_transcripts:utterance_after_call_end",
+    "call_transcripts:utterances_out_of_order",
+    "customers:conflicting_duplicate_keys",
+    "customers:future_registration_date",
+    "customers:impossible_dates:date_of_birth",
+    "customers:impossible_dates:last_purchase_date",
+    "customers:impossible_dates:metadata.created_at",
+    "customers:impossible_dates:metadata.updated_at",
+    "customers:impossible_dates:registration_date",
+    "customers:malformed_primary_key",
+    "customers:missing_required:customer_id",
+    "customers:missing_required:registration_date",
+    "customers:partial_extract",
+    "customers:placeholder_nulls:address.city",
+    "customers:placeholder_nulls:address.country",
+    "customers:placeholder_nulls:address.postal_code",
+    "customers:placeholder_nulls:address.state",
+    "customers:placeholder_nulls:address.street",
+    "customers:placeholder_nulls:average_order_value",
+    "customers:placeholder_nulls:customer_id",
+    "customers:placeholder_nulls:date_of_birth",
+    "customers:placeholder_nulls:email_verified",
+    "customers:placeholder_nulls:first_name",
+    "customers:placeholder_nulls:full_name",
+    "customers:placeholder_nulls:is_active",
+    "customers:placeholder_nulls:last_name",
+    "customers:placeholder_nulls:last_purchase_date",
+    "customers:placeholder_nulls:metadata.created_at",
+    "customers:placeholder_nulls:metadata.source",
+    "customers:placeholder_nulls:metadata.updated_at",
+    "customers:placeholder_nulls:phone_verified",
+    "customers:placeholder_nulls:preferences.newsletter",
+    "customers:placeholder_nulls:preferences.preferred_currency",
+    "customers:placeholder_nulls:preferences.preferred_language",
+    "customers:placeholder_nulls:preferences.sms_notifications",
+    "customers:placeholder_nulls:registration_date",
+    "customers:placeholder_nulls:segment",
+    "customers:placeholder_nulls:total_orders",
+    "customers:placeholder_nulls:total_spend",
+    "invoice_lines:conflicting_duplicate_keys",
+    "invoice_lines:line_total_mismatch",
+    "invoice_lines:missing_required:invoice_id",
+    "invoice_lines:missing_required:line_number",
+    "invoice_lines:missing_required:quantity",
+    "invoice_lines:missing_required:unit_cost",
+    "invoice_lines:orphan:invoice_id->invoices",
+    "invoice_lines:placeholder_nulls:description",
+    "invoice_lines:placeholder_nulls:invoice_id",
+    "invoice_lines:placeholder_nulls:line_number",
+    "invoice_lines:placeholder_nulls:line_total",
+    "invoice_lines:placeholder_nulls:product_id",
+    "invoice_lines:placeholder_nulls:quantity",
+    "invoice_lines:placeholder_nulls:unit_cost",
+    "invoice_lines:zero_quantity",
+    "invoices:balance_mismatch",
+    "invoices:conflicting_duplicate_keys",
+    "invoices:impossible_dates:created_at",
+    "invoices:impossible_dates:due_date",
+    "invoices:impossible_dates:invoice_date",
+    "invoices:impossible_dates:payment_date",
+    "invoices:impossible_dates:updated_at",
+    "invoices:line_count_mismatch",
+    "invoices:malformed_primary_key",
+    "invoices:missing_required:invoice_date",
+    "invoices:missing_required:invoice_id",
+    "invoices:missing_required:total_amount",
+    "invoices:missing_required:vendor_id",
+    "invoices:placeholder_nulls:amount_paid",
+    "invoices:placeholder_nulls:approved_by",
+    "invoices:placeholder_nulls:balance_due",
+    "invoices:placeholder_nulls:created_at",
+    "invoices:placeholder_nulls:currency",
+    "invoices:placeholder_nulls:due_date",
+    "invoices:placeholder_nulls:invoice_date",
+    "invoices:placeholder_nulls:invoice_id",
+    "invoices:placeholder_nulls:invoice_number",
+    "invoices:placeholder_nulls:line_item_count",
+    "invoices:placeholder_nulls:line_items_json",
+    "invoices:placeholder_nulls:notes",
+    "invoices:placeholder_nulls:payment_date",
+    "invoices:placeholder_nulls:payment_method",
+    "invoices:placeholder_nulls:payment_status",
+    "invoices:placeholder_nulls:payment_terms",
+    "invoices:placeholder_nulls:po_number",
+    "invoices:placeholder_nulls:shipping_handling",
+    "invoices:placeholder_nulls:subtotal",
+    "invoices:placeholder_nulls:tax_amount",
+    "invoices:placeholder_nulls:tax_rate",
+    "invoices:placeholder_nulls:total_amount",
+    "invoices:placeholder_nulls:updated_at",
+    "invoices:placeholder_nulls:vendor_id",
+    "invoices:placeholder_nulls:vendor_name",
+    "invoices:status_payment_conflict",
+    "invoices:subtotal_vs_lines",
+    "invoices:unparseable_line_items",
+    "product_reviews:conflicting_duplicate_keys",
+    "product_reviews:exact_duplicate_records",
+    "product_reviews:impossible_dates:response.response_date",
+    "product_reviews:impossible_dates:review_date",
+    "product_reviews:malformed_primary_key",
+    "product_reviews:missing_required:customer_id",
+    "product_reviews:missing_required:product_id",
+    "product_reviews:orphan:customer_id->customers",
+    "product_reviews:placeholder_nulls:customer_id",
+    "product_reviews:placeholder_nulls:helpful_votes",
+    "product_reviews:placeholder_nulls:images",
+    "product_reviews:placeholder_nulls:product_id",
+    "product_reviews:placeholder_nulls:rating",
+    "product_reviews:placeholder_nulls:response",
+    "product_reviews:placeholder_nulls:response.responder",
+    "product_reviews:placeholder_nulls:response.response_date",
+    "product_reviews:placeholder_nulls:response.response_text",
+    "product_reviews:placeholder_nulls:review_date",
+    "product_reviews:placeholder_nulls:review_text",
+    "product_reviews:placeholder_nulls:sentiment",
+    "product_reviews:placeholder_nulls:title",
+    "product_reviews:placeholder_nulls:verified_purchase",
+    "product_reviews:rating_contradicts_sentiment",
+    "products:conflicting_duplicate_keys",
+    "products:cost_above_price",
+    "products:created_after_updated",
+    "products:impossible_dates:created_date",
+    "products:impossible_dates:last_updated",
+    "products:malformed_primary_key",
+    "products:missing_required:price",
+    "products:missing_required:product_id",
+    "products:missing_required:product_name",
+    "products:missing_required:vendor_id",
+    "products:placeholder_nulls:category",
+    "products:placeholder_nulls:cost",
+    "products:placeholder_nulls:created_date",
+    "products:placeholder_nulls:currency",
+    "products:placeholder_nulls:description",
+    "products:placeholder_nulls:is_active",
+    "products:placeholder_nulls:last_updated",
+    "products:placeholder_nulls:price",
+    "products:placeholder_nulls:product_id",
+    "products:placeholder_nulls:product_name",
+    "products:placeholder_nulls:reorder_level",
+    "products:placeholder_nulls:review_count",
+    "products:placeholder_nulls:sku",
+    "products:placeholder_nulls:stock_quantity",
+    "products:placeholder_nulls:subcategory",
+    "products:placeholder_nulls:tags",
+    "products:placeholder_nulls:vendor_id",
+    "products:placeholder_nulls:weight_kg",
+    "support_tickets:conflicting_duplicate_keys",
+    "support_tickets:exact_duplicate_records",
+    "support_tickets:impossible_dates:created_at",
+    "support_tickets:impossible_dates:resolved_at",
+    "support_tickets:malformed_primary_key",
+    "support_tickets:missing_required:created_at",
+    "support_tickets:missing_required:customer_id",
+    "support_tickets:missing_required:status",
+    "support_tickets:open_with_resolved_at",
+    "support_tickets:placeholder_nulls:agent_id",
+    "support_tickets:placeholder_nulls:category",
+    "support_tickets:placeholder_nulls:channel",
+    "support_tickets:placeholder_nulls:created_at",
+    "support_tickets:placeholder_nulls:customer_id",
+    "support_tickets:placeholder_nulls:priority",
+    "support_tickets:placeholder_nulls:product_id",
+    "support_tickets:placeholder_nulls:resolution_type",
+    "support_tickets:placeholder_nulls:resolved_at",
+    "support_tickets:placeholder_nulls:satisfaction_score",
+    "support_tickets:placeholder_nulls:status",
+    "support_tickets:placeholder_nulls:summary",
+    "support_tickets:placeholder_nulls:tags",
+    "support_tickets:placeholder_nulls:transcript",
+    "support_tickets:resolved_before_created",
+    "support_tickets:resolved_without_resolved_at",
+    "transactions:amount_mismatch",
+    "transactions:conflicting_duplicate_keys",
+    "transactions:future_transaction_date",
+    "transactions:impossible_dates:transaction_date",
+    "transactions:impossible_dates:transaction_timestamp",
+    "transactions:malformed_primary_key",
+    "transactions:missing_required:customer_id",
+    "transactions:missing_required:product_id",
+    "transactions:missing_required:quantity",
+    "transactions:missing_required:total_amount",
+    "transactions:missing_required:transaction_date",
+    "transactions:missing_required:transaction_id",
+    "transactions:missing_required:unit_price",
+    "transactions:placeholder_nulls:channel",
+    "transactions:placeholder_nulls:currency",
+    "transactions:placeholder_nulls:customer_id",
+    "transactions:placeholder_nulls:discount_amount",
+    "transactions:placeholder_nulls:discount_percent",
+    "transactions:placeholder_nulls:is_gift",
+    "transactions:placeholder_nulls:notes",
+    "transactions:placeholder_nulls:order_id",
+    "transactions:placeholder_nulls:order_status",
+    "transactions:placeholder_nulls:payment_method",
+    "transactions:placeholder_nulls:payment_status",
+    "transactions:placeholder_nulls:product_id",
+    "transactions:placeholder_nulls:quantity",
+    "transactions:placeholder_nulls:region",
+    "transactions:placeholder_nulls:shipping_cost",
+    "transactions:placeholder_nulls:shipping_method",
+    "transactions:placeholder_nulls:subtotal",
+    "transactions:placeholder_nulls:tax_amount",
+    "transactions:placeholder_nulls:tax_rate",
+    "transactions:placeholder_nulls:total_amount",
+    "transactions:placeholder_nulls:transaction_date",
+    "transactions:placeholder_nulls:transaction_id",
+    "transactions:placeholder_nulls:transaction_timestamp",
+    "transactions:placeholder_nulls:unit_price",
+    "vendors:conflicting_duplicate_keys",
+    "vendors:exact_duplicate_records",
+    "vendors:impossible_dates:created_at",
+    "vendors:impossible_dates:updated_at",
+    "vendors:invalid_email:contact.email",
+    "vendors:malformed_primary_key",
+    "vendors:missing_required:status",
+    "vendors:missing_required:vendor_id",
+    "vendors:missing_required:vendor_name",
+    "vendors:partial_extract",
+    "vendors:placeholder_nulls:address.country",
+    "vendors:placeholder_nulls:address.postal_code",
+    "vendors:placeholder_nulls:address.state",
+    "vendors:placeholder_nulls:address.street",
+    "vendors:placeholder_nulls:categories",
+    "vendors:placeholder_nulls:certifications",
+    "vendors:placeholder_nulls:contact.email",
+    "vendors:placeholder_nulls:contact.phone",
+    "vendors:placeholder_nulls:contact.primary_name",
+    "vendors:placeholder_nulls:country",
+    "vendors:placeholder_nulls:country_code",
+    "vendors:placeholder_nulls:created_at",
+    "vendors:placeholder_nulls:currency",
+    "vendors:placeholder_nulls:lead_time_days",
+    "vendors:placeholder_nulls:payment_terms",
+    "vendors:placeholder_nulls:region",
+    "vendors:placeholder_nulls:reliability_score",
+    "vendors:placeholder_nulls:status",
+    "vendors:placeholder_nulls:updated_at",
+    "vendors:placeholder_nulls:vendor_code",
+    "vendors:placeholder_nulls:vendor_id",
+    "vendors:placeholder_nulls:vendor_name",
+    "vendors:reliability_out_of_range"
+  ],
+  "datasets": {
+    "call_transcripts": {
+      "column_profiles": {
+        "action_items": {
+          "cardinality": 1.0,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "agent_id": {
+          "cardinality": 0.5,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "AGT-005",
+              4
+            ],
+            [
+              "AGT-007",
+              3
+            ],
+            [
+              "AGT-002",
+              1
+            ],
+            [
+              "AGT-003",
+              1
+            ],
+            [
+              "AGT-006",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "agent_name": {
+          "cardinality": 0.5,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "Sarah Mitchell",
+              4
+            ],
+            [
+              "David Park",
+              3
+            ],
+            [
+              "Alex Thompson",
+              1
+            ],
+            [
+              "Maria Santos",
+              1
+            ],
+            [
+              "Michael Rodriguez",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "call_end": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 10,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 10
+            },
+            "max": "2025-03-28",
+            "min": "2025-03-15",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "call_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "CALL-000001",
+              1
+            ],
+            [
+              "CALL-000002",
+              1
+            ],
+            [
+              "CALL-000003",
+              1
+            ],
+            [
+              "CALL-000004",
+              1
+            ],
+            [
+              "CALL-000005",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "call_start": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 10,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 10
+            },
+            "max": "2025-03-28",
+            "min": "2025-03-15",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "call_type": {
+          "cardinality": 0.2,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "inbound",
+              9
+            ],
+            [
+              "outbound",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "customer_id": {
+          "cardinality": 0.9,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "CUS-00000555",
+              2
+            ],
+            [
+              "CUS-00000001",
+              1
+            ],
+            [
+              "CUS-00000012",
+              1
+            ],
+            [
+              "CUS-00000042",
+              1
+            ],
+            [
+              "CUS-00000045",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "duration_seconds": {
+          "cardinality": 1.0,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 10,
+            "max": 2144.0,
+            "mean": 1254.4,
+            "median": 1113.5,
+            "min": 502.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 469.7839,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "hold_time_seconds": {
+          "cardinality": 0.8,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 10,
+            "max": 300.0,
+            "mean": 103.5,
+            "median": 75.0,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 105.9363,
+            "zeros": 3
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 10
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "keywords_detected": {
+          "cardinality": 1.0,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "language": {
+          "cardinality": 0.1,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "en-US",
+              10
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 1
+        },
+        "phone_number": {
+          "cardinality": 0.9,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "+1-555-0555",
+              2
+            ],
+            [
+              "+1-555-0112",
+              1
+            ],
+            [
+              "+1-555-0123",
+              1
+            ],
+            [
+              "+1-555-0142",
+              1
+            ],
+            [
+              "+1-555-0145",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "quality_score": {
+          "cardinality": 0.9,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 10,
+            "max": 98.0,
+            "mean": 92.9,
+            "median": 94.5,
+            "min": 78.0,
+            "negatives": 0,
+            "outliers_iqr": 1,
+            "std": 5.6657,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 10
+          },
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "queue_wait_seconds": {
+          "cardinality": 0.9,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 10,
+            "max": 180.0,
+            "mean": 57.6,
+            "median": 39.5,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 58.6803,
+            "zeros": 2
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 10
+          },
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "resolution_achieved": {
+          "boolean_spellings": {
+            "False": 1,
+            "True": 9
+          },
+          "cardinality": 0.2,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 10
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "sentiment_overall": {
+          "cardinality": 0.9,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "neutral",
+              2
+            ],
+            [
+              "concerned_to_relieved",
+              1
+            ],
+            [
+              "confused_to_satisfied",
+              1
+            ],
+            [
+              "dissatisfied_to_satisfied",
+              1
+            ],
+            [
+              "frustrated_to_satisfied",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "ticket_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 30.0,
+          "nulls": 3,
+          "placeholders": 0,
+          "python_types": {
+            "string": 7
+          },
+          "top_values": [
+            [
+              "TKT-000001",
+              1
+            ],
+            [
+              "TKT-000004",
+              1
+            ],
+            [
+              "TKT-000006",
+              1
+            ],
+            [
+              "TKT-000011",
+              1
+            ],
+            [
+              "TKT-000014",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 7
+        },
+        "transfers": {
+          "cardinality": 0.2,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 10,
+            "max": 1.0,
+            "mean": 0.2,
+            "median": 0.0,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 0.4216,
+            "zeros": 8
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 10
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "utterances": {
+          "cardinality": 1.0,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        }
+      },
+      "columns": 20,
+      "envelope": {
+        "api_version": "1.0.0",
+        "description": "Customer support phone call transcripts with speaker diarization and timestamps",
+        "generated_at": "2026-01-29T11:00:00.000000",
+        "total_count": 25
+      },
+      "error": null,
+      "file": "call_transcripts.json",
+      "file_bytes": 49858,
+      "format": "json",
+      "memory_bytes": 7730,
+      "primary_key": [
+        "call_id"
+      ],
+      "rows": 10,
+      "sha256": "cc589f8ab320ab09dec830e676f9a5d4a6a93bbb37eca74462077b46d9606bd4",
+      "status": "ok"
+    },
+    "customers": {
+      "column_profiles": {
+        "address.city": {
+          "cardinality": 0.01,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "top_values": [
+            [
+              "Los Angeles",
+              117
+            ],
+            [
+              "Sydney",
+              109
+            ],
+            [
+              "Chicago",
+              108
+            ],
+            [
+              "Toronto",
+              108
+            ],
+            [
+              "Paris",
+              100
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "address.country": {
+          "cardinality": 0.008,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "top_values": [
+            [
+              "USA",
+              309
+            ],
+            [
+              "Australia",
+              109
+            ],
+            [
+              "Canada",
+              108
+            ],
+            [
+              "France",
+              100
+            ],
+            [
+              "Japan",
+              99
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "address.postal_code": {
+          "cardinality": 0.01,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "top_values": [
+            [
+              "90001",
+              117
+            ],
+            [
+              "2000",
+              109
+            ],
+            [
+              "60601",
+              108
+            ],
+            [
+              "M5V 2H1",
+              108
+            ],
+            [
+              "75001",
+              100
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "address.state": {
+          "cardinality": 0.0095,
+          "inferred_type": "string",
+          "missing_pct": 47.56,
+          "nulls": 477,
+          "placeholders": 0,
+          "python_types": {
+            "string": 526
+          },
+          "top_values": [
+            [
+              "CA",
+              117
+            ],
+            [
+              "NSW",
+              109
+            ],
+            [
+              "IL",
+              108
+            ],
+            [
+              "ON",
+              108
+            ],
+            [
+              "NY",
+              84
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "address.street": {
+          "cardinality": 0.993,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 996
+        },
+        "age": {
+          "cardinality": 0.0713,
+          "inferred_type": "integer",
+          "missing_pct": 0.7,
+          "nulls": 6,
+          "numeric": {
+            "count": 996,
+            "max": 150.0,
+            "mean": 52.3926,
+            "median": 53.0,
+            "min": -5.0,
+            "negatives": 7,
+            "outliers_iqr": 9,
+            "std": 22.8809,
+            "zeros": 1
+          },
+          "placeholders": 1,
+          "python_types": {
+            "integer": 996
+          },
+          "type_fit": 1.0,
+          "unique": 71
+        },
+        "average_order_value": {
+          "cardinality": 0.9979,
+          "inferred_type": "float",
+          "missing_pct": 3.49,
+          "nulls": 35,
+          "numeric": {
+            "count": 968,
+            "max": 43433.68,
+            "mean": 1932.297,
+            "median": 942.98,
+            "min": 1.47,
+            "negatives": 0,
+            "outliers_iqr": 102,
+            "std": 3994.8763,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 968
+          },
+          "type_fit": 1.0,
+          "unique": 966
+        },
+        "customer_id": {
+          "cardinality": 0.997,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 1000
+        },
+        "date_of_birth": {
+          "cardinality": 0.0703,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 9,
+            "formats": {
+              "iso_date": 996
+            },
+            "max": "2008-02-03",
+            "min": "1876-03-06",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.7,
+          "nulls": 7,
+          "placeholders": 0,
+          "python_types": {
+            "string": 996
+          },
+          "type_fit": 1.0,
+          "unique": 70
+        },
+        "email": {
+          "cardinality": 0.9804,
+          "inferred_type": "string",
+          "missing_pct": 3.39,
+          "nulls": 12,
+          "placeholders": 22,
+          "python_types": {
+            "string": 969
+          },
+          "type_fit": 1.0,
+          "unique": 950
+        },
+        "email_verified": {
+          "boolean_spellings": {
+            "False": 500,
+            "True": 503
+          },
+          "cardinality": 0.002,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "first_name": {
+          "cardinality": 0.0299,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "top_values": [
+            [
+              "Joseph",
+              40
+            ],
+            [
+              "Christopher",
+              39
+            ],
+            [
+              "Jessica",
+              39
+            ],
+            [
+              "Priya",
+              39
+            ],
+            [
+              "David",
+              38
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 30
+        },
+        "full_name": {
+          "cardinality": 0.4915,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 493
+        },
+        "gender": {
+          "cardinality": 0.0121,
+          "inferred_type": "string",
+          "missing_pct": 17.45,
+          "nulls": 92,
+          "placeholders": 83,
+          "python_types": {
+            "string": 828
+          },
+          "spelling_variants": {
+            "female": {
+              "FEMALE": 84,
+              "Female": 71,
+              "female": 85
+            },
+            "male": {
+              "MALE": 84,
+              "Male": 88,
+              "male": 86
+            }
+          },
+          "top_values": [
+            [
+              "Other",
+              94
+            ],
+            [
+              "F",
+              93
+            ],
+            [
+              "Male",
+              88
+            ],
+            [
+              "male",
+              86
+            ],
+            [
+              "female",
+              85
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "is_active": {
+          "boolean_spellings": {
+            "'false'": 129,
+            "'no'": 134,
+            "'true'": 112,
+            "'yes'": 132,
+            "0": 111,
+            "1": 119,
+            "False": 130,
+            "True": 136
+          },
+          "cardinality": 0.008,
+          "inferred_type": "mixed:boolean_string",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 266,
+            "integer": 230,
+            "string": 507
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "last_name": {
+          "cardinality": 0.0199,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "top_values": [
+            [
+              "Dubois",
+              67
+            ],
+            [
+              "Chen",
+              59
+            ],
+            [
+              "Smith",
+              59
+            ],
+            [
+              "Brown",
+              55
+            ],
+            [
+              "Garcia",
+              54
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 20
+        },
+        "last_purchase_date": {
+          "cardinality": 0.8724,
+          "dates": {
+            "after_as_of": 387,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 1003
+            },
+            "max": "2030-02-10",
+            "min": "2018-04-25",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 875
+        },
+        "metadata.created_at": {
+          "cardinality": 0.8245,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 1003
+            },
+            "max": "2024-11-05",
+            "min": "2018-01-01",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 827
+        },
+        "metadata.source": {
+          "cardinality": 0.0061,
+          "inferred_type": "string",
+          "missing_pct": 18.15,
+          "nulls": 182,
+          "placeholders": 0,
+          "python_types": {
+            "string": 821
+          },
+          "top_values": [
+            [
+              "social_media",
+              186
+            ],
+            [
+              "website",
+              173
+            ],
+            [
+              "partner",
+              158
+            ],
+            [
+              "mobile_app",
+              154
+            ],
+            [
+              "referral",
+              150
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "metadata.updated_at": {
+          "cardinality": 0.8195,
+          "dates": {
+            "after_as_of": 73,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 1003
+            },
+            "max": "2026-01-17",
+            "min": "2018-04-03",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 822
+        },
+        "phone": {
+          "cardinality": 0.9971,
+          "inferred_type": "string",
+          "missing_pct": 30.81,
+          "nulls": 146,
+          "placeholders": 163,
+          "python_types": {
+            "string": 694
+          },
+          "type_fit": 1.0,
+          "unique": 692
+        },
+        "phone_verified": {
+          "boolean_spellings": {
+            "False": 357,
+            "True": 328
+          },
+          "cardinality": 0.0029,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 31.7,
+          "nulls": 318,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 685
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "preferences.newsletter": {
+          "boolean_spellings": {
+            "False": 516,
+            "True": 487
+          },
+          "cardinality": 0.002,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "preferences.preferred_currency": {
+          "cardinality": 0.0071,
+          "inferred_type": "string",
+          "missing_pct": 15.25,
+          "nulls": 153,
+          "placeholders": 0,
+          "python_types": {
+            "string": 850
+          },
+          "top_values": [
+            [
+              "JPY",
+              160
+            ],
+            [
+              "CAD",
+              150
+            ],
+            [
+              "USD",
+              145
+            ],
+            [
+              "AUD",
+              139
+            ],
+            [
+              "GBP",
+              132
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "preferences.preferred_language": {
+          "cardinality": 0.0071,
+          "inferred_type": "string",
+          "missing_pct": 15.85,
+          "nulls": 159,
+          "placeholders": 0,
+          "python_types": {
+            "string": 844
+          },
+          "top_values": [
+            [
+              "en",
+              150
+            ],
+            [
+              "ja",
+              149
+            ],
+            [
+              "de",
+              147
+            ],
+            [
+              "zh",
+              145
+            ],
+            [
+              "fr",
+              127
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "preferences.sms_notifications": {
+          "boolean_spellings": {
+            "False": 483,
+            "True": 520
+          },
+          "cardinality": 0.002,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        },
+        "registration_date": {
+          "cardinality": 0.9581,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "epoch_seconds": 213,
+              "iso_date": 209,
+              "iso_datetime": 193,
+              "nn-nn-yyyy": 203,
+              "nn/nn/yyyy": 185
+            },
+            "max": "2024-11-05",
+            "min": "2018-01-01",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 961
+        },
+        "segment": {
+          "cardinality": 0.014,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 1003
+          },
+          "spelling_variants": {
+            "bronze": {
+              "BRONZE": 23,
+              "Bronze": 161,
+              "bronze": 21
+            },
+            "gold": {
+              "GOLD": 19,
+              "Gold": 180,
+              "gold": 12
+            },
+            "platinum": {
+              "PLATINUM": 19,
+              "Platinum": 171,
+              "platinum": 22
+            },
+            "silver": {
+              "SILVER": 20,
+              "Silver": 136,
+              "silver": 20
+            },
+            "vip": {
+              "VIP": 171,
+              "vip": 28
+            }
+          },
+          "top_values": [
+            [
+              "Gold",
+              180
+            ],
+            [
+              "Platinum",
+              171
+            ],
+            [
+              "VIP",
+              171
+            ],
+            [
+              "Bronze",
+              161
+            ],
+            [
+              "Silver",
+              136
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 14
+        },
+        "total_orders": {
+          "cardinality": 0.1974,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 1003,
+            "max": 200.0,
+            "mean": 100.9422,
+            "median": 100.0,
+            "min": 1.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 57.5111,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 1003
+          },
+          "type_fit": 1.0,
+          "unique": 198
+        },
+        "total_spend": {
+          "cardinality": 0.998,
+          "inferred_type": "float",
+          "missing_pct": 2.19,
+          "nulls": 22,
+          "numeric": {
+            "count": 981,
+            "max": 49645.83,
+            "mean": 23637.9011,
+            "median": 24592.55,
+            "min": -48890.0,
+            "negatives": 13,
+            "outliers_iqr": 7,
+            "std": 15748.9485,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 981
+          },
+          "type_fit": 1.0,
+          "unique": 979
+        }
+      },
+      "columns": 30,
+      "envelope": {
+        "api_version": "1.0.0",
+        "generated_at": "2026-01-29T10:25:41.520431",
+        "total_count": 1003
+      },
+      "error": null,
+      "file": "customers.json",
+      "file_bytes": 1079733,
+      "format": "json",
+      "memory_bytes": 505685,
+      "primary_key": [
+        "customer_id"
+      ],
+      "rows": 1003,
+      "sha256": "c6cdbb308002af50c61462988d126aa3c3f95e0e9a661d9fc1010bd25365ba97",
+      "status": "ok"
+    },
+    "invoice_lines": {
+      "column_profiles": {
+        "description": {
+          "cardinality": 0.0022,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 3618
+          },
+          "top_values": [
+            [
+              "Bulk purchase - Line 1",
+              805
+            ],
+            [
+              "Bulk purchase - Line 2",
+              713
+            ],
+            [
+              "Bulk purchase - Line 3",
+              606
+            ],
+            [
+              "Bulk purchase - Line 4",
+              495
+            ],
+            [
+              "Bulk purchase - Line 5",
+              386
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "invoice_id": {
+          "cardinality": 0.2211,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 3618
+          },
+          "type_fit": 1.0,
+          "unique": 800
+        },
+        "line_number": {
+          "cardinality": 0.0022,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 3618,
+            "max": 8.0,
+            "mean": 3.3339,
+            "median": 3.0,
+            "min": 1.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 1.9869,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 3618
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "line_total": {
+          "cardinality": 0.9895,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 3618,
+            "max": 317170.72,
+            "mean": 53960.6641,
+            "median": 36984.94,
+            "min": -288819.0,
+            "negatives": 111,
+            "outliers_iqr": 177,
+            "std": 59596.3071,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 3618
+          },
+          "type_fit": 1.0,
+          "unique": 3580
+        },
+        "product_id": {
+          "cardinality": 0.1735,
+          "inferred_type": "string",
+          "missing_pct": 13.65,
+          "nulls": 494,
+          "placeholders": 0,
+          "python_types": {
+            "string": 3124
+          },
+          "type_fit": 1.0,
+          "unique": 542
+        },
+        "quantity": {
+          "cardinality": 0.1531,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 3618,
+            "max": 500.0,
+            "mean": 242.8101,
+            "median": 243.0,
+            "min": -484.0,
+            "negatives": 67,
+            "outliers_iqr": 27,
+            "std": 158.0738,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 3618
+          },
+          "type_fit": 1.0,
+          "unique": 554
+        },
+        "unit_cost": {
+          "cardinality": 0.309,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 3618,
+            "max": 669.07,
+            "mean": 221.5392,
+            "median": 194.43,
+            "min": -585.79,
+            "negatives": 44,
+            "outliers_iqr": 14,
+            "std": 163.5813,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 3618
+          },
+          "type_fit": 1.0,
+          "unique": 1118
+        }
+      },
+      "columns": 7,
+      "envelope": {},
+      "error": null,
+      "file": "invoices.csv (line_items_json)",
+      "file_bytes": null,
+      "format": "nested json",
+      "memory_bytes": 357767,
+      "primary_key": [
+        "invoice_id",
+        "line_number"
+      ],
+      "rows": 3618,
+      "sha256": null,
+      "status": "ok"
+    },
+    "invoices": {
+      "column_profiles": {
+        "amount_paid": {
+          "cardinality": 0.8447,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 930118.47,
+            "mean": 172308.2662,
+            "median": 117174.32,
+            "min": -113590.22,
+            "negatives": 11,
+            "outliers_iqr": 17,
+            "std": 182418.8789,
+            "zeros": 121
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 680
+        },
+        "approved_by": {
+          "cardinality": 0.0051,
+          "inferred_type": "string",
+          "missing_pct": 26.58,
+          "nulls": 0,
+          "placeholders": 214,
+          "python_types": {
+            "string": 591
+          },
+          "top_values": [
+            [
+              "jane.smith@company.com",
+              206
+            ],
+            [
+              "procurement@company.com",
+              193
+            ],
+            [
+              "john.doe@company.com",
+              192
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 3
+        },
+        "balance_due": {
+          "cardinality": 0.5975,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 936784.3,
+            "mean": 95426.4891,
+            "median": 26443.53,
+            "min": -62758.11,
+            "negatives": 7,
+            "outliers_iqr": 43,
+            "std": 140913.5641,
+            "zeros": 323
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 481
+        },
+        "created_at": {
+          "cardinality": 0.6857,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 805
+            },
+            "max": "2024-12-31",
+            "min": "2022-01-03",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 552
+        },
+        "currency": {
+          "cardinality": 0.0099,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "spelling_variants": {
+            "usd": {
+              "USD": 211,
+              "usd": 7
+            }
+          },
+          "top_values": [
+            [
+              "EUR",
+              280
+            ],
+            [
+              "USD",
+              211
+            ],
+            [
+              "AUD",
+              97
+            ],
+            [
+              "CAD",
+              96
+            ],
+            [
+              "GBP",
+              92
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "due_date": {
+          "cardinality": 0.8224,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 409,
+              "nn/nn/yyyy": 396
+            },
+            "max": "2024-12-31",
+            "min": "2022-01-03",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 662
+        },
+        "invoice_date": {
+          "cardinality": 0.9155,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 196,
+              "nn-nn-yyyy": 200,
+              "nn/nn/yyyy": 203,
+              "yyyy/mm/dd": 206
+            },
+            "max": "2024-12-31",
+            "min": "2022-01-03",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 737
+        },
+        "invoice_id": {
+          "cardinality": 0.9938,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 800
+        },
+        "invoice_number": {
+          "cardinality": 0.9689,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 780
+        },
+        "line_item_count": {
+          "cardinality": 0.0099,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 8.0,
+            "mean": 4.4944,
+            "median": 4.0,
+            "min": 1.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 2.2979,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "line_items_json": {
+          "cardinality": 0.9938,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 800
+        },
+        "notes": {
+          "cardinality": 0.04,
+          "inferred_type": "string",
+          "missing_pct": 81.37,
+          "nulls": 0,
+          "placeholders": 655,
+          "python_types": {
+            "string": 150
+          },
+          "top_values": [
+            [
+              "Quality inspection required",
+              33
+            ],
+            [
+              "Rush order",
+              31
+            ],
+            [
+              "Damaged items replaced",
+              29
+            ],
+            [
+              "Bulk discount applied",
+              21
+            ],
+            [
+              "Price negotiated",
+              18
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "payment_date": {
+          "cardinality": 0.8054,
+          "dates": {
+            "after_as_of": 15,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 442
+            },
+            "max": "2025-02-17",
+            "min": "2022-01-25",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 45.09,
+          "nulls": 0,
+          "placeholders": 363,
+          "python_types": {
+            "string": 442
+          },
+          "type_fit": 1.0,
+          "unique": 356
+        },
+        "payment_method": {
+          "cardinality": 0.0062,
+          "inferred_type": "string",
+          "missing_pct": 20.25,
+          "nulls": 0,
+          "placeholders": 163,
+          "python_types": {
+            "string": 642
+          },
+          "top_values": [
+            [
+              "wire_transfer",
+              182
+            ],
+            [
+              "credit_card",
+              157
+            ],
+            [
+              "check",
+              155
+            ],
+            [
+              "ach",
+              148
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "payment_status": {
+          "cardinality": 0.0062,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "top_values": [
+            [
+              "paid",
+              323
+            ],
+            [
+              "disputed",
+              129
+            ],
+            [
+              "pending",
+              121
+            ],
+            [
+              "partial",
+              119
+            ],
+            [
+              "overdue",
+              113
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "payment_terms": {
+          "cardinality": 0.005,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "top_values": [
+            [
+              "NET30",
+              609
+            ],
+            [
+              "NET45",
+              107
+            ],
+            [
+              "NET15",
+              86
+            ],
+            [
+              "NET60",
+              3
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "po_number": {
+          "cardinality": 0.9918,
+          "inferred_type": "string",
+          "missing_pct": 8.94,
+          "nulls": 0,
+          "placeholders": 72,
+          "python_types": {
+            "string": 733
+          },
+          "type_fit": 1.0,
+          "unique": 727
+        },
+        "shipping_handling": {
+          "cardinality": 0.6932,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 499.89,
+            "mean": 171.7396,
+            "median": 148.04,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 163.9638,
+            "zeros": 243
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 558
+        },
+        "subtotal": {
+          "cardinality": 0.9938,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 969810.3,
+            "mean": 242521.3448,
+            "median": 216690.58,
+            "min": -163149.28,
+            "negatives": 12,
+            "outliers_iqr": 11,
+            "std": 176228.534,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 800
+        },
+        "tax_amount": {
+          "cardinality": 0.8658,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 203660.16,
+            "mean": 24981.534,
+            "median": 17286.53,
+            "min": -13051.94,
+            "negatives": 11,
+            "outliers_iqr": 46,
+            "std": 28071.6247,
+            "zeros": 106
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 697
+        },
+        "tax_rate": {
+          "cardinality": 0.0087,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 0.21,
+            "mean": 0.1019,
+            "median": 0.08,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 0.0702,
+            "zeros": 106
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 7
+        },
+        "total_amount": {
+          "cardinality": 0.9938,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 805,
+            "max": 1173560.74,
+            "mean": 267734.7553,
+            "median": 233571.72,
+            "min": -176074.03,
+            "negatives": 12,
+            "outliers_iqr": 11,
+            "std": 196194.381,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 800
+        },
+        "updated_at": {
+          "cardinality": 0.7217,
+          "dates": {
+            "after_as_of": 21,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 805
+            },
+            "max": "2025-02-24",
+            "min": "2022-01-14",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "type_fit": 1.0,
+          "unique": 581
+        },
+        "vendor_id": {
+          "cardinality": 0.0311,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "top_values": [
+            [
+              "VND-001",
+              110
+            ],
+            [
+              "VND-002",
+              106
+            ],
+            [
+              "VND-007",
+              105
+            ],
+            [
+              "VND-004",
+              102
+            ],
+            [
+              "VND-003",
+              100
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 25
+        },
+        "vendor_name": {
+          "cardinality": 0.0124,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 805
+          },
+          "top_values": [
+            [
+              "TechFlow Electronics",
+              112
+            ],
+            [
+              "Global Gadgets Ltd",
+              107
+            ],
+            [
+              "Nordic Home Essentials",
+              106
+            ],
+            [
+              "MapleCraft Toys",
+              105
+            ],
+            [
+              "Aussie Sports Gear",
+              102
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        }
+      },
+      "columns": 25,
+      "envelope": {},
+      "error": null,
+      "file": "invoices.csv",
+      "file_bytes": 798590,
+      "format": "csv",
+      "memory_bytes": 880785,
+      "primary_key": [
+        "invoice_id"
+      ],
+      "rows": 805,
+      "sha256": "cb1adbb844e406808b98e73a52b756aa5b5b1e5180fb6517e3016318290ffac4",
+      "status": "ok"
+    },
+    "product_reviews": {
+      "column_profiles": {
+        "customer_id": {
+          "cardinality": 0.7333,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 30
+          },
+          "top_values": [
+            [
+              "CUS-00000234",
+              2
+            ],
+            [
+              "CUS-00000345",
+              2
+            ],
+            [
+              "CUS-00000456",
+              2
+            ],
+            [
+              "CUS-00000567",
+              2
+            ],
+            [
+              "CUS-00000678",
+              2
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 22
+        },
+        "helpful_votes": {
+          "cardinality": 0.8,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 30,
+            "max": 445.0,
+            "mean": 104.4333,
+            "median": 72.5,
+            "min": 2.0,
+            "negatives": 0,
+            "outliers_iqr": 1,
+            "std": 94.1527,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 30
+          },
+          "type_fit": 1.0,
+          "unique": 24
+        },
+        "images": {
+          "cardinality": 0.4667,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 30
+          },
+          "type_fit": 1.0,
+          "unique": 14
+        },
+        "product_id": {
+          "cardinality": 0.6,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 30
+          },
+          "top_values": [
+            [
+              "PRD-000001",
+              4
+            ],
+            [
+              "PRD-000012",
+              3
+            ],
+            [
+              "PRD-000004",
+              2
+            ],
+            [
+              "PRD-000005",
+              2
+            ],
+            [
+              "PRD-000006",
+              2
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 18
+        },
+        "rating": {
+          "cardinality": 0.2069,
+          "inferred_type": "float",
+          "missing_pct": 3.33,
+          "nulls": 1,
+          "numeric": {
+            "count": 29,
+            "max": 5.0,
+            "mean": 3.931,
+            "median": 4.0,
+            "min": -1.0,
+            "negatives": 1,
+            "outliers_iqr": 4,
+            "std": 1.4375,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 29
+          },
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "response": {
+          "cardinality": 0.0,
+          "inferred_type": "empty",
+          "missing_pct": 100.0,
+          "nulls": 30,
+          "placeholders": 0,
+          "python_types": {},
+          "type_fit": 0.0,
+          "unique": 0
+        },
+        "response.responder": {
+          "cardinality": 0.6667,
+          "inferred_type": "string",
+          "missing_pct": 60.0,
+          "nulls": 18,
+          "placeholders": 0,
+          "python_types": {
+            "string": 12
+          },
+          "top_values": [
+            [
+              "TechStore Team",
+              4
+            ],
+            [
+              "TechStore Support",
+              2
+            ],
+            [
+              "TechStore Creative",
+              1
+            ],
+            [
+              "TechStore Fashion",
+              1
+            ],
+            [
+              "TechStore Manager",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "response.response_date": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 12,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 12
+            },
+            "max": "2025-03-22",
+            "min": "2025-01-16",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 60.0,
+          "nulls": 18,
+          "placeholders": 0,
+          "python_types": {
+            "string": 12
+          },
+          "type_fit": 1.0,
+          "unique": 12
+        },
+        "response.response_text": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 60.0,
+          "nulls": 18,
+          "placeholders": 0,
+          "python_types": {
+            "string": 12
+          },
+          "text_issues": {
+            "non_ascii": 3
+          },
+          "top_values": [
+            [
+              "Great tip about the sizing! We've updated the product page with a size guide that accounts for this. Thanks for helping other customers!",
+              1
+            ],
+            [
+              "Thank you for this feedback. We've heard similar comments and are working with the manufacturer to improve the instructions. We now also offer professional assembly for $49 - wish we could have offered that to you!",
+              1
+            ],
+            [
+              "Thank you for your honest feedback! We also offer a 'Silent' version of this keyboard with dampened switches that's much quieter while maintaining the mechanical feel. Check out the 'Office Series' in our store!",
+              1
+            ],
+            [
+              "Thank you for your wonderful review! We're thrilled you're enjoying the sound quality. Rock on! 🎵",
+              1
+            ],
+            [
+              "We sincerely apologize for this terrible experience, especially during the holidays. This is unacceptable. Please contact us immediately at support@techstore.com or call 1-800-TECHSTOR. We'll expedite a replacement with free overnight shipping and include a small gift for the inconvenience.",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 12
+        },
+        "review_date": {
+          "cardinality": 0.9,
+          "dates": {
+            "after_as_of": 30,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 29,
+              "nn/nn/yyyy": 1
+            },
+            "max": "2025-03-25",
+            "min": "2025-01-10",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 30
+          },
+          "type_fit": 1.0,
+          "unique": 27
+        },
+        "review_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 3.33,
+          "nulls": 0,
+          "placeholders": 1,
+          "python_types": {
+            "string": 29
+          },
+          "top_values": [
+            [
+              "REV-000001",
+              1
+            ],
+            [
+              "REV-000002",
+              1
+            ],
+            [
+              "REV-000003",
+              1
+            ],
+            [
+              "REV-000004",
+              1
+            ],
+            [
+              "REV-000005",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 29
+        },
+        "review_text": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 30
+          },
+          "top_values": [
+            [
+              "After trying at least 10 different sports bras, this one is THE ONE. High impact support without feeling like you're being squeezed to death. The moisture-wicking is incredible - stayed dry during a hot yoga session. The straps don't dig in. Already ordered two more!",
+              1
+            ],
+            [
+              "As a digital artist, display quality is crucial. This tablet's screen is gorgeous - accurate colors, minimal parallax with the stylus, and smooth performance. The 120Hz display makes drawing feel natural. Replaced my much more expensive competitor tablet with this!",
+              1
+            ],
+            [
+              "As a software developer who types 8+ hours a day, a good keyboard is essential. This mechanical keyboard has transformed my typing experience. The tactile feedback is perfect, the RGB lighting is customizable, and the build quality is exceptional. Worth every penny!",
+              1
+            ],
+            [
+              "As someone who works in a noisy open office, these headphones are a lifesaver. The noise cancellation lets me focus, and the mic quality is great for calls. Battery easily lasts my whole work week. Premium feel and the case is handy for travel.",
+              1
+            ],
+            [
+              "Beautiful sweater - the wool is soft and doesn't itch. Keeps me warm without overheating. The fit is a little boxy but that's the style I guess. Hand wash only which is a bit annoying but expected for wool.",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 30
+        },
+        "sentiment": {
+          "cardinality": 0.1034,
+          "inferred_type": "string",
+          "missing_pct": 3.33,
+          "nulls": 1,
+          "placeholders": 0,
+          "python_types": {
+            "string": 29
+          },
+          "top_values": [
+            [
+              "positive",
+              22
+            ],
+            [
+              "negative",
+              4
+            ],
+            [
+              "neutral",
+              3
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 3
+        },
+        "title": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 30
+          },
+          "top_values": [
+            [
+              "Amazing sound quality!",
+              1
+            ],
+            [
+              "Best keyboard I've ever owned",
+              1
+            ],
+            [
+              "Changed my work life",
+              1
+            ],
+            [
+              "DOA - Doesn't turn on",
+              1
+            ],
+            [
+              "DONT BUY!!!",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 30
+        },
+        "verified_purchase": {
+          "boolean_spellings": {
+            "False": 1,
+            "True": 29
+          },
+          "cardinality": 0.0667,
+          "inferred_type": "boolean",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "boolean": 30
+          },
+          "type_fit": 1.0,
+          "unique": 2
+        }
+      },
+      "columns": 15,
+      "envelope": {
+        "api_version": "1.0.0",
+        "generated_at": "2026-01-29T10:35:00.000000",
+        "total_count": 150
+      },
+      "error": null,
+      "file": "product_reviews.json",
+      "file_bytes": 22082,
+      "format": "json",
+      "memory_bytes": 17209,
+      "primary_key": [
+        "review_id"
+      ],
+      "rows": 30,
+      "sha256": "6eb0131905121807ca69c56ff72c724cf86dd7a52d71e942a061c0c7d2c2684d",
+      "status": "ok"
+    },
+    "products": {
+      "column_profiles": {
+        "category": {
+          "cardinality": 0.0163,
+          "inferred_type": "string",
+          "missing_pct": 2.77,
+          "nulls": 0,
+          "placeholders": 14,
+          "python_types": {
+            "string": 491
+          },
+          "top_values": [
+            [
+              "Electronics",
+              121
+            ],
+            [
+              "Clothing",
+              69
+            ],
+            [
+              "Beauty & Personal Care",
+              63
+            ],
+            [
+              "Home & Kitchen",
+              63
+            ],
+            [
+              "Sports & Outdoors",
+              60
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "cost": {
+          "cardinality": 0.9858,
+          "inferred_type": "numeric_string",
+          "missing_pct": 2.57,
+          "nulls": 0,
+          "numeric": {
+            "count": 492,
+            "max": 669.07,
+            "mean": 255.3802,
+            "median": 241.33,
+            "min": 4.01,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 161.2998,
+            "zeros": 0
+          },
+          "placeholders": 13,
+          "python_types": {
+            "string": 492
+          },
+          "type_fit": 1.0,
+          "unique": 485
+        },
+        "created_date": {
+          "cardinality": 0.9683,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "dd-Mon-yyyy": 98,
+              "iso_date": 107,
+              "nn-nn-yyyy": 94,
+              "nn/nn/yyyy": 94,
+              "yyyy/mm/dd": 112
+            },
+            "max": "2024-12-05",
+            "min": "2020-01-03",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 489
+        },
+        "currency": {
+          "cardinality": 0.0119,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "spelling_variants": {
+            "usd": {
+              "USD": 485,
+              "Usd": 4,
+              "usd": 3
+            }
+          },
+          "top_values": [
+            [
+              "USD",
+              485
+            ],
+            [
+              "$",
+              5
+            ],
+            [
+              "US Dollar",
+              5
+            ],
+            [
+              "Usd",
+              4
+            ],
+            [
+              "US$",
+              3
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "description": {
+          "cardinality": 0.9287,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "text_issues": {
+            "non_ascii": 16
+          },
+          "type_fit": 1.0,
+          "unique": 469
+        },
+        "is_active": {
+          "boolean_spellings": {
+            "'0'": 94,
+            "'1'": 90,
+            "'False'": 57,
+            "'True'": 38,
+            "'false'": 46,
+            "'no'": 57,
+            "'true'": 52,
+            "'yes'": 71
+          },
+          "cardinality": 0.0158,
+          "inferred_type": "boolean_string",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "last_updated": {
+          "cardinality": 0.8891,
+          "dates": {
+            "after_as_of": 47,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 505
+            },
+            "max": "2025-10-05",
+            "min": "2020-02-01",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 449
+        },
+        "price": {
+          "cardinality": 0.9901,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 505,
+            "max": 999.6,
+            "mean": 488.7078,
+            "median": 509.2,
+            "min": -888.29,
+            "negatives": 13,
+            "outliers_iqr": 4,
+            "std": 333.2661,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 500
+        },
+        "product_id": {
+          "cardinality": 0.9901,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 500
+        },
+        "product_name": {
+          "cardinality": 0.7208,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 364
+        },
+        "rating": {
+          "cardinality": 0.0876,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.59,
+          "nulls": 0,
+          "numeric": {
+            "count": 502,
+            "max": 5.5,
+            "mean": 2.9472,
+            "median": 2.9,
+            "min": -1.0,
+            "negatives": 2,
+            "outliers_iqr": 2,
+            "std": 1.1593,
+            "zeros": 1
+          },
+          "placeholders": 3,
+          "python_types": {
+            "string": 502
+          },
+          "type_fit": 1.0,
+          "unique": 44
+        },
+        "reorder_level": {
+          "cardinality": 0.0812,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 505,
+            "max": 50.0,
+            "mean": 30.0574,
+            "median": 30.0,
+            "min": 10.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 11.6965,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 41
+        },
+        "review_count": {
+          "cardinality": 0.9366,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 505,
+            "max": 4967.0,
+            "mean": 2502.6099,
+            "median": 2478.0,
+            "min": 5.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 1368.455,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 473
+        },
+        "sku": {
+          "cardinality": 0.9564,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 483
+        },
+        "stock_quantity": {
+          "cardinality": 0.6158,
+          "inferred_type": "numeric_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 505,
+            "max": 497.0,
+            "mean": 238.4713,
+            "median": 228.0,
+            "min": -41.0,
+            "negatives": 6,
+            "outliers_iqr": 0,
+            "std": 146.7477,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 311
+        },
+        "subcategory": {
+          "cardinality": 0.0835,
+          "inferred_type": "string",
+          "missing_pct": 2.77,
+          "nulls": 0,
+          "placeholders": 14,
+          "python_types": {
+            "string": 491
+          },
+          "top_values": [
+            [
+              "Smartwatches",
+              26
+            ],
+            [
+              "Headphones",
+              25
+            ],
+            [
+              "Cameras",
+              20
+            ],
+            [
+              "Smartphones",
+              19
+            ],
+            [
+              "Tablets",
+              19
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 41
+        },
+        "tags": {
+          "cardinality": 0.8752,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "type_fit": 1.0,
+          "unique": 442
+        },
+        "vendor_id": {
+          "cardinality": 0.0218,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 505
+          },
+          "top_values": [
+            [
+              "VND-005",
+              70
+            ],
+            [
+              "VND-003",
+              65
+            ],
+            [
+              "VND-008",
+              65
+            ],
+            [
+              "VND-001",
+              64
+            ],
+            [
+              "VND-004",
+              63
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 11
+        },
+        "weight_kg": {
+          "cardinality": 0.9046,
+          "inferred_type": "numeric_string",
+          "missing_pct": 4.55,
+          "nulls": 0,
+          "numeric": {
+            "count": 482,
+            "max": 24.98,
+            "mean": 11.6944,
+            "median": 12.3,
+            "min": -22.51,
+            "negatives": 16,
+            "outliers_iqr": 5,
+            "std": 8.4992,
+            "zeros": 0
+          },
+          "placeholders": 23,
+          "python_types": {
+            "string": 482
+          },
+          "type_fit": 1.0,
+          "unique": 436
+        }
+      },
+      "columns": 19,
+      "envelope": {},
+      "error": null,
+      "file": "products.csv",
+      "file_bytes": 131160,
+      "format": "csv",
+      "memory_bytes": 197262,
+      "primary_key": [
+        "product_id"
+      ],
+      "rows": 505,
+      "sha256": "a5b4d7f16110d16f283ae225864c94862a6e85b00281670582d767688838c977",
+      "status": "ok"
+    },
+    "support_tickets": {
+      "column_profiles": {
+        "agent_id": {
+          "cardinality": 0.35,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "AGT-001",
+              3
+            ],
+            [
+              "AGT-002",
+              3
+            ],
+            [
+              "AGT-003",
+              3
+            ],
+            [
+              "AGT-004",
+              3
+            ],
+            [
+              "AGT-005",
+              3
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 7
+        },
+        "category": {
+          "cardinality": 0.7,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "product_issue",
+              3
+            ],
+            [
+              "return",
+              3
+            ],
+            [
+              "complaint",
+              2
+            ],
+            [
+              "technical_support",
+              2
+            ],
+            [
+              "account",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 14
+        },
+        "channel": {
+          "cardinality": 0.2,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "spelling_variants": {
+            "chat": {
+              "CHAT": 1,
+              "chat": 6
+            }
+          },
+          "top_values": [
+            [
+              "phone",
+              8
+            ],
+            [
+              "chat",
+              6
+            ],
+            [
+              "email",
+              5
+            ],
+            [
+              "CHAT",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "created_at": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 20,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 19,
+              "nn-nn-yyyy": 1
+            },
+            "max": "2025-03-27",
+            "min": "2025-03-15",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "type_fit": 1.0,
+          "unique": 20
+        },
+        "customer_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "CUS-00000001",
+              1
+            ],
+            [
+              "CUS-00000008",
+              1
+            ],
+            [
+              "CUS-00000012",
+              1
+            ],
+            [
+              "CUS-00000015",
+              1
+            ],
+            [
+              "CUS-00000023",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 20
+        },
+        "priority": {
+          "cardinality": 0.25,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "spelling_variants": {
+            "high": {
+              "HIGH": 1,
+              "high": 3
+            }
+          },
+          "top_values": [
+            [
+              "low",
+              7
+            ],
+            [
+              "medium",
+              7
+            ],
+            [
+              "high",
+              3
+            ],
+            [
+              "urgent",
+              2
+            ],
+            [
+              "HIGH",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "product_id": {
+          "cardinality": 0.9412,
+          "inferred_type": "string",
+          "missing_pct": 15.0,
+          "nulls": 3,
+          "placeholders": 0,
+          "python_types": {
+            "string": 17
+          },
+          "top_values": [
+            [
+              "PRD-000234",
+              2
+            ],
+            [
+              "PRD-000001",
+              1
+            ],
+            [
+              "PRD-000012",
+              1
+            ],
+            [
+              "PRD-000023",
+              1
+            ],
+            [
+              "PRD-000045",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 16
+        },
+        "resolution_type": {
+          "cardinality": 0.7,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "information_provided",
+              4
+            ],
+            [
+              "replacement",
+              3
+            ],
+            [
+              "technical_resolution",
+              2
+            ],
+            [
+              "account_recovery",
+              1
+            ],
+            [
+              "escalated",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 14
+        },
+        "resolved_at": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 18,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 18
+            },
+            "max": "2025-03-27",
+            "min": "2025-03-15",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 10.0,
+          "nulls": 2,
+          "placeholders": 0,
+          "python_types": {
+            "string": 18
+          },
+          "type_fit": 1.0,
+          "unique": 18
+        },
+        "satisfaction_score": {
+          "cardinality": 0.3529,
+          "inferred_type": "float",
+          "missing_pct": 15.0,
+          "nulls": 3,
+          "numeric": {
+            "count": 17,
+            "max": 6.0,
+            "mean": 4.1176,
+            "median": 4.0,
+            "min": 1.0,
+            "negatives": 0,
+            "outliers_iqr": 2,
+            "std": 1.269,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 17
+          },
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "status": {
+          "cardinality": 0.25,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "spelling_variants": {
+            "resolved": {
+              "Resolved": 1,
+              "resolved": 13
+            }
+          },
+          "top_values": [
+            [
+              "resolved",
+              13
+            ],
+            [
+              "closed",
+              4
+            ],
+            [
+              "Resolved",
+              1
+            ],
+            [
+              "escalated",
+              1
+            ],
+            [
+              "pending",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "summary": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "Account access issue due to email typo. Corrected and 2FA enabled.",
+              1
+            ],
+            [
+              "Battery defect in bluetooth speaker - replacement sent.",
+              1
+            ],
+            [
+              "Bluetooth pairing issue resolved by forgetting and re-pairing device.",
+              1
+            ],
+            [
+              "Complaint about battery life advertising. Clarified specs, offered replacement + credit.",
+              1
+            ],
+            [
+              "Customer reported defective mechanical keyboard with non-responsive keys. Replacement initiated.",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 20
+        },
+        "tags": {
+          "cardinality": 1.0,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 20
+          },
+          "type_fit": 1.0,
+          "unique": 20
+        },
+        "ticket_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 5.0,
+          "nulls": 0,
+          "placeholders": 1,
+          "python_types": {
+            "string": 19
+          },
+          "top_values": [
+            [
+              "TKT-000001",
+              1
+            ],
+            [
+              "TKT-000002",
+              1
+            ],
+            [
+              "TKT-000003",
+              1
+            ],
+            [
+              "TKT-000004",
+              1
+            ],
+            [
+              "TKT-000005",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 19
+        },
+        "transcript": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 20
+          },
+          "top_values": [
+            [
+              "Agent: TechStore support, Alex here.\n\nCustomer: Hi, I want to return a gift I received. But I don't have the receipt.\n\nAgent: No problem, we can still help! Do you know who purchased it or do you have the gift receipt?\n\nCustomer: I have the gift receipt. The code is GR-2025-12345.\n\nAgent: Perfect, let me look that up... I found it - a Portable Power Bank, correct?\n\nCustomer: Yes, that's it.\n\nAgent: Great. With a gift receipt, I can issue you store credit for the purchase amount. Would that work for you?\n\nCustomer: Yes, that's fine.\n\nAgent: Excellent. I'll email you a return shipping label. Once we receive the item, you'll get a $79.99 store credit on a gift card sent to your email. What email should I use?\n\nCustomer: gift.return@email.com\n\nAgent: Got it. The label will arrive within an hour. Is there anything else I can help with?\n\nCustomer: No, thank you!",
+              1
+            ],
+            [
+              "Agent: TechStore support, David speaking.\n\nCustomer: Hi, I'd like to return a pair of headphones. They're just not comfortable for me.\n\nAgent: No problem, I can help with that. Do you have your order number?\n\nCustomer: Yes, ORD-2025-87654.\n\nAgent: Thank you. I see the Noise-Canceling Headset purchased 12 days ago. That's within our 30-day return window. Is the product in original condition with all packaging?\n\nCustomer: Yes, everything is there. I only used them a few times.\n\nAgent: Perfect. I'll email you a prepaid return label. Once we receive the item, we'll process your refund within 3-5 business days.\n\nCustomer: Can I exchange for a different model instead?\n\nAgent: Absolutely! Which model were you interested in?\n\nCustomer: The EarPods Pro - they look smaller and might fit better.\n\nAgent: Great choice. They're actually $30 less, so you'll get that difference refunded too. I'll set up the exchange now.\n\nCustomer: Wonderful, thank you!",
+              1
+            ],
+            [
+              "Agent: TechStore support, David speaking.\n\nCustomer: My new laptop is making a burning smell! I just unplugged it. What should I do?\n\nAgent: That's very concerning and you did the right thing unplugging it immediately. Please don't turn it back on. Can you tell me if there's any visible damage or smoke?\n\nCustomer: No smoke, just that electrical burning smell. The bottom feels very hot.\n\nAgent: Okay, keep it in a safe place away from flammable materials and let it cool down. This is a serious safety issue. I'm going to arrange for an immediate pickup - a courier will come to your address today to collect it.\n\nCustomer: Today? That's impressive.\n\nAgent: Yes, safety issues are our top priority. We'll have our technicians examine it, and you'll receive a replacement within 48 hours if it's confirmed defective. Can you confirm your address?\n\nCustomer: Yes, it's 123 Main Street, Apt 4B.\n\nAgent: Perfect. Expect the courier between 2-6 PM today. You'll receive tracking info shortly.\n\nCustomer: Thank you for taking this seriously.\n\nAgent: Absolutely. Please don't hesitate to call if you notice anything else unusual.",
+              1
+            ],
+            [
+              "Agent: TechStore support, Sarah speaking. How can I help?\n\nCustomer: Hi, I just set up my new smart TV but I can't connect it to WiFi.\n\nAgent: I'd be happy to help. What error message are you seeing?\n\nCustomer: It says 'Connection failed - incorrect password' but I'm 100% sure the password is correct.\n\nAgent: That's a common issue. Let's try a few things. First, is your WiFi network name visible in the TV's list?\n\nCustomer: Yes, it shows up.\n\nAgent: Good. Sometimes the issue is with special characters. Does your WiFi password have any symbols like @, #, or &?\n\nCustomer: Yes, it has an @ symbol.\n\nAgent: That might be the culprit. Some smart TVs have trouble with certain special characters in passwords. I'd recommend temporarily changing your WiFi password to something with only letters and numbers, connecting the TV, and then you can change it back.\n\nCustomer: Okay, let me try... [pause] ... It's connecting now!\n\nAgent: Excellent! After the TV is connected, you can change your router password back. The TV will remember the new password.\n\nCustomer: It worked! Thank you so much!\n\nAgent: You're welcome! Enjoy your new TV!",
+              1
+            ],
+            [
+              "Agent: TechStore support, how can I help?\n\nCustomer: I bought a speaker but the battery only lasts 2 hours instead of the advertised 10 hours.\n\nAgent: I apologize for that. Can I have your order details?\n\nCustomer: Order ORD-2025-90123\n\nAgent: Let me check... I see the Compact Bluetooth Speaker. This could be a battery defect. Have you tried a full charge cycle - letting it drain completely and then charging to 100%?\n\nCustomer: Yes, twice.\n\nAgent: In that case, this sounds like a defective unit. I can send you a replacement with a fresh battery. Would that work?\n\nCustomer: Yes please.\n\nAgent: Done. You'll get shipping info by email. Keep the defective unit until the new one arrives, then use the included label to return it.\n\nCustomer: Great, thank you.",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 20
+        }
+      },
+      "columns": 15,
+      "envelope": {
+        "api_version": "1.0.0",
+        "generated_at": "2026-01-29T10:30:00.000000",
+        "total_count": 250
+      },
+      "error": null,
+      "file": "support_tickets.json",
+      "file_bytes": 31199,
+      "format": "json",
+      "memory_bytes": 26838,
+      "primary_key": [
+        "ticket_id"
+      ],
+      "rows": 20,
+      "sha256": "c2fe435cf476b11c7b05552a26dc9b73b0cc492391884260b7711eb8621853f2",
+      "status": "ok"
+    },
+    "transactions": {
+      "column_profiles": {
+        "channel": {
+          "cardinality": 0.001,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "top_values": [
+            [
+              "web",
+              1032
+            ],
+            [
+              "phone",
+              1016
+            ],
+            [
+              "mobile",
+              1015
+            ],
+            [
+              "store",
+              994
+            ],
+            [
+              "partner",
+              953
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "currency": {
+          "cardinality": 0.0014,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "spelling_variants": {
+            "usd": {
+              "USD": 4863,
+              "usd": 19
+            }
+          },
+          "top_values": [
+            [
+              "USD",
+              4863
+            ],
+            [
+              "US$",
+              28
+            ],
+            [
+              "$",
+              27
+            ],
+            [
+              "EUR",
+              27
+            ],
+            [
+              "GBP",
+              24
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 7
+        },
+        "customer_id": {
+          "cardinality": 0.2112,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 1058
+        },
+        "discount_amount": {
+          "cardinality": 0.5365,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 2499.0,
+            "mean": 265.9777,
+            "median": 79.28,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 417,
+            "std": 406.334,
+            "zeros": 1898
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 2688
+        },
+        "discount_percent": {
+          "cardinality": 0.0012,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 25.0,
+            "mean": 9.4411,
+            "median": 5.0,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 9.2225,
+            "zeros": 1870
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "is_gift": {
+          "boolean_spellings": {
+            "'0'": 789,
+            "'1'": 875,
+            "'False'": 842,
+            "'True'": 813,
+            "'false'": 828,
+            "'true'": 863
+          },
+          "cardinality": 0.0012,
+          "inferred_type": "boolean_string",
+          "invalid_booleans": 0,
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "notes": {
+          "cardinality": 0.0075,
+          "inferred_type": "string",
+          "missing_pct": 89.4,
+          "nulls": 4479,
+          "placeholders": 0,
+          "python_types": {
+            "string": 531
+          },
+          "top_values": [
+            [
+              "Special instructions: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              149
+            ],
+            [
+              "Fragile",
+              144
+            ],
+            [
+              "Express delivery requested",
+              122
+            ],
+            [
+              "Gift wrapped",
+              116
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "order_id": {
+          "cardinality": 0.998,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 5000
+        },
+        "order_status": {
+          "cardinality": 0.0014,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "top_values": [
+            [
+              "completed",
+              1678
+            ],
+            [
+              "processing",
+              578
+            ],
+            [
+              "delivered",
+              571
+            ],
+            [
+              "cancelled",
+              564
+            ],
+            [
+              "refunded",
+              553
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 7
+        },
+        "payment_method": {
+          "cardinality": 0.0012,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "top_values": [
+            [
+              "crypto",
+              863
+            ],
+            [
+              "debit_card",
+              859
+            ],
+            [
+              "credit_card",
+              843
+            ],
+            [
+              "cash_on_delivery",
+              833
+            ],
+            [
+              "bank_transfer",
+              810
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "payment_status": {
+          "cardinality": 0.0008,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "top_values": [
+            [
+              "paid",
+              1313
+            ],
+            [
+              "refunded",
+              1265
+            ],
+            [
+              "failed",
+              1217
+            ],
+            [
+              "pending",
+              1215
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "product_id": {
+          "cardinality": 0.1104,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 553
+        },
+        "quantity": {
+          "cardinality": 0.0042,
+          "inferred_type": "integer",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 10.0,
+            "mean": 4.9383,
+            "median": 5.0,
+            "min": -10.0,
+            "negatives": 236,
+            "outliers_iqr": 139,
+            "std": 3.7082,
+            "zeros": 42
+          },
+          "placeholders": 0,
+          "python_types": {
+            "integer": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 21
+        },
+        "region": {
+          "cardinality": 0.001,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "top_values": [
+            [
+              "Europe",
+              1069
+            ],
+            [
+              "Latin America",
+              1002
+            ],
+            [
+              "North America",
+              998
+            ],
+            [
+              "Asia Pacific",
+              986
+            ],
+            [
+              "Middle East",
+              955
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "shipping_cost": {
+          "cardinality": 0.4403,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 25.0,
+            "mean": 12.2777,
+            "median": 12.5,
+            "min": -24.89,
+            "negatives": 57,
+            "outliers_iqr": 32,
+            "std": 7.7141,
+            "zeros": 2
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 2206
+        },
+        "shipping_method": {
+          "cardinality": 0.001,
+          "inferred_type": "string",
+          "missing_pct": 20.46,
+          "nulls": 1025,
+          "placeholders": 0,
+          "python_types": {
+            "string": 3985
+          },
+          "top_values": [
+            [
+              "standard",
+              1003
+            ],
+            [
+              "express",
+              1000
+            ],
+            [
+              "overnight",
+              992
+            ],
+            [
+              "pickup",
+              990
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "subtotal": {
+          "cardinality": 0.6377,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 9996.0,
+            "mean": 2781.2222,
+            "median": 2080.35,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 49,
+            "std": 2356.9353,
+            "zeros": 42
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 3195
+        },
+        "tax_amount": {
+          "cardinality": 0.7613,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 1916.74,
+            "mean": 208.4044,
+            "median": 114.63,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 279,
+            "std": 268.3153,
+            "zeros": 872
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 3814
+        },
+        "tax_rate": {
+          "cardinality": 0.0012,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 0.2,
+            "mean": 0.0832,
+            "median": 0.07,
+            "min": 0.0,
+            "negatives": 0,
+            "outliers_iqr": 829,
+            "std": 0.0606,
+            "zeros": 834
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 6
+        },
+        "total_amount": {
+          "cardinality": 0.9964,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 11501.4,
+            "mean": 2482.2801,
+            "median": 1912.135,
+            "min": -9604.15,
+            "negatives": 239,
+            "outliers_iqr": 129,
+            "std": 2609.3971,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 4992
+        },
+        "transaction_date": {
+          "cardinality": 0.5142,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_date": 1691,
+              "iso_datetime": 3319
+            },
+            "max": "2024-12-31",
+            "min": "2022-01-01",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 2576
+        },
+        "transaction_id": {
+          "cardinality": 0.998,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 5000
+        },
+        "transaction_timestamp": {
+          "cardinality": 0.2154,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 5010
+            },
+            "max": "2024-12-31",
+            "min": "2022-01-01",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 1079
+        },
+        "unit_price": {
+          "cardinality": 0.1188,
+          "inferred_type": "float",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "numeric": {
+            "count": 5010,
+            "max": 999.6,
+            "mean": 509.0276,
+            "median": 509.74,
+            "min": 10.27,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 296.6124,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 5010
+          },
+          "type_fit": 1.0,
+          "unique": 595
+        }
+      },
+      "columns": 24,
+      "envelope": {},
+      "error": null,
+      "file": "sales_transactions.parquet",
+      "file_bytes": 312876,
+      "format": "parquet",
+      "memory_bytes": 1731004,
+      "primary_key": [
+        "transaction_id"
+      ],
+      "rows": 5010,
+      "sha256": "d13040341d98cf4e2970d945f4b866e6d93000b868c7cbb6b694ea44fd24d2d9",
+      "status": "ok"
+    },
+    "vendors": {
+      "column_profiles": {
+        "address.city": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 10.0,
+          "nulls": 0,
+          "placeholders": 1,
+          "python_types": {
+            "string": 9
+          },
+          "top_values": [
+            [
+              "Denver",
+              1
+            ],
+            [
+              "London",
+              1
+            ],
+            [
+              "Milano",
+              1
+            ],
+            [
+              "Paris",
+              1
+            ],
+            [
+              "San Jose",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "address.country": {
+          "cardinality": 0.8,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "USA",
+              3
+            ],
+            [
+              "Australia",
+              1
+            ],
+            [
+              "Canada",
+              1
+            ],
+            [
+              "China",
+              1
+            ],
+            [
+              "France",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "address.postal_code": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "placeholders": 0,
+          "python_types": {
+            "string": 9
+          },
+          "top_values": [
+            [
+              "111 56",
+              1
+            ],
+            [
+              "2000",
+              1
+            ],
+            [
+              "20121",
+              1
+            ],
+            [
+              "518000",
+              1
+            ],
+            [
+              "75008",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "address.state": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 50.0,
+          "nulls": 5,
+          "placeholders": 0,
+          "python_types": {
+            "string": 5
+          },
+          "top_values": [
+            [
+              "CA",
+              1
+            ],
+            [
+              "CO",
+              1
+            ],
+            [
+              "Guangdong",
+              1
+            ],
+            [
+              "NSW",
+              1
+            ],
+            [
+              "ON",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "address.street": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "placeholders": 0,
+          "python_types": {
+            "string": 9
+          },
+          "text_issues": {
+            "non_ascii": 1
+          },
+          "top_values": [
+            [
+              "100 Publishing Lane",
+              1
+            ],
+            [
+              "1200 Tech Park Drive",
+              1
+            ],
+            [
+              "15 Avenue des Champs-Élysées",
+              1
+            ],
+            [
+              "42 Harbour Street",
+              1
+            ],
+            [
+              "500 Maple Avenue",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "categories": {
+          "cardinality": 1.0,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "certifications": {
+          "cardinality": 0.8,
+          "inferred_type": "list",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "list": 10
+          },
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "contact.email": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "placeholders": 0,
+          "python_types": {
+            "string": 9
+          },
+          "top_values": [
+            [
+              "emma.clarke@bookworld.co.uk",
+              1
+            ],
+            [
+              "erik@nordichome.se",
+              1
+            ],
+            [
+              "john.mitchell@techflow.com",
+              1
+            ],
+            [
+              "m.rossi@fashionfirst.it",
+              1
+            ],
+            [
+              "pierre@maplecraft.ca",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "contact.phone": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 20.0,
+          "nulls": 2,
+          "placeholders": 0,
+          "python_types": {
+            "string": 8
+          },
+          "top_values": [
+            [
+              "+1-416-555-0107",
+              1
+            ],
+            [
+              "+1-555-0101",
+              1
+            ],
+            [
+              "+33-1-5555-0108",
+              1
+            ],
+            [
+              "+39-02-5555-0105",
+              1
+            ],
+            [
+              "+44-20-5555-0106",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "contact.primary_name": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "placeholders": 0,
+          "python_types": {
+            "string": 9
+          },
+          "top_values": [
+            [
+              "Emma Clarke",
+              1
+            ],
+            [
+              "Erik Lindqvist",
+              1
+            ],
+            [
+              "John Mitchell",
+              1
+            ],
+            [
+              "Marco Rossi",
+              1
+            ],
+            [
+              "Pierre Dubois",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "country": {
+          "cardinality": 0.8,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "USA",
+              3
+            ],
+            [
+              "Australia",
+              1
+            ],
+            [
+              "Canada",
+              1
+            ],
+            [
+              "China",
+              1
+            ],
+            [
+              "France",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "country_code": {
+          "cardinality": 0.8,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "US",
+              3
+            ],
+            [
+              "AU",
+              1
+            ],
+            [
+              "CA",
+              1
+            ],
+            [
+              "CN",
+              1
+            ],
+            [
+              "FR",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 8
+        },
+        "created_at": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 10
+            },
+            "max": "2024-11-01",
+            "min": "2017-01-15",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "currency": {
+          "cardinality": 0.5,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "USD",
+              4
+            ],
+            [
+              "EUR",
+              3
+            ],
+            [
+              "AUD",
+              1
+            ],
+            [
+              "CAD",
+              1
+            ],
+            [
+              "GBP",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 5
+        },
+        "lead_time_days": {
+          "cardinality": 1.0,
+          "inferred_type": "float",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "numeric": {
+            "count": 9,
+            "max": 30.0,
+            "mean": 13.8889,
+            "median": 12.0,
+            "min": 5.0,
+            "negatives": 0,
+            "outliers_iqr": 0,
+            "std": 7.96,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 9
+          },
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "payment_terms": {
+          "cardinality": 0.4,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "NET30",
+              7
+            ],
+            [
+              "NET15",
+              1
+            ],
+            [
+              "NET45",
+              1
+            ],
+            [
+              "NET60",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 4
+        },
+        "region": {
+          "cardinality": 0.3,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "Europe",
+              4
+            ],
+            [
+              "North America",
+              4
+            ],
+            [
+              "Asia Pacific",
+              2
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 3
+        },
+        "reliability_score": {
+          "cardinality": 1.0,
+          "inferred_type": "float",
+          "missing_pct": 10.0,
+          "nulls": 1,
+          "numeric": {
+            "count": 9,
+            "max": 98.1,
+            "mean": 90.9667,
+            "median": 93.4,
+            "min": 72.5,
+            "negatives": 0,
+            "outliers_iqr": 1,
+            "std": 7.7311,
+            "zeros": 0
+          },
+          "placeholders": 0,
+          "python_types": {
+            "float": 9
+          },
+          "type_fit": 1.0,
+          "unique": 9
+        },
+        "status": {
+          "cardinality": 0.3,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "active",
+              8
+            ],
+            [
+              "inactive",
+              1
+            ],
+            [
+              "pending",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 3
+        },
+        "updated_at": {
+          "cardinality": 1.0,
+          "dates": {
+            "after_as_of": 0,
+            "before_1900": 0,
+            "formats": {
+              "iso_datetime": 10
+            },
+            "max": "2024-12-05",
+            "min": "2023-06-30",
+            "unparseable": 0,
+            "unparseable_samples": []
+          },
+          "inferred_type": "date_string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "vendor_code": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "AUSSPORT",
+              1
+            ],
+            [
+              "BEAUTYBL",
+              1
+            ],
+            [
+              "BOOKWRLD",
+              1
+            ],
+            [
+              "DISCONT",
+              1
+            ],
+            [
+              "FASHITA",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "vendor_id": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "VND-001",
+              1
+            ],
+            [
+              "VND-002",
+              1
+            ],
+            [
+              "VND-003",
+              1
+            ],
+            [
+              "VND-004",
+              1
+            ],
+            [
+              "VND-005",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        },
+        "vendor_name": {
+          "cardinality": 1.0,
+          "inferred_type": "string",
+          "missing_pct": 0.0,
+          "nulls": 0,
+          "placeholders": 0,
+          "python_types": {
+            "string": 10
+          },
+          "top_values": [
+            [
+              "Aussie Sports Gear",
+              1
+            ],
+            [
+              "BeautyBliss Cosmetics",
+              1
+            ],
+            [
+              "BookWorld Publishing",
+              1
+            ],
+            [
+              "Discontinued Supplies Inc",
+              1
+            ],
+            [
+              "FashionFirst Italia",
+              1
+            ]
+          ],
+          "type_fit": 1.0,
+          "unique": 10
+        }
+      },
+      "columns": 23,
+      "envelope": {
+        "api_version": "2.0.0",
+        "request_timestamp": "2026-01-29T10:25:41.562723",
+        "total_count": 10
+      },
+      "error": null,
+      "file": "vendors.json",
+      "file_bytes": 9126,
+      "format": "json",
+      "memory_bytes": 5534,
+      "primary_key": [
+        "vendor_id"
+      ],
+      "rows": 10,
+      "sha256": "d84c900ea487ac57e18efdb15286f557763daf04931b0dd01eb9d2443e6be7ed",
+      "status": "ok"
+    }
+  },
+  "evidence": {
+    "currency_labels": {
+      "invoice_line_unit_cost_vs_catalog_cost": {
+        "AUD": {
+          "checked": 334,
+          "match": 334
+        },
+        "CAD": {
+          "checked": 333,
+          "match": 333
+        },
+        "EUR": {
+          "checked": 1052,
+          "match": 1052
+        },
+        "GBP": {
+          "checked": 367,
+          "match": 367
+        },
+        "USD": {
+          "checked": 912,
+          "match": 912
+        }
+      },
+      "transactions_unit_price_vs_catalog_price": {
+        "AUD": {
+          "checked": 21,
+          "match": 21
+        },
+        "EUR": {
+          "checked": 27,
+          "match": 27
+        },
+        "GBP": {
+          "checked": 23,
+          "match": 23
+        },
+        "USD": {
+          "checked": 4830,
+          "match": 4830
+        }
+      }
+    },
+    "date_convention": {
+      "epoch_seconds": {
+        "agree": 0,
+        "agree_if_day_first": 0,
+        "agree_if_month_first": 0,
+        "values": 213
+      },
+      "iso_date": {
+        "agree": 209,
+        "agree_if_day_first": 0,
+        "agree_if_month_first": 0,
+        "values": 209
+      },
+      "iso_datetime": {
+        "agree": 193,
+        "agree_if_day_first": 0,
+        "agree_if_month_first": 0,
+        "values": 193
+      },
+      "nn-nn-yyyy": {
+        "agree": 203,
+        "agree_if_day_first": 13,
+        "agree_if_month_first": 203,
+        "values": 203
+      },
+      "nn/nn/yyyy": {
+        "agree": 185,
+        "agree_if_day_first": 185,
+        "agree_if_month_first": 10,
+        "values": 185
+      }
+    }
+  },
+  "findings": [
+    {
+      "check": "exact_duplicate_records",
+      "count": 5,
+      "dataset": "products",
+      "description": "record identical to an earlier one (all fields)",
+      "kind": "violation",
+      "pct": 0.99,
+      "recommendation": "Drop repeats, keep the first; log what was removed",
+      "rule": "products.duplicate",
+      "samples": [
+        "PRD-000027",
+        "PRD-000154",
+        "PRD-000208",
+        "PRD-000303",
+        "PRD-000488"
+      ],
+      "severity": "High",
+      "total": 505
+    },
+    {
+      "check": "missing_required:category",
+      "count": 14,
+      "dataset": "products",
+      "description": "required field `category` missing",
+      "kind": "violation",
+      "pct": 2.77,
+      "recommendation": "Quarantine if it is the key; otherwise null and flag",
+      "rule": "products.missing_category",
+      "samples": [
+        "PRD-000079",
+        "PRD-000094",
+        "PRD-000100",
+        "PRD-000106",
+        "PRD-000127"
+      ],
+      "severity": "High",
+      "total": 505
+    },
+    {
+      "check": "inconsistent_categories:currency",
+      "count": 7,
+      "dataset": "products",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 1.39,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "Usd",
+        "usd"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "placeholder_nulls:rating",
+      "count": 2,
+      "dataset": "products",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 0.4,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        "N/A"
+      ],
+      "severity": "Low",
+      "total": 505
+    },
+    {
+      "check": "boolean_spellings:is_active",
+      "count": 407,
+      "dataset": "products",
+      "description": "8 spellings of true/false",
+      "kind": "violation",
+      "pct": 80.59,
+      "recommendation": "Map tokens to true/false",
+      "rule": "products.boolean",
+      "samples": [
+        "0",
+        "1",
+        "False",
+        "True",
+        "no"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "mixed_date_formats:created_date",
+      "count": 393,
+      "dataset": "products",
+      "description": "5 date formats (dd-Mon-yyyy, iso_date, nn-nn-yyyy, nn/nn/yyyy, yyyy/mm/dd); dominant yyyy/mm/dd",
+      "kind": "violation",
+      "pct": 77.82,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "01-05-2023",
+        "01-12-2020",
+        "01-12-2024",
+        "01-15-2023",
+        "01-30-2024"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "duplicate_sku",
+      "count": 34,
+      "dataset": "products",
+      "description": "SKU shared by different product_ids",
+      "kind": "anomaly",
+      "pct": 6.73,
+      "recommendation": "Keep product_id as the key; flag, do not merge",
+      "rule": "products.sku_conflict",
+      "samples": [
+        "SKU-16626",
+        "SKU-21830",
+        "SKU-30204",
+        "SKU-43175",
+        "SKU-47941"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "invalid_price",
+      "count": 13,
+      "dataset": "products",
+      "description": "price is not a positive number",
+      "kind": "violation",
+      "pct": 2.57,
+      "recommendation": "Null and flag; do not guess",
+      "rule": "products.invalid_price",
+      "samples": [
+        "PRD-000051",
+        "PRD-000067",
+        "PRD-000137",
+        "PRD-000142",
+        "PRD-000191"
+      ],
+      "severity": "High",
+      "total": 505
+    },
+    {
+      "check": "negative_weight",
+      "count": 16,
+      "dataset": "products",
+      "description": "weight_kg < 0",
+      "kind": "violation",
+      "pct": 3.17,
+      "recommendation": "Null and flag",
+      "rule": "products.invalid_weight",
+      "samples": [
+        "PRD-000014",
+        "PRD-000021",
+        "PRD-000077",
+        "PRD-000078",
+        "PRD-000081"
+      ],
+      "severity": "High",
+      "total": 505
+    },
+    {
+      "check": "negative_stock",
+      "count": 6,
+      "dataset": "products",
+      "description": "stock_quantity < 0",
+      "kind": "violation",
+      "pct": 1.19,
+      "recommendation": "Null and flag",
+      "rule": "products.negative_stock",
+      "samples": [
+        "PRD-000005",
+        "PRD-000095",
+        "PRD-000157",
+        "PRD-000162",
+        "PRD-000317"
+      ],
+      "severity": "High",
+      "total": 505
+    },
+    {
+      "check": "rating_out_of_range",
+      "count": 3,
+      "dataset": "products",
+      "description": "rating outside 0–5",
+      "kind": "violation",
+      "pct": 0.59,
+      "recommendation": "Null and flag",
+      "rule": "products.invalid_rating",
+      "samples": [
+        "PRD-000001",
+        "PRD-000008",
+        "PRD-000347"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "currency_not_iso",
+      "count": 20,
+      "dataset": "products",
+      "description": "currency written as an alias ('$', 'usd', 'US Dollar')",
+      "kind": "violation",
+      "pct": 3.96,
+      "recommendation": "Map aliases to ISO 4217",
+      "rule": "products.currency",
+      "samples": [
+        "$",
+        "US Dollar",
+        "US$",
+        "Usd",
+        "usd"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "exact_duplicate_records",
+      "count": 3,
+      "dataset": "customers",
+      "description": "record identical to an earlier one (all fields)",
+      "kind": "violation",
+      "pct": 0.3,
+      "recommendation": "Drop repeats, keep the first; log what was removed",
+      "rule": "customers.duplicate",
+      "samples": [
+        "CUS-00000411",
+        "CUS-00000621",
+        "CUS-00000648"
+      ],
+      "severity": "High",
+      "total": 1003
+    },
+    {
+      "check": "missing_required:email",
+      "count": 34,
+      "dataset": "customers",
+      "description": "required field `email` missing",
+      "kind": "violation",
+      "pct": 3.39,
+      "recommendation": "Quarantine if it is the key; otherwise null and flag",
+      "rule": "customers.missing_email",
+      "samples": [
+        "CUS-00000009",
+        "CUS-00000018",
+        "CUS-00000088",
+        "CUS-00000146",
+        "CUS-00000151"
+      ],
+      "severity": "High",
+      "total": 1003
+    },
+    {
+      "check": "placeholder_nulls:email",
+      "count": 22,
+      "dataset": "customers",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 2.19,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        "N/A"
+      ],
+      "severity": "Low",
+      "total": 1003
+    },
+    {
+      "check": "invalid_email:email",
+      "count": 21,
+      "dataset": "customers",
+      "description": "not a syntactically valid email address",
+      "kind": "violation",
+      "pct": 2.09,
+      "recommendation": "Null and flag",
+      "rule": "customers.invalid_email",
+      "samples": [
+        "BarbaraRodriguez",
+        "DavidPatel",
+        "ElizabethPatel",
+        "FatimaMartinez",
+        "HansJones"
+      ],
+      "severity": "High",
+      "total": 1003
+    },
+    {
+      "check": "placeholder_nulls:phone",
+      "count": 163,
+      "dataset": "customers",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 16.25,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        "UNLISTED"
+      ],
+      "severity": "Low",
+      "total": 1003
+    },
+    {
+      "check": "placeholder_nulls:gender",
+      "count": 83,
+      "dataset": "customers",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 8.28,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        ""
+      ],
+      "severity": "Low",
+      "total": 1003
+    },
+    {
+      "check": "inconsistent_categories:gender",
+      "count": 325,
+      "dataset": "customers",
+      "description": "2 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 32.4,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "FEMALE",
+        "Female",
+        "MALE",
+        "male"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "placeholder_nulls:age",
+      "count": 1,
+      "dataset": "customers",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 0.1,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        "Unknown"
+      ],
+      "severity": "Low",
+      "total": 1003
+    },
+    {
+      "check": "inconsistent_categories:segment",
+      "count": 184,
+      "dataset": "customers",
+      "description": "5 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 18.34,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "BRONZE",
+        "GOLD",
+        "PLATINUM",
+        "SILVER",
+        "bronze"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "mixed_date_formats:registration_date",
+      "count": 790,
+      "dataset": "customers",
+      "description": "5 date formats (epoch_seconds, iso_date, iso_datetime, nn-nn-yyyy, nn/nn/yyyy); dominant epoch_seconds",
+      "kind": "violation",
+      "pct": 78.76,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "01-03-2020",
+        "01-03-2021",
+        "01-07-2023",
+        "01-11-2020",
+        "01-14-2019"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "boolean_spellings:is_active",
+      "count": 496,
+      "dataset": "customers",
+      "description": "8 spellings of true/false",
+      "kind": "violation",
+      "pct": 49.45,
+      "recommendation": "Map tokens to true/false",
+      "rule": "customers.boolean",
+      "samples": [
+        "0",
+        "1",
+        "no",
+        "yes"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "shared_email",
+      "count": 32,
+      "dataset": "customers",
+      "description": "email used by more than one customer_id",
+      "kind": "anomaly",
+      "pct": 3.19,
+      "recommendation": "Flag; do not merge (names, phones and dates differ)",
+      "rule": "customers.shared_email",
+      "samples": [
+        "ahmed.garcia622@yahoo.com",
+        "carlos.kim60@outlook.com",
+        "david.davis584@gmail.com",
+        "james.chen459@mail.com",
+        "james.williams305@outlook.com"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "future_last_purchase_date",
+      "count": 387,
+      "dataset": "customers",
+      "description": "last_purchase_date after as_of_date 2025-01-01",
+      "kind": "violation",
+      "pct": 38.58,
+      "recommendation": "Null and flag",
+      "rule": "customers.future_last_purchase",
+      "samples": [
+        "CUS-00000001",
+        "CUS-00000005",
+        "CUS-00000008",
+        "CUS-00000013",
+        "CUS-00000015"
+      ],
+      "severity": "High",
+      "total": 1003
+    },
+    {
+      "check": "age_out_of_range",
+      "count": 16,
+      "dataset": "customers",
+      "description": "age outside 0–120",
+      "kind": "violation",
+      "pct": 1.6,
+      "recommendation": "Recompute from date_of_birth; else null and flag",
+      "rule": "customers.invalid_age",
+      "samples": [
+        "CUS-00000055",
+        "CUS-00000072",
+        "CUS-00000076",
+        "CUS-00000113",
+        "CUS-00000245"
+      ],
+      "severity": "High",
+      "total": 1003
+    },
+    {
+      "check": "negative_total_spend",
+      "count": 13,
+      "dataset": "customers",
+      "description": "total_spend < 0",
+      "kind": "violation",
+      "pct": 1.3,
+      "recommendation": "Flag; recompute aggregates from transactions",
+      "rule": "customers.negative_total_spend",
+      "samples": [
+        "CUS-00000006",
+        "CUS-00000074",
+        "CUS-00000136",
+        "CUS-00000178",
+        "CUS-00000243"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "registration_vs_metadata",
+      "count": 213,
+      "dataset": "customers",
+      "description": "registration_date differs from metadata.created_at (see date-convention evidence)",
+      "kind": "anomaly",
+      "pct": 21.24,
+      "recommendation": "Take the ISO metadata timestamp",
+      "rule": "customers.registration_from_metadata",
+      "samples": [
+        "1515020400",
+        "1515193200",
+        "1517439600",
+        "1517871600",
+        "1518390000"
+      ],
+      "severity": "Medium",
+      "total": 1003
+    },
+    {
+      "check": "exact_duplicate_records",
+      "count": 10,
+      "dataset": "transactions",
+      "description": "record identical to an earlier one (all fields)",
+      "kind": "violation",
+      "pct": 0.2,
+      "recommendation": "Drop repeats, keep the first; log what was removed",
+      "rule": "transactions.duplicate",
+      "samples": [
+        "TXN-0A96D9B9",
+        "TXN-183C234B",
+        "TXN-28583B15",
+        "TXN-28EC49F1",
+        "TXN-4D5DD8E2"
+      ],
+      "severity": "Critical",
+      "total": 5010
+    },
+    {
+      "check": "mixed_date_formats:transaction_date",
+      "count": 1691,
+      "dataset": "transactions",
+      "description": "2 date formats (iso_date, iso_datetime); dominant iso_datetime",
+      "kind": "violation",
+      "pct": 33.75,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "2022-01-01",
+        "2022-01-03",
+        "2022-01-04",
+        "2022-01-05",
+        "2022-01-06"
+      ],
+      "severity": "Medium",
+      "total": 5010
+    },
+    {
+      "check": "inconsistent_categories:currency",
+      "count": 19,
+      "dataset": "transactions",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 0.38,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "usd"
+      ],
+      "severity": "Medium",
+      "total": 5010
+    },
+    {
+      "check": "boolean_spellings:is_gift",
+      "count": 3319,
+      "dataset": "transactions",
+      "description": "6 spellings of true/false",
+      "kind": "violation",
+      "pct": 66.25,
+      "recommendation": "Map tokens to true/false",
+      "rule": "transactions.boolean",
+      "samples": [
+        "0",
+        "1",
+        "False",
+        "True"
+      ],
+      "severity": "Medium",
+      "total": 5010
+    },
+    {
+      "check": "zero_quantity",
+      "count": 42,
+      "dataset": "transactions",
+      "description": "quantity is 0 (shipping-only line, nothing sold)",
+      "kind": "violation",
+      "pct": 0.84,
+      "recommendation": "Quarantine",
+      "rule": "transactions.zero_quantity",
+      "samples": [
+        "TXN-018E1339",
+        "TXN-01B7D3A3",
+        "TXN-0B141238",
+        "TXN-264D3930",
+        "TXN-274AE98A"
+      ],
+      "severity": "High",
+      "total": 5010
+    },
+    {
+      "check": "returns",
+      "count": 236,
+      "dataset": "transactions",
+      "description": "negative quantity: a return, not an error",
+      "kind": "business_exception",
+      "pct": 4.71,
+      "recommendation": "Keep; mark is_return and treat amounts as refunds",
+      "rule": "transactions.return",
+      "samples": [
+        "TXN-015306C0",
+        "TXN-021ADD07",
+        "TXN-03487A26",
+        "TXN-055BD847",
+        "TXN-05AA4FBD"
+      ],
+      "severity": "Low",
+      "total": 5010
+    },
+    {
+      "check": "negative_shipping_on_sale",
+      "count": 49,
+      "dataset": "transactions",
+      "description": "negative shipping cost on a sale",
+      "kind": "violation",
+      "pct": 0.98,
+      "recommendation": "Flag",
+      "rule": "transactions.negative_shipping",
+      "samples": [
+        "TXN-047D1E89",
+        "TXN-0A96D9B9",
+        "TXN-0EBCEB26",
+        "TXN-10D7EE90",
+        "TXN-14176952"
+      ],
+      "severity": "Medium",
+      "total": 5010
+    },
+    {
+      "check": "junk_notes",
+      "count": 149,
+      "dataset": "transactions",
+      "description": "placeholder notes ('xxxxxxxxxx')",
+      "kind": "violation",
+      "pct": 2.97,
+      "recommendation": "Null and flag",
+      "rule": "transactions.junk_notes",
+      "samples": [
+        "TXN-0249E473",
+        "TXN-02ED9629",
+        "TXN-03563570",
+        "TXN-05245299",
+        "TXN-055BD847"
+      ],
+      "severity": "Low",
+      "total": 5010
+    },
+    {
+      "check": "currency_alias",
+      "count": 74,
+      "dataset": "transactions",
+      "description": "currency written as an alias",
+      "kind": "violation",
+      "pct": 1.48,
+      "recommendation": "Map to ISO 4217",
+      "rule": "transactions.currency",
+      "samples": [
+        "$",
+        "US$",
+        "usd"
+      ],
+      "severity": "Medium",
+      "total": 5010
+    },
+    {
+      "check": "currency_label_contradicted",
+      "count": 71,
+      "dataset": "transactions",
+      "description": "non-USD label, but unit_price equals the USD catalog price",
+      "kind": "anomaly",
+      "pct": 1.42,
+      "recommendation": "Treat amounts as USD; keep source label; never FX-convert",
+      "rule": "transactions.currency_relabelled",
+      "samples": [
+        "AUD",
+        "EUR",
+        "GBP"
+      ],
+      "severity": "Critical",
+      "total": 5010
+    },
+    {
+      "check": "placeholder_nulls:address.city",
+      "count": 1,
+      "dataset": "vendors",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        "Unknown"
+      ],
+      "severity": "Low",
+      "total": 10
+    },
+    {
+      "check": "non_active_vendor_supplying",
+      "count": 2,
+      "dataset": "vendors",
+      "description": "pending/inactive vendor still has catalogue products and sales",
+      "kind": "business_exception",
+      "pct": 20.0,
+      "recommendation": "Keep; surface as a vendor-risk feature",
+      "rule": null,
+      "samples": [
+        "VND-009 (pending: 6 products, 71 sales)",
+        "VND-010 (inactive: 3 products, 16 sales)"
+      ],
+      "severity": "Medium",
+      "total": 10
+    },
+    {
+      "check": "missing_contact",
+      "count": 1,
+      "dataset": "vendors",
+      "description": "no contact name, email or phone",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Flag",
+      "rule": "vendors.missing_contact",
+      "samples": [
+        "VND-010"
+      ],
+      "severity": "High",
+      "total": 10
+    },
+    {
+      "check": "incomplete_contact",
+      "count": 1,
+      "dataset": "vendors",
+      "description": "contact details partially missing",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Flag",
+      "rule": "vendors.incomplete_contact",
+      "samples": [
+        "VND-009"
+      ],
+      "severity": "Medium",
+      "total": 10
+    },
+    {
+      "check": "missing_reliability",
+      "count": 1,
+      "dataset": "vendors",
+      "description": "reliability_score missing",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Flag",
+      "rule": "vendors.missing_reliability",
+      "samples": [
+        "VND-009"
+      ],
+      "severity": "Low",
+      "total": 10
+    },
+    {
+      "check": "exact_duplicate_records",
+      "count": 5,
+      "dataset": "invoices",
+      "description": "record identical to an earlier one (all fields)",
+      "kind": "violation",
+      "pct": 0.62,
+      "recommendation": "Drop repeats, keep the first; log what was removed",
+      "rule": "invoices.duplicate",
+      "samples": [
+        "INV-22095E76",
+        "INV-5AEDBE83",
+        "INV-86081C03",
+        "INV-A83DA848",
+        "INV-C559686C"
+      ],
+      "severity": "Critical",
+      "total": 805
+    },
+    {
+      "check": "mixed_date_formats:invoice_date",
+      "count": 599,
+      "dataset": "invoices",
+      "description": "4 date formats (iso_date, nn-nn-yyyy, nn/nn/yyyy, yyyy/mm/dd); dominant yyyy/mm/dd",
+      "kind": "violation",
+      "pct": 74.41,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "01-05-2022",
+        "01-10-2024",
+        "01-11-2022",
+        "01-11-2023",
+        "01-14-2022"
+      ],
+      "severity": "Medium",
+      "total": 805
+    },
+    {
+      "check": "mixed_date_formats:due_date",
+      "count": 396,
+      "dataset": "invoices",
+      "description": "2 date formats (iso_date, nn/nn/yyyy); dominant iso_date",
+      "kind": "violation",
+      "pct": 49.19,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "01/03/2022",
+        "01/04/2022",
+        "01/06/2024",
+        "01/07/2024",
+        "01/08/2023"
+      ],
+      "severity": "Medium",
+      "total": 805
+    },
+    {
+      "check": "inconsistent_categories:currency",
+      "count": 7,
+      "dataset": "invoices",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 0.87,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "usd"
+      ],
+      "severity": "Medium",
+      "total": 805
+    },
+    {
+      "check": "duplicate_invoice_number",
+      "count": 40,
+      "dataset": "invoices",
+      "description": "invoice_number shared by different invoice_ids (numbers are unique per vendor only)",
+      "kind": "anomaly",
+      "pct": 4.97,
+      "recommendation": "Key on invoice_id; flag",
+      "rule": "invoices.duplicate_number",
+      "samples": [
+        "INV-AUSSPORT-2024-00015",
+        "INV-BEAUTYBL-2023-00169",
+        "INV-BEAUTYBL-2024-00239",
+        "INV-BOOKWRLD-2024-00045",
+        "INV-GLOBGAD-2024-00017"
+      ],
+      "severity": "Medium",
+      "total": 805
+    },
+    {
+      "check": "total_mismatch",
+      "count": 20,
+      "dataset": "invoices",
+      "description": "total_amount != subtotal + tax + shipping",
+      "kind": "violation",
+      "pct": 2.48,
+      "recommendation": "Flag",
+      "rule": "invoices.total_mismatch",
+      "samples": [
+        "INV-1076BC78",
+        "INV-1CBC81CF",
+        "INV-42BA2198",
+        "INV-456E808E",
+        "INV-5219FA55"
+      ],
+      "severity": "Critical",
+      "total": 805
+    },
+    {
+      "check": "due_date_ignores_terms",
+      "count": 805,
+      "dataset": "invoices",
+      "description": "due_date equals invoice_date despite NET terms",
+      "kind": "anomaly",
+      "pct": 100.0,
+      "recommendation": "Derive due_date = invoice_date + NET days; keep source as src_due_date",
+      "rule": "invoices.due_date_from_terms",
+      "samples": [
+        "INV-00564E2B",
+        "INV-007CD370",
+        "INV-00A60E20",
+        "INV-00AAE9E4",
+        "INV-00C172E9"
+      ],
+      "severity": "High",
+      "total": 805
+    },
+    {
+      "check": "paid_before_invoiced",
+      "count": 8,
+      "dataset": "invoices",
+      "description": "payment_date earlier than invoice_date",
+      "kind": "violation",
+      "pct": 0.99,
+      "recommendation": "Flag",
+      "rule": "invoices.paid_before_invoiced",
+      "samples": [
+        "INV-2269F88C",
+        "INV-455F8191",
+        "INV-52469F77",
+        "INV-57AF8E5A",
+        "INV-74230110"
+      ],
+      "severity": "High",
+      "total": 805
+    },
+    {
+      "check": "number_year_mismatch",
+      "count": 550,
+      "dataset": "invoices",
+      "description": "year embedded in invoice_number != invoice year",
+      "kind": "anomaly",
+      "pct": 68.32,
+      "recommendation": "Flag; do not derive dates from the number",
+      "rule": "invoices.number_year_mismatch",
+      "samples": [
+        "INV-AUSSPORT-2022-00004",
+        "INV-AUSSPORT-2022-00005",
+        "INV-AUSSPORT-2022-00009",
+        "INV-AUSSPORT-2022-00048",
+        "INV-AUSSPORT-2022-00111"
+      ],
+      "severity": "Low",
+      "total": 805
+    },
+    {
+      "check": "currency_label_contradicted",
+      "count": 557,
+      "dataset": "invoices",
+      "description": "non-USD label, but every line cost equals the USD catalog cost",
+      "kind": "anomaly",
+      "pct": 69.19,
+      "recommendation": "Treat amounts as USD; keep source label; never FX-convert",
+      "rule": "invoices.currency_relabelled",
+      "samples": [
+        "AUD",
+        "CAD",
+        "EUR",
+        "GBP"
+      ],
+      "severity": "Critical",
+      "total": 805
+    },
+    {
+      "check": "missing_required:ticket_id",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "required field `ticket_id` missing",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Quarantine if it is the key; otherwise null and flag",
+      "rule": "support_tickets.invalid_id",
+      "samples": [
+        "∅"
+      ],
+      "severity": "Critical",
+      "total": 20
+    },
+    {
+      "check": "placeholder_nulls:ticket_id",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        ""
+      ],
+      "severity": "Low",
+      "total": 20
+    },
+    {
+      "check": "inconsistent_categories:channel",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "CHAT"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "inconsistent_categories:priority",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "HIGH"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "inconsistent_categories:status",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "1 value(s) spelled several ways (case/space/underscore)",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Normalise to lower snake_case",
+      "rule": null,
+      "samples": [
+        "Resolved"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "mixed_date_formats:created_at",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "2 date formats (iso_datetime, nn-nn-yyyy); dominant iso_datetime",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "20-03-2025"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "partial_extract",
+      "count": 230,
+      "dataset": "support_tickets",
+      "description": "envelope total_count=250, file holds 20 records",
+      "kind": "anomaly",
+      "pct": 92.0,
+      "recommendation": "Report completeness; confirm with the source whether this is a sample",
+      "rule": null,
+      "samples": [],
+      "severity": "Low",
+      "total": 250
+    },
+    {
+      "check": "satisfaction_out_of_range",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "satisfaction_score outside 1–5",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Null and flag",
+      "rule": "support_tickets.invalid_satisfaction",
+      "samples": [
+        "TKT-000009"
+      ],
+      "severity": "High",
+      "total": 20
+    },
+    {
+      "check": "resolved_without_score",
+      "count": 2,
+      "dataset": "support_tickets",
+      "description": "resolved/closed ticket has no score",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Flag",
+      "rule": "support_tickets.missing_satisfaction",
+      "samples": [
+        "TKT-000004",
+        "TKT-000015"
+      ],
+      "severity": "Low",
+      "total": 20
+    },
+    {
+      "check": "missing_required:review_id",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "required field `review_id` missing",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Quarantine if it is the key; otherwise null and flag",
+      "rule": "product_reviews.invalid_id",
+      "samples": [
+        "∅"
+      ],
+      "severity": "Critical",
+      "total": 30
+    },
+    {
+      "check": "missing_required:rating",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "required field `rating` missing",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Quarantine if it is the key; otherwise null and flag",
+      "rule": "product_reviews.missing_rating",
+      "samples": [
+        "REV-000025"
+      ],
+      "severity": "High",
+      "total": 30
+    },
+    {
+      "check": "placeholder_nulls:review_id",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "missing value encoded as text ('N/A', 'Unknown', 'UNLISTED', or '' in JSON)",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Map placeholder tokens to null on read",
+      "rule": null,
+      "samples": [
+        ""
+      ],
+      "severity": "Low",
+      "total": 30
+    },
+    {
+      "check": "mixed_date_formats:review_date",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "2 date formats (iso_date, nn/nn/yyyy); dominant iso_date",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Parse with explicit per-format rules, never format inference",
+      "rule": null,
+      "samples": [
+        "25/03/2025"
+      ],
+      "severity": "Medium",
+      "total": 30
+    },
+    {
+      "check": "partial_extract",
+      "count": 120,
+      "dataset": "product_reviews",
+      "description": "envelope total_count=150, file holds 30 records",
+      "kind": "anomaly",
+      "pct": 80.0,
+      "recommendation": "Report completeness; confirm with the source whether this is a sample",
+      "rule": null,
+      "samples": [],
+      "severity": "Low",
+      "total": 150
+    },
+    {
+      "check": "rating_out_of_range",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "rating outside 1–5",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Null and flag",
+      "rule": "product_reviews.invalid_rating",
+      "samples": [
+        "REV-000022"
+      ],
+      "severity": "High",
+      "total": 30
+    },
+    {
+      "check": "missing_sentiment",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "sentiment missing",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Flag",
+      "rule": "product_reviews.missing_sentiment",
+      "samples": [
+        "REV-000025"
+      ],
+      "severity": "Low",
+      "total": 30
+    },
+    {
+      "check": "unverified_purchase_claim",
+      "count": 29,
+      "dataset": "product_reviews",
+      "description": "verified_purchase is true but the customer never bought the product",
+      "kind": "anomaly",
+      "pct": 96.67,
+      "recommendation": "Flag",
+      "rule": "product_reviews.unverified_purchase",
+      "samples": [
+        "REV-000001",
+        "REV-000002",
+        "REV-000003",
+        "REV-000004",
+        "REV-000005"
+      ],
+      "severity": "Medium",
+      "total": 30
+    },
+    {
+      "check": "partial_extract",
+      "count": 15,
+      "dataset": "call_transcripts",
+      "description": "envelope total_count=25, file holds 10 records",
+      "kind": "anomaly",
+      "pct": 60.0,
+      "recommendation": "Report completeness; confirm with the source whether this is a sample",
+      "rule": null,
+      "samples": [],
+      "severity": "Low",
+      "total": 25
+    },
+    {
+      "check": "missing_ticket_reference",
+      "count": 3,
+      "dataset": "call_transcripts",
+      "description": "call has no ticket_id",
+      "kind": "violation",
+      "pct": 30.0,
+      "recommendation": "Flag",
+      "rule": "call_transcripts.missing_ticket_ref",
+      "samples": [
+        "CALL-000006",
+        "CALL-000008",
+        "CALL-000009"
+      ],
+      "severity": "Medium",
+      "total": 10
+    },
+    {
+      "check": "third_party_speakers",
+      "count": 8,
+      "dataset": "call_transcripts",
+      "description": "utterances by a speaker other than agent/customer (system prompts, supervisors)",
+      "kind": "business_exception",
+      "pct": 80.0,
+      "recommendation": "Flag",
+      "rule": null,
+      "samples": [
+        "CALL-000001",
+        "CALL-000002",
+        "CALL-000003",
+        "CALL-000004",
+        "CALL-000005"
+      ],
+      "severity": "Low",
+      "total": 10
+    },
+    {
+      "check": "exact_duplicate_records",
+      "count": 18,
+      "dataset": "invoice_lines",
+      "description": "record identical to an earlier one (all fields)",
+      "kind": "violation",
+      "pct": 0.5,
+      "recommendation": "Drop repeats, keep the first; log what was removed",
+      "rule": "invoice_lines.duplicate",
+      "samples": [
+        "INV-22095E76|1",
+        "INV-5AEDBE83|1",
+        "INV-5AEDBE83|2",
+        "INV-86081C03|1",
+        "INV-86081C03|2"
+      ],
+      "severity": "Critical",
+      "total": 3618
+    },
+    {
+      "check": "missing_product",
+      "count": 494,
+      "dataset": "invoice_lines",
+      "description": "line has no product_id: a non-catalogue item (service, freight) or a gap",
+      "kind": "anomaly",
+      "pct": 13.65,
+      "recommendation": "Keep; flag",
+      "rule": "invoice_lines.missing_product",
+      "samples": [
+        "INV-00AAE9E4|8",
+        "INV-014FA67A|3",
+        "INV-0223E74D|1",
+        "INV-022606AB|7",
+        "INV-023EB976|3"
+      ],
+      "severity": "Medium",
+      "total": 3618
+    },
+    {
+      "check": "credit_lines",
+      "count": 67,
+      "dataset": "invoice_lines",
+      "description": "negative quantity: a credit line",
+      "kind": "business_exception",
+      "pct": 1.85,
+      "recommendation": "Keep; mark is_credit",
+      "rule": "invoice_lines.credit",
+      "samples": [
+        "INV-0223E74D|1",
+        "INV-06507D30|4",
+        "INV-0F562FFA|1",
+        "INV-1D7DBE69|3",
+        "INV-1E461C3E|3"
+      ],
+      "severity": "Low",
+      "total": 3618
+    },
+    {
+      "check": "vendor_mismatch",
+      "count": 72,
+      "dataset": "invoice_lines",
+      "description": "product belongs to a different vendor than the invoice",
+      "kind": "anomaly",
+      "pct": 1.99,
+      "recommendation": "Flag",
+      "rule": "invoice_lines.vendor_mismatch",
+      "samples": [
+        "INV-0EE84822|1",
+        "INV-2269F88C|1",
+        "INV-5204ECE5|1",
+        "INV-5204ECE5|2",
+        "INV-5204ECE5|3"
+      ],
+      "severity": "Medium",
+      "total": 3618
+    },
+    {
+      "check": "orphan:vendor_id->vendors",
+      "count": 1,
+      "dataset": "products",
+      "description": "vendor_id not found in vendors",
+      "kind": "violation",
+      "pct": 0.2,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "products.unknown_vendor",
+      "samples": [
+        "VND-INVALID"
+      ],
+      "severity": "Medium",
+      "total": 505
+    },
+    {
+      "check": "orphan:customer_id->customers",
+      "count": 89,
+      "dataset": "transactions",
+      "description": "customer_id not found in customers",
+      "kind": "violation",
+      "pct": 1.78,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "transactions.unknown_customer",
+      "samples": [
+        "CUS-INVALID-1",
+        "CUS-INVALID-10",
+        "CUS-INVALID-11",
+        "CUS-INVALID-13",
+        "CUS-INVALID-14"
+      ],
+      "severity": "Critical",
+      "total": 5010
+    },
+    {
+      "check": "orphan:product_id->products",
+      "count": 109,
+      "dataset": "transactions",
+      "description": "product_id not found in products",
+      "kind": "violation",
+      "pct": 2.18,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "transactions.unknown_product",
+      "samples": [
+        "PRD-DELETED-1",
+        "PRD-DELETED-10",
+        "PRD-DELETED-11",
+        "PRD-DELETED-12",
+        "PRD-DELETED-13"
+      ],
+      "severity": "Critical",
+      "total": 5010
+    },
+    {
+      "check": "orphan:vendor_id->vendors",
+      "count": 16,
+      "dataset": "invoices",
+      "description": "vendor_id not found in vendors",
+      "kind": "violation",
+      "pct": 1.99,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "invoices.unknown_vendor",
+      "samples": [
+        "VND-INVALID-172",
+        "VND-INVALID-266",
+        "VND-INVALID-285",
+        "VND-INVALID-358",
+        "VND-INVALID-388"
+      ],
+      "severity": "High",
+      "total": 805
+    },
+    {
+      "check": "orphan:product_id->products",
+      "count": 46,
+      "dataset": "invoice_lines",
+      "description": "product_id not found in products",
+      "kind": "violation",
+      "pct": 1.27,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "invoice_lines.unknown_product",
+      "samples": [
+        "PRD-EXTERNAL-1184",
+        "PRD-EXTERNAL-1289",
+        "PRD-EXTERNAL-1492",
+        "PRD-EXTERNAL-1749",
+        "PRD-EXTERNAL-1806"
+      ],
+      "severity": "High",
+      "total": 3618
+    },
+    {
+      "check": "orphan:customer_id->customers",
+      "count": 1,
+      "dataset": "support_tickets",
+      "description": "customer_id not found in customers",
+      "kind": "violation",
+      "pct": 5.0,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "support_tickets.unknown_customer",
+      "samples": [
+        "INVALID_ID"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "orphan:product_id->products",
+      "count": 3,
+      "dataset": "support_tickets",
+      "description": "product_id not found in products",
+      "kind": "violation",
+      "pct": 15.0,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "support_tickets.unknown_product",
+      "samples": [
+        "PRD-000555",
+        "PRD-000666",
+        "PRD-000789"
+      ],
+      "severity": "Medium",
+      "total": 20
+    },
+    {
+      "check": "orphan:product_id->products",
+      "count": 1,
+      "dataset": "product_reviews",
+      "description": "product_id not found in products",
+      "kind": "violation",
+      "pct": 3.33,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "product_reviews.unknown_product",
+      "samples": [
+        "PRD-INVALID"
+      ],
+      "severity": "Medium",
+      "total": 30
+    },
+    {
+      "check": "orphan:customer_id->customers",
+      "count": 1,
+      "dataset": "call_transcripts",
+      "description": "customer_id not found in customers",
+      "kind": "violation",
+      "pct": 10.0,
+      "recommendation": "Keep and flag (revenue stays complete); the graph draws no edge",
+      "rule": "call_transcripts.unknown_customer",
+      "samples": [
+        "INVALID"
+      ],
+      "severity": "Medium",
+      "total": 10
+    }
+  ],
+  "relationships": [
+    {
+      "child": "products",
+      "column": "vendor_id",
+      "distinct_orphan_ids": 1,
+      "null_references": 0,
+      "orphan_patterns": {
+        "VND-INVALI<1>": 1
+      },
+      "orphan_pct": 0.2,
+      "orphans": 1,
+      "parent": "vendors",
+      "rows": 505,
+      "rule": "products.unknown_vendor",
+      "samples": [
+        "VND-INVALID"
+      ]
+    },
+    {
+      "child": "transactions",
+      "column": "customer_id",
+      "distinct_orphan_ids": 63,
+      "null_references": 0,
+      "orphan_patterns": {
+        "CUS-INVALID-<1>": 10,
+        "CUS-INVALID-<2>": 79
+      },
+      "orphan_pct": 1.78,
+      "orphans": 89,
+      "parent": "customers",
+      "rows": 5010,
+      "rule": "transactions.unknown_customer",
+      "samples": [
+        "CUS-INVALID-1",
+        "CUS-INVALID-10",
+        "CUS-INVALID-11",
+        "CUS-INVALID-13",
+        "CUS-INVALID-14"
+      ]
+    },
+    {
+      "child": "transactions",
+      "column": "product_id",
+      "distinct_orphan_ids": 66,
+      "null_references": 0,
+      "orphan_patterns": {
+        "PRD-DELETED-<1>": 14,
+        "PRD-DELETED-<2>": 95
+      },
+      "orphan_pct": 2.18,
+      "orphans": 109,
+      "parent": "products",
+      "rows": 5010,
+      "rule": "transactions.unknown_product",
+      "samples": [
+        "PRD-DELETED-1",
+        "PRD-DELETED-10",
+        "PRD-DELETED-11",
+        "PRD-DELETED-12",
+        "PRD-DELETED-13"
+      ]
+    },
+    {
+      "child": "invoices",
+      "column": "vendor_id",
+      "distinct_orphan_ids": 15,
+      "null_references": 0,
+      "orphan_patterns": {
+        "VND-INVALID-<3>": 16
+      },
+      "orphan_pct": 1.99,
+      "orphans": 16,
+      "parent": "vendors",
+      "rows": 805,
+      "rule": "invoices.unknown_vendor",
+      "samples": [
+        "VND-INVALID-172",
+        "VND-INVALID-266",
+        "VND-INVALID-285",
+        "VND-INVALID-358",
+        "VND-INVALID-388"
+      ]
+    },
+    {
+      "child": "invoice_lines",
+      "column": "invoice_id",
+      "distinct_orphan_ids": 0,
+      "null_references": 0,
+      "orphan_patterns": {},
+      "orphan_pct": 0.0,
+      "orphans": 0,
+      "parent": "invoices",
+      "rows": 3618,
+      "rule": "invoice_lines.unknown_invoice",
+      "samples": []
+    },
+    {
+      "child": "invoice_lines",
+      "column": "product_id",
+      "distinct_orphan_ids": 46,
+      "null_references": 494,
+      "orphan_patterns": {
+        "PRD-EXTERNAL-<4>": 46
+      },
+      "orphan_pct": 1.27,
+      "orphans": 46,
+      "parent": "products",
+      "rows": 3618,
+      "rule": "invoice_lines.unknown_product",
+      "samples": [
+        "PRD-EXTERNAL-1184",
+        "PRD-EXTERNAL-1289",
+        "PRD-EXTERNAL-1492",
+        "PRD-EXTERNAL-1749",
+        "PRD-EXTERNAL-1806"
+      ]
+    },
+    {
+      "child": "support_tickets",
+      "column": "customer_id",
+      "distinct_orphan_ids": 1,
+      "null_references": 0,
+      "orphan_patterns": {
+        "INVALID_I<1>": 1
+      },
+      "orphan_pct": 5.0,
+      "orphans": 1,
+      "parent": "customers",
+      "rows": 20,
+      "rule": "support_tickets.unknown_customer",
+      "samples": [
+        "INVALID_ID"
+      ]
+    },
+    {
+      "child": "support_tickets",
+      "column": "product_id",
+      "distinct_orphan_ids": 3,
+      "null_references": 3,
+      "orphan_patterns": {
+        "PRD-<6>": 3
+      },
+      "orphan_pct": 15.0,
+      "orphans": 3,
+      "parent": "products",
+      "rows": 20,
+      "rule": "support_tickets.unknown_product",
+      "samples": [
+        "PRD-000555",
+        "PRD-000666",
+        "PRD-000789"
+      ]
+    },
+    {
+      "child": "product_reviews",
+      "column": "customer_id",
+      "distinct_orphan_ids": 0,
+      "null_references": 0,
+      "orphan_patterns": {},
+      "orphan_pct": 0.0,
+      "orphans": 0,
+      "parent": "customers",
+      "rows": 30,
+      "rule": "product_reviews.unknown_customer",
+      "samples": []
+    },
+    {
+      "child": "product_reviews",
+      "column": "product_id",
+      "distinct_orphan_ids": 1,
+      "null_references": 0,
+      "orphan_patterns": {
+        "PRD-INVALI<1>": 1
+      },
+      "orphan_pct": 3.33,
+      "orphans": 1,
+      "parent": "products",
+      "rows": 30,
+      "rule": "product_reviews.unknown_product",
+      "samples": [
+        "PRD-INVALID"
+      ]
+    },
+    {
+      "child": "call_transcripts",
+      "column": "ticket_id",
+      "distinct_orphan_ids": 0,
+      "null_references": 3,
+      "orphan_patterns": {},
+      "orphan_pct": 0.0,
+      "orphans": 0,
+      "parent": "support_tickets",
+      "rows": 10,
+      "rule": "call_transcripts.unknown_ticket",
+      "samples": []
+    },
+    {
+      "child": "call_transcripts",
+      "column": "customer_id",
+      "distinct_orphan_ids": 1,
+      "null_references": 0,
+      "orphan_patterns": {
+        "INVALI<1>": 1
+      },
+      "orphan_pct": 10.0,
+      "orphans": 1,
+      "parent": "customers",
+      "rows": 10,
+      "rule": "call_transcripts.unknown_customer",
+      "samples": [
+        "INVALID"
+      ]
+    }
+  ],
+  "summary": {
+    "by_kind": {
+      "anomaly": 14,
+      "business_exception": 4,
+      "violation": 68
+    },
+    "by_severity": {
+      "Critical": 10,
+      "High": 19,
+      "Low": 19,
+      "Medium": 38
+    },
+    "checks_run": 364,
+    "checks_with_issues": 86,
+    "datasets": 9,
+    "invoice_lines": 3618,
+    "records": 7393
+  }
+}

@@ -1,5 +1,8 @@
 # Senior Data Engineer - Take-Home Assessment
 
+> **Reviewers:** the solution is summarised in [Solution: Where to Find Each Deliverable](#solution-where-to-find-each-deliverable),
+> and the design rationale is in [`ARCHITECTURE.md`](ARCHITECTURE.md). The original brief follows.
+
 ## Overview
 
 Welcome to the technical assessment for the **Senior Data Engineer** position. This exercise is designed to evaluate your ability to build production-quality data pipelines, handle real-world data quality challenges, perform feature engineering, and model data for a graph database (SurrealDB GraphRAG).
@@ -584,6 +587,41 @@ async with Surreal("ws://localhost:8000/rpc") as db:
     await db.signin({"user": "root", "pass": "root"})
     await db.use("test", "ecommerce")
 ```
+
+---
+
+## Solution: Where to Find Each Deliverable
+
+Start with [`ARCHITECTURE.md`](ARCHITECTURE.md): design decisions, trade-offs and what I would
+change for production. The generated reports under `outputs/` are committed, so results can be
+reviewed without running anything.
+
+```bash
+docker compose up -d surrealdb     # SurrealDB 4.0 for the graph stage
+python run_pipeline.py             # ingest → validate → clean → report → features → graph
+pytest --cov=src                   # 185 tests, 93% coverage
+```
+
+| Task | Deliverable | Where |
+|---|---|---|
+| 1 | Ingestion for all eight source files | `src/ingestion/loaders.py` (Bronze with lineage: `outputs/processed/bronze/`) |
+| 1 | Schema definitions | `src/validation/schemas/` (Pydantic v2), rules in `src/validation/rules.py` |
+| 1 | Data quality report | [`outputs/quality_report.md`](outputs/quality_report.md) |
+| 1 | Quarantine with reasons | [`outputs/quarantine/`](outputs/quarantine/) (raw record, rule, message; duplicates in `_duplicates.csv`) |
+| 2 | Transformation code with lineage | `src/cleaning/` (lineage columns carried from Bronze to Silver and quarantine) |
+| 2 | Cleaning rules | [`docs/CLEANING_RULES.md`](docs/CLEANING_RULES.md) |
+| 2 | Cleaned vs rejected statistics | [`outputs/quality_report.md`](outputs/quality_report.md), section 1 |
+| 3 | Feature code | `src/features/build.py` |
+| 3 | Feature documentation | [`docs/FEATURES.md`](docs/FEATURES.md) |
+| 3 | Sample output | [`outputs/feature_samples.md`](outputs/feature_samples.md) |
+| 4 | Schema design and modelling write-up | [`docs/GRAPH_MODEL.md`](docs/GRAPH_MODEL.md), `src/graph/schema.surql` |
+| 4 | Loading code | `src/graph/loader.py`, `src/graph/stage.py` |
+| 4 | Graph queries with explanations (8) | `src/graph/queries.py`, results in [`outputs/graph_queries.md`](outputs/graph_queries.md) |
+| 5 | Tests (>70% coverage) | `tests/unit/`, `tests/integration/` |
+| 5 | Configuration | [`config/pipeline_config.yaml`](config/pipeline_config.yaml) |
+| 5 | Architecture | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
+| 5 | Logging examples | [`docs/LOGGING.md`](docs/LOGGING.md) |
+| – | Raw data profile (done before any rule was written) | [`outputs/profiling/raw_data_profile.md`](outputs/profiling/raw_data_profile.md) |
 
 ---
 

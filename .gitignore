@@ -20,3 +20,7 @@ outputs/logs/
 
 # Embedded SurrealDB data file (rebuilt by the graph stage)
 outputs/graph/
+
+# Bronze/Silver/Gold tables (rebuilt by `python run_pipeline.py`). The small generated reports
+# under outputs/ are committed so the results can be reviewed without running anything.
+outputs/processed/

@@ -9,7 +9,7 @@ pydantic>=2.0.0
 pandera>=0.18.0
 
 # SurrealDB
-surrealdb>=0.3.0  # Python client for SurrealDB
+surrealdb>=2.0.0  # Python client for SurrealDB (2.x: AsyncSurreal, RecordID, embedded engine)
 
 # Testing
 pytest>=7.4.0

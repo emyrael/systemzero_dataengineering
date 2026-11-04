@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 import pandas as pd
 import pytest
@@ -10,11 +11,14 @@ import pytest
 from src.cleaning.clean import CLEAN_SUBDIR, DUPLICATES_FILE
 from src.cleaning.clean import METRICS_FILE as CLEANING_METRICS_FILE
 from src.ingestion.loaders import BATCH_COLUMNS
+from src.features.build import recognised_sales
 from src.pipeline import PipelineContext, run_pipeline
+from src.reporting.dashboard import GOLD_TABLES, dashboard_data, render_dashboard
+from src.reporting.quality_report import merge_metrics
 from src.validation.validator import METRICS_FILE, VALIDATED_SUBDIR
 
 pytestmark = pytest.mark.integration
-STAGES = ["ingest", "validate", "clean", "report", "features"]
+STAGES = ["ingest", "validate", "clean", "report", "features", "dashboard"]
 
 
 @pytest.fixture
@@ -115,3 +119,26 @@ def test_silver_rows_trace_back_to_bronze(ran):
     customers = pd.read_parquet(config.paths.silver_dir / VALIDATED_SUBDIR / "customers.parquet")
     assert customers["_record_key"].notna().all()
     assert (customers["_record_key"].str.upper().str.strip() == customers["customer_id"]).mean() > 0.99
+
+
+def test_dashboard_agrees_with_gold_and_holds_no_customer_data(ran):
+    config, validation = ran
+    gold = {n: pd.read_parquet(config.paths.gold_dir / f"{n}.parquet") for n in GOLD_TABLES}
+    tx = pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / "transactions.parquet")
+    cleaning = json.loads((config.paths.silver_dir / CLEAN_SUBDIR / CLEANING_METRICS_FILE).read_text())
+    quality = merge_metrics(validation, cleaning["entities"])
+    d = dashboard_data(gold, tx, quality, "2025-01-01")
+    customers, k = gold["customer_features"], d["kpis"]
+
+    assert k["net_revenue"] == pytest.approx(recognised_sales(tx)["net_revenue"].sum(), abs=0.01)
+    assert sum(v for _, v in d["categories"]) + d["unlisted_product_revenue"] == pytest.approx(k["net_revenue"], abs=1)
+    assert sum(v["revenue"] for v in d["vendors"]) == pytest.approx(gold["vendor_features"]["revenue_generated"].sum(), abs=1)
+    assert k["buying_customers"] == (customers["total_orders"] > 0).sum()
+    assert sum(n for _, n, _ in d["rfm"]) == sum(n for _, n in d["recency"]) == len(customers)
+    assert sum(n for _, n in d["payment"]) == len(tx)
+    assert all(sum(q["parts"]) == q["total"] for q in d["quality"])  # every record accounted for
+
+    html = config.paths.dashboard.read_text()
+    assert html == render_dashboard(d)  # the stage wrote exactly this: deterministic, no timestamp
+    assert "CUS-" not in html  # aggregates only: no customer ids ...
+    assert not re.search(r"[\w.+-]+@[\w-]+\.[a-z]{2,}", html)  # ... and no email addresses

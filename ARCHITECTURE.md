@@ -25,6 +25,7 @@ graph LR
     SC --> F[features] --> G[(Gold<br/>feature tables)]
     G --> GR[graph] --> S[(SurrealDB)]
     SC --> GR
+    G --> D[dashboard] --> DH[dashboard/index.html]
 ```
 
 | Stage | Input → output | What it owns |
@@ -35,6 +36,7 @@ graph LR
 | `report` | Silver → `outputs/quality_report.md` | cleaned vs rejected statistics, generated from rule results |
 | `features` | Silver clean → `gold/*_features.parquet` | the 21 brief features plus RFM, one revenue definition |
 | `graph` | Silver + Gold → SurrealDB, `outputs/graph_queries.md` | schema, idempotent load, the 8 queries |
+| `dashboard` | Gold (+ Silver transactions, quality metrics) → `outputs/dashboard/index.html` | KPI page: aggregates only, no customer data |
 
 One run on the assessment data takes about five seconds end to end:
 11,011 records in (including 3,618 exploded invoice lines), 44 quarantined, 41 duplicates removed, 2,390 nodes and 11,833 edges loaded.
@@ -245,7 +247,26 @@ into a table and trended without parsing text.
 **In production.** Ship the JSON logs to the platform's log store; turn the per-stage counts into
 metrics with alerts (quarantine rate, skipped edges, stage duration).
 
-### 2.13 Testing strategy
+### 2.13 KPI dashboard as a generated static page
+
+**Choice.** The last stage writes one self-contained HTML file (`outputs/dashboard/index.html`):
+revenue, orders, return rate, customer segments, products, vendor invoice health and data quality.
+Charts are inline SVG generated in Python; a few lines of JavaScript add tooltips. No CDN, no server,
+no timestamp.
+
+**Why.**
+- **Same numbers as the rest of the system.** Revenue uses the shared `recognised_sales` rule; an integration test checks the page against the Gold tables and that every source record is accounted for.
+- **Safe to share.** Only aggregates leave the pipeline: no customer ids, names or contact details (also tested).
+- **Zero infrastructure.** It opens offline, deploys as a static site, and is identical on every rerun, so it can be committed and diffed.
+
+**Trade-off.** No filters or drill-down, and it only refreshes when the pipeline runs. For a
+take-home, a page anyone can open beats a BI tool nobody has access to.
+
+**In production.** A BI layer over the Gold tables (Databricks SQL dashboards or Genie, Superset,
+Looker) with access control, scheduled refresh and drill-down. The KPI definitions here become that
+layer's semantic model.
+
+### 2.14 Testing strategy
 
 | Layer | What is tested | Example |
 |---|---|---|
@@ -253,7 +274,7 @@ metrics with alerts (quarantine rate, skipped edges, stage duration).
 | Integration | the real pipeline on the real data | every record accounted for (valid + quarantined = read; clean = valid − duplicates); feature revenue reconciles with transactions; reruns are identical |
 | Graph | load into SurrealDB, embedded and Docker | idempotent reload, pruning of deleted records, query results equal pandas |
 
-185 tests, **93% line coverage** on `src/`. Integration tests write to temporary directories and
+193 tests, **93% line coverage** on `src/`. Integration tests write to temporary directories and
 to a separate test database, never to the pipeline's outputs.
 
 ---

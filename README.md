@@ -598,8 +598,8 @@ reviewed without running anything.
 
 ```bash
 docker compose up -d surrealdb     # SurrealDB 4.0 for the graph stage
-python run_pipeline.py             # ingest → validate → clean → report → features → graph
-pytest --cov=src                   # 185 tests, 93% coverage
+python run_pipeline.py             # ingest → validate → clean → report → features → graph → dashboard
+pytest --cov=src                   # 193 tests, 93% coverage
 ```
 
 | Task | Deliverable | Where |
@@ -621,6 +621,7 @@ pytest --cov=src                   # 185 tests, 93% coverage
 | 5 | Configuration | [`config/pipeline_config.yaml`](config/pipeline_config.yaml) |
 | 5 | Architecture | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
 | 5 | Logging examples | [`docs/LOGGING.md`](docs/LOGGING.md) |
+| – | KPI dashboard (aggregates only; open in a browser, works offline) | [`outputs/dashboard/index.html`](outputs/dashboard/index.html) |
 | – | Raw data profile (done before any rule was written) | [`outputs/profiling/raw_data_profile.md`](outputs/profiling/raw_data_profile.md) |
 | – | Code map and change impact, made with my open-source tool [Daygent](https://github.com/emyrael/daygent) | [`docs/LINEAGE.md`](docs/LINEAGE.md) |
 

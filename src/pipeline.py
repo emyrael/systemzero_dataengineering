@@ -58,6 +58,12 @@ def _graph(ctx: PipelineContext) -> None:
     ctx.artifacts["graph"] = run_graph(ctx.config, batch_id=ctx.run_id)
 
 
+def _dashboard(ctx: PipelineContext) -> None:
+    from src.reporting.dashboard import write_dashboard
+
+    ctx.artifacts["dashboard"] = write_dashboard(ctx.config)
+
+
 def _report(ctx: PipelineContext) -> None:
     from src.reporting.quality_report import write_quality_report
 
@@ -74,6 +80,7 @@ STAGES: dict[str, Stage] = {
     "report": Stage("report", _report, depends_on=("clean",)),
     "features": Stage("features", _features, depends_on=("clean",)),
     "graph": Stage("graph", _graph, depends_on=("features",)),
+    "dashboard": Stage("dashboard", _dashboard, depends_on=("features",)),
 }
 
 

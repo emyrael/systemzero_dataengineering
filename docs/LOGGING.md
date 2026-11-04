@@ -25,7 +25,8 @@ always records DEBUG and up).
 
 ## Example: a full run (console)
 
-Excerpt from `python run_pipeline.py` on the assessment data (absolute paths shortened):
+Excerpt from `python run_pipeline.py` on the assessment data (absolute paths shortened; the
+`dashboard` line and the final summary come from a later run, after that stage was added):
 
 ```text
 21:47:17 | INFO    | pipeline   | Pipeline started as_of_date=2025-01-01 log_file=outputs/logs/pipeline_20261104T204717Z-061308.jsonl
@@ -48,7 +49,8 @@ Excerpt from `python run_pipeline.py` on the assessment data (absolute paths sho
 21:47:22 | WARNING | graph      | Edges skipped: end not in graph reason=invoice_item:out=product count=537
 21:47:22 | INFO    | graph      | Graph queries written queries=8
 21:47:22 | INFO    | graph      | Stage finished duration_s=3.63
-21:47:22 | INFO    | pipeline   | Pipeline finished succeeded=['ingest', 'validate', 'clean', 'report', 'features', 'graph'] failed=[] skipped=[]
+21:47:22 | INFO    | dashboard  | Dashboard written path=outputs/dashboard/index.html net_revenue=2739162.03 orders=1102
+21:47:22 | INFO    | pipeline   | Pipeline finished succeeded=['ingest', 'validate', 'clean', 'report', 'features', 'graph', 'dashboard'] failed=[] skipped=[]
 ```
 
 What a reader gets from this without opening any file:

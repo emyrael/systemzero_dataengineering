@@ -30,7 +30,7 @@ _MONTHS = {m: i for i, m in enumerate(
     ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], start=1
 )}
 
-# Date conventions, established from the data (see PLAN.md, finding 1): customer
+# Date conventions, established from the data (docs/CLEANING_RULES.md, Dates): customer
 # registration dates checked against their ISO metadata.created_at copy matched 203/203
 # for dash-separated values as month-first and 185/185 for slash-separated values as
 # day-first. Unambiguous values (a part > 12) always override the convention.

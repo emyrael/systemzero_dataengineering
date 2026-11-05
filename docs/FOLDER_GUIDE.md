@@ -43,7 +43,6 @@ Files that sit next to the folders, not inside one.
 | `run_pipeline.py` | The program you start. Loads config, creates output folders, makes a run id, runs the stages you asked for. Exit code 0 when nothing failed. |
 | `README.md` | The original assessment brief: the eight files, the known data problems, and the five tasks. |
 | `ARCHITECTURE.md` | Why the pipeline is built this way: medallion layers, one revenue rule, what was traded off. |
-| `PLAN.md` | Working notes from building it. Findings from the raw data, what each phase finished. Not the submission document. |
 | `pyproject.toml` | Project name and pytest settings (where tests live, the `integration` marker). |
 | `requirements.txt` | Libraries: pandas, pydantic, pyarrow, loguru, pyyaml, phonenumbers, surrealdb, pytest. |
 | `docker-compose.yml` | Starts SurrealDB 4.0.0 in Docker (and an unused Redis). Data is kept in a Docker volume. |

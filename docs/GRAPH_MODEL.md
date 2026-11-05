@@ -88,4 +88,4 @@ The integration tests run against both: always the embedded engine (`mem://`), a
 - **Revenue in queries** always uses `purchased[WHERE recognised = true]`.
 - **Q4 groups by customer id, not name.** Grouping by name merged two different customers called Robert Dubois into one "top customer".
 - **Q4 wraps its grouping in a subquery.** Ordering by the aggregate in the same statement returned rows in name order.
-- **Q8's correlation is computed by the report** from the per-vendor rows, because SurrealQL has no correlation function. With 10 vendors, r = −0.32 is indicative only.
+- **Q8's correlation is computed by the report** from the per-vendor rows, because SurrealQL has no correlation function. r = −0.32 across 10 vendors, but it is set by one vendor: Discontinued Supplies has 3 invoices due and $641 of sales, and without it r = +0.82. The report recomputes r leaving out each vendor in turn (`correlation_summary`) and says so; no relationship can be claimed from this data.

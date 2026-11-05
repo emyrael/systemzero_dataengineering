@@ -40,6 +40,7 @@ it stays null, with a flag if the source value was invalid.
 | Currency | aliases (`$`, `usd`, `US Dollar`, `€`…) → ISO code | 6 spellings in products |
 | Phone | E.164 via `phonenumbers`, default region US | every number is NANP-formatted regardless of country |
 | Email | lower-cased, must match a basic address pattern; otherwise null + flag | `N/A`, names in the email column |
+| Text | Unicode NFC, trimmed, inner whitespace collapsed; non-ASCII kept as UTF-8, never stripped | 16 product descriptions carry `中文`, `日本語`, `café`, `résumé`; all arrive intact in Silver |
 | Names | re-cased only when all-lower or ALL-UPPER | keeps `McDonald`, `van der Berg` |
 | Enums | lower snake_case (`Gold` → `gold`) | mixed-case segments, statuses, priorities |
 | Integers | nullable `Int64` | a null must not turn `age` into `44.0` |

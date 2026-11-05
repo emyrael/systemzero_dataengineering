@@ -120,6 +120,7 @@ ORDER BY overdue_balance DESC, vendor""",
         "q8_payment_vs_sales",
         "Is a vendor's on-time payment performance related to how well its products sell?",
         """SELECT name AS vendor,
+       count(->billed->invoice[WHERE is_credit_note = false AND due_date <= $as_of]) AS invoices_due,
        math::round(math::mean(->billed->invoice[WHERE is_credit_note = false AND due_date <= $as_of]
            .map(|$i| IF $i.payment_status = 'paid' AND $i.payment_date <= $i.due_date THEN 100 ELSE 0 END))) AS on_time_pct,
        math::round(math::sum(->supplies->product<-purchased[WHERE recognised = true].net_revenue)) AS product_sales
@@ -127,7 +128,8 @@ FROM vendor
 ORDER BY vendor""",
         "Both measures come from traversals: invoices billed by the vendor, and sales of the products it "
         "supplies. SurrealQL has no correlation function, so the report computes Pearson r from these "
-        "rows (`pearson_r`). With ten vendors the coefficient is indicative, not significant.",
+        "rows (`pearson_r`), then leaves out one vendor at a time (`correlation_summary`) to show whether "
+        "a single vendor drives the result. With ten vendors the coefficient is indicative, not significant.",
     ),
 )
 
@@ -142,6 +144,34 @@ def pearson_r(xs: list[float], ys: list[float]) -> float | None:
     sxx = sum((x - mx) ** 2 for x, _ in pairs)
     syy = sum((y - my) ** 2 for _, y in pairs)
     return round(sxy / math.sqrt(sxx * syy), 3) if sxx and syy else None
+
+
+def leave_one_out(xs: list[float], ys: list[float]) -> list[float | None]:
+    """Pearson r recomputed with each point left out in turn."""
+    return [pearson_r(xs[:i] + xs[i + 1:], ys[:i] + ys[i + 1:]) for i in range(len(xs))]
+
+
+def correlation_summary(rows: list[dict[str, Any]], x: str, y: str, label: str, size: str) -> str:
+    """Pearson r of ``x`` vs ``y`` and how much it depends on any single row.
+
+    A coefficient over a handful of points can be set by one of them, so the sentence names the
+    row whose removal moves r the most, with its sample ``size``, and says whether the sign flips.
+    """
+    xs, ys = [row.get(x) for row in rows], [row.get(y) for row in rows]
+    r = pearson_r(xs, ys)
+    if r is None:
+        return f"**Pearson r ({x} vs {y}):** not computable from {len(rows)} rows."
+    text = f"**Pearson r ({x} vs {y}): {r}** across {len(rows)} {label}s."
+    without = [(r_i, row) for r_i, row in zip(leave_one_out(xs, ys), rows) if r_i is not None]
+    if not without:
+        return text
+    r_out, row = max(without, key=lambda pair: abs(pair[0] - r))
+    low, high = min(v for v, _ in without), max(v for v, _ in without)
+    text += (f" Leaving out one {label} at a time gives r from {low} to {high}; the largest change comes from "
+             f"dropping {row.get(label)} ({row.get(size)} {size.replace('_', ' ')}): r = {r_out}.")
+    if (r_out > 0) != (r > 0) or abs(r_out - r) > 0.5:
+        text += f" One {label} decides the result, so no relationship can be claimed from this data."
+    return text
 
 
 def as_rows(result: Any) -> list[dict[str, Any]]:

@@ -274,7 +274,7 @@ layer's semantic model.
 | Integration | the real pipeline on the real data | every record accounted for (valid + quarantined = read; clean = valid − duplicates); feature revenue reconciles with transactions; reruns are identical |
 | Graph | load into SurrealDB, embedded and Docker | idempotent reload, pruning of deleted records, query results equal pandas |
 
-193 tests, **93% line coverage** on `src/`. Integration tests write to temporary directories and
+196 tests, **93% line coverage** on `src/`. Integration tests write to temporary directories and
 to a separate test database, never to the pipeline's outputs.
 
 ---
@@ -287,7 +287,7 @@ to a separate test database, never to the pipeline's outputs.
 | Validation engine | Pydantic per record | Will not scale to very large volumes without vectorising |
 | Orchestration | A small stage runner with dependencies | No scheduling, retries or backfill UI |
 | Text sources | Loaded as given; the files hold 20/30/10 of 250/150/25 records | Text analytics and GraphRAG run on a partial extract (flagged in the report) |
-| Q8 correlation | Computed across 10 vendors | r = −0.32 is indicative only |
+| Q8 correlation | Computed across 10 vendors | r = −0.32, but +0.82 without one 3-invoice vendor; the report shows this, and no relationship is claimed |
 | Embeddings | Text nodes are ready for GraphRAG; no vector index yet | Semantic search is a next step |
 
 ## 4. What I would change for production

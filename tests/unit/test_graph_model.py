@@ -10,7 +10,7 @@ from surrealdb.cbor import CBORTag
 
 from src.graph.loader import upsert_statement, wire
 from src.graph.model import _Builder, slug, value
-from src.graph.queries import QUERIES, pearson_r
+from src.graph.queries import QUERIES, correlation_summary, leave_one_out, pearson_r
 
 
 @pytest.mark.parametrize(
@@ -67,6 +67,27 @@ def test_pearson_r():
     assert pearson_r([1, 2, 3, None], [3, 2, 1, 5]) == -1.0
     assert pearson_r([1, 2], [1, 2]) is None  # too few pairs
     assert pearson_r([1, 1, 1], [1, 2, 3]) is None  # no variance
+
+
+def test_leave_one_out_drops_each_point_once():
+    assert leave_one_out([1, 2, 3, 4], [2, 4, 6, 8]) == [1.0, 1.0, 1.0, 1.0]
+
+
+def test_correlation_summary_names_the_row_that_decides_the_result():
+    # Four vendors on a clear upward line, plus one tiny outlier that turns r negative.
+    rows = [{"vendor": v, "x": x, "y": y, "invoices_due": n}
+            for v, x, y, n in [("A", 10, 100, 80), ("B", 20, 200, 80), ("C", 30, 300, 80), ("D", 40, 400, 80),
+                               ("Tiny", 90, 1, 3)]]
+    text = correlation_summary(rows, "x", "y", "vendor", "invoices_due")
+    assert text.startswith("**Pearson r (x vs y): -0.")
+    assert "dropping Tiny (3 invoices due): r = 1.0" in text
+    assert "no relationship can be claimed" in text
+
+
+def test_correlation_summary_stays_quiet_when_the_result_is_stable():
+    rows = [{"vendor": v, "x": x, "y": 2 * x + d, "invoices_due": 50} for v, x, d in
+            [("A", 1, 0), ("B", 2, 1), ("C", 3, 0), ("D", 4, 1), ("E", 5, 0), ("F", 6, 1)]]
+    assert "no relationship can be claimed" not in correlation_summary(rows, "x", "y", "vendor", "invoices_due")
 
 
 def test_there_are_eight_uniquely_named_queries():

@@ -14,7 +14,7 @@ from surrealdb import AsyncSurreal, RecordID
 from src.cleaning.clean import CLEAN_SUBDIR
 from src.graph.loader import connect, load_graph, log_load, wire
 from src.graph.model import EDGE_TABLES, NODE_TABLES, Graph, build_graph
-from src.graph.queries import QUERIES, as_rows, pearson_r
+from src.graph.queries import QUERIES, as_rows, correlation_summary
 from src.utils.config import PROJECT_ROOT, PipelineConfig
 
 SILVER_TABLES = ("vendors", "products", "customers", "transactions", "invoices", "invoice_lines",
@@ -87,8 +87,7 @@ def render_report(results: dict[str, list[dict[str, Any]]], params: dict[str, An
         rows = results[q.id]
         out += [f"## {number}. {q.question}", "", "```sql", q.surql, "```", "", q.explanation, "", *_table(rows), ""]
         if q.id == "q8_payment_vs_sales":
-            r = pearson_r([row.get("on_time_pct") for row in rows], [row.get("product_sales") for row in rows])
-            out += [f"**Pearson r (on-time % vs product sales): {r}** across {len(rows)} vendors.", ""]
+            out += [correlation_summary(rows, "on_time_pct", "product_sales", "vendor", "invoices_due"), ""]
     return "\n".join(out)
 
 

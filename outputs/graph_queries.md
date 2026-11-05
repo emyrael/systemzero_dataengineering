@@ -183,6 +183,7 @@ Vendor -> overdue invoices -> billed products. `days_overdue` is a Gold feature 
 
 ```sql
 SELECT name AS vendor,
+       count(->billed->invoice[WHERE is_credit_note = false AND due_date <= $as_of]) AS invoices_due,
        math::round(math::mean(->billed->invoice[WHERE is_credit_note = false AND due_date <= $as_of]
            .map(|$i| IF $i.payment_status = 'paid' AND $i.payment_date <= $i.due_date THEN 100 ELSE 0 END))) AS on_time_pct,
        math::round(math::sum(->supplies->product<-purchased[WHERE recognised = true].net_revenue)) AS product_sales
@@ -190,19 +191,19 @@ FROM vendor
 ORDER BY vendor
 ```
 
-Both measures come from traversals: invoices billed by the vendor, and sales of the products it supplies. SurrealQL has no correlation function, so the report computes Pearson r from these rows (`pearson_r`). With ten vendors the coefficient is indicative, not significant.
+Both measures come from traversals: invoices billed by the vendor, and sales of the products it supplies. SurrealQL has no correlation function, so the report computes Pearson r from these rows (`pearson_r`), then leaves out one vendor at a time (`correlation_summary`) to show whether a single vendor drives the result. With ten vendors the coefficient is indicative, not significant.
 
-| on_time_pct | product_sales | vendor |
-|---|---|---|
-| 14.00 | 306,927.00 | Aussie Sports Gear |
-| 13.00 | 290,984.00 | BeautyBliss Cosmetics |
-| 10.00 | 243,873.00 | BookWorld Publishing |
-| 67.00 | 641.00 | Discontinued Supplies Inc |
-| 23.00 | 436,491.00 | FashionFirst Italia |
-| 24.00 | 300,169.00 | Global Gadgets Ltd |
-| 19.00 | 270,014.00 | MapleCraft Toys |
-| 23.00 | 327,359.00 | Nordic Home Essentials |
-| 0.00 | 35,060.00 | QuickSupply Co |
-| 19.00 | 444,349.00 | TechFlow Electronics |
+| invoices_due | on_time_pct | product_sales | vendor |
+|---|---|---|---|
+| 96 | 14.00 | 306,927.00 | Aussie Sports Gear |
+| 84 | 13.00 | 290,984.00 | BeautyBliss Cosmetics |
+| 80 | 10.00 | 243,873.00 | BookWorld Publishing |
+| 3 | 67.00 | 641.00 | Discontinued Supplies Inc |
+| 84 | 23.00 | 436,491.00 | FashionFirst Italia |
+| 101 | 24.00 | 300,169.00 | Global Gadgets Ltd |
+| 101 | 19.00 | 270,014.00 | MapleCraft Toys |
+| 94 | 23.00 | 327,359.00 | Nordic Home Essentials |
+| 4 | 0.00 | 35,060.00 | QuickSupply Co |
+| 104 | 19.00 | 444,349.00 | TechFlow Electronics |
 
-**Pearson r (on-time % vs product sales): -0.318** across 10 vendors.
+**Pearson r (on_time_pct vs product_sales): -0.318** across 10 vendors. Leaving out one vendor at a time gives r from -0.73 to 0.817; the largest change comes from dropping Discontinued Supplies Inc (3 invoices due): r = 0.817. One vendor decides the result, so no relationship can be claimed from this data.

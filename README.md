@@ -599,7 +599,7 @@ reviewed without running anything.
 ```bash
 docker compose up -d surrealdb     # SurrealDB 4.0 for the graph stage
 python run_pipeline.py             # ingest → validate → clean → report → features → graph → dashboard
-pytest --cov=src                   # 193 tests, 93% coverage
+pytest --cov=src                   # 196 tests, 93% coverage
 ```
 
 | Task | Deliverable | Where |

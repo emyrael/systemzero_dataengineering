@@ -196,7 +196,7 @@ The full rationale is in [docs/GRAPH_MODEL.md](docs/GRAPH_MODEL.md). The decisio
 - **no email, phone or street address in the graph** (data minimisation).
 
 **Two engines.** The default target is the SurrealDB 4.0 server in Docker. The Python client's
-embedded engine (SurrealDB 2.0) remains available for running without Docker. The two differ:
+embedded engine (SurrealDB 2.x, core 2.3.10) remains available for running without Docker. The two differ:
 - the client sends datetimes in a format the 4.0 server rejects, so the loader encodes them itself;
 - function names changed between versions, so the queries stick to functions common to both.
 

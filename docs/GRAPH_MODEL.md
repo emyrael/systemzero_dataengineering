@@ -71,7 +71,7 @@ To query the loaded graph by hand:
 docker exec -it coding-test-surrealdb /surreal sql --endpoint http://localhost:8000 --user root --pass root --ns test --db ecommerce
 ```
 
-**Two engines, one result.** The embedded engine in the `surrealdb` 2.0 Python client is SurrealDB **2.0**, while the Docker server is **4.0**, and they differ in ways that matter:
+**Two engines, one result.** The embedded engine in the `surrealdb` 2.0 Python client is SurrealDB **2.x** (`surrealdb-core` 2.3.10), while the Docker server is **4.0**, and they differ in ways that matter:
 
 | Difference | Handling |
 |---|---|

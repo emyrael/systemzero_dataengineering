@@ -5,7 +5,7 @@ services:
   # SurrealDB - Graph database for GraphRAG
   surrealdb:
     # Pinned so every run uses the same server version. The surrealdb 2.0 Python client embeds a
-    # SurrealDB 2.0 engine (mem://, surrealkv://); the loader and queries work on both (docs/GRAPH_MODEL.md).
+    # SurrealDB 2.x engine (surrealdb-core 2.3.10; mem://, surrealkv://); the loader and queries work on both (docs/GRAPH_MODEL.md).
     image: surrealdb/surrealdb:v4.0.0
     container_name: coding-test-surrealdb
     user: root

@@ -667,25 +667,3 @@ which counts after duplicates are removed.
 | All 387 non-null `last_purchase_date` values are after `as_of_date` | Nulled and flagged; recency recomputed from transactions |
 
 The full rule set and the reasoning behind it are in [`docs/CLEANING_RULES.md`](docs/CLEANING_RULES.md).
-
----
-
-
-## Questions?
-
-If you have questions about the requirements, please email [contact email]. We're happy to clarify scope but cannot provide implementation guidance.
-
----
-
-## What We're Looking For
-
-Beyond technical skills, we're evaluating:
-
-- **Problem-solving approach:** How do you handle ambiguity and data quality issues?
-- **Communication:** Can you explain your design decisions clearly?
-- **Pragmatism:** Do you make reasonable trade-offs given time constraints?
-- **Attention to detail:** Do you catch the data quality issues?
-- **Production mindset:** Is this code you'd be comfortable deploying?
-- **Graph thinking:** Do you understand when and how to leverage graph relationships?
-
-Good luck! We look forward to reviewing your submission.

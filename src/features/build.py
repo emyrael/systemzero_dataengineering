@@ -123,6 +123,13 @@ def customer_features(
 def product_features(
     products: pd.DataFrame, vendors: pd.DataFrame, sales: pd.DataFrame, window: Window, turnover_days: int
 ) -> pd.DataFrame:
+    """One row per product: sales volume, revenue, velocity, turnover, price tier, weighted score.
+
+    ``sales`` must already be the recognised sales (see ``recognised_sales``), so returns reduce
+    units and revenue. Velocity is sale lines per month since the product was created (or the
+    window start, if later). Turnover is units sold in the last ``turnover_days`` divided by
+    current stock (null when stock <= 0). Price tiers are price quartiles.
+    """
     by_product = sales.groupby("product_id")
     f = products[["product_id", "product_name", "category", "vendor_id", "price", "rating", "stock_quantity",
                   "is_active"]].copy()
@@ -157,6 +164,11 @@ def price_tier_bounds(products: pd.DataFrame) -> list[float]:
 def vendor_features(
     vendors: pd.DataFrame, product_feats: pd.DataFrame, invoices: pd.DataFrame, window: Window
 ) -> pd.DataFrame:
+    """One row per vendor, aggregated from its products and its invoices.
+
+    ``invoice_payment_rate`` is the share of invoices already due at ``window.as_of`` that were
+    paid on or before their due date; credit notes are excluded from every invoice measure.
+    """
     f = vendors[["vendor_id", "vendor_name", "status", "reliability_score"]].copy()
     by_vendor = product_feats.groupby("vendor_id")
     active = product_feats[product_feats["is_active"].fillna(False)].groupby("vendor_id").size()
@@ -180,6 +192,13 @@ def vendor_features(
 
 
 def invoice_features(invoices: pd.DataFrame, lines: pd.DataFrame, products: pd.DataFrame, window: Window) -> pd.DataFrame:
+    """One row per invoice: payment timing, overdue days, line diversity and reconciliation.
+
+    ``days_overdue`` is counted from the due date to ``window.as_of`` for unpaid invoices only.
+    Reconciliation compares each line's unit cost with the catalog cost and uses the amount
+    checks from validation; invoices with no catalog lines get no flag
+    (``reconciliation_note = no_catalog_lines``).
+    """
     f = invoices[["invoice_id", "vendor_id", "invoice_date", "due_date", "payment_status", "total_amount"]].copy()
     invoiced, due, paid_on = _ts(f["invoice_date"]), _ts(f["due_date"]), _ts(invoices["payment_date"])
     days_to_payment = (paid_on - invoiced).dt.days
@@ -213,6 +232,11 @@ def invoice_features(invoices: pd.DataFrame, lines: pd.DataFrame, products: pd.D
 
 
 def build_features(tables: Tables, config: PipelineConfig) -> Tables:
+    """Build the four Gold feature tables from Silver ``clean`` tables.
+
+    The window runs from the first transaction to ``run.as_of_date``. Every table uses the same
+    recognised sales, so revenue agrees across customers, products and vendors.
+    """
     tx = tables["transactions"]
     window = Window(start=_ts(tx["transaction_date"]).min(), as_of=pd.Timestamp(config.run.as_of_date))
     sales = recognised_sales(tx)
@@ -260,6 +284,7 @@ def _markdown_table(df: pd.DataFrame) -> list[str]:
 
 
 def run_features(config: PipelineConfig) -> Tables:
+    """Features stage: read Silver ``clean``, write the Gold Parquet tables and the sample report."""
     clean_dir = config.paths.silver_dir / CLEAN_SUBDIR
     needed = ("customers", "products", "vendors", "transactions", "invoices", "invoice_lines")
     tables = {name: pd.read_parquet(clean_dir / f"{name}.parquet") for name in needed}

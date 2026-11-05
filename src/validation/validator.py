@@ -74,6 +74,11 @@ def _split_events(events: list[str]) -> tuple[list[str], list[str]]:
 def validate_record(
     entity: str, model: type[RecordModel], record: dict[str, Any], context: dict[str, Any]
 ) -> RecordOutcome:
+    """Validate one raw record against its Pydantic model.
+
+    Returns the parsed row with the fixes and flags the validators recorded, or, if the model
+    rejects the record, no row and one rejection per error (rule, field, message).
+    """
     ctx = {**context, "events": []}
     try:
         parsed = model.model_validate(record, context=ctx)
@@ -112,6 +117,11 @@ def _typed_frame(model: type[RecordModel], rows: list[dict[str, Any]]) -> pd.Dat
 def validate_entity(
     entity: str, bronze_rows: list[dict[str, Any]], context: dict[str, Any]
 ) -> tuple[pd.DataFrame, pd.DataFrame, EntityMetrics]:
+    """Validate all Bronze rows of one entity.
+
+    Returns the valid rows as a typed DataFrame (with lineage, ``dq_fixes`` and ``dq_flags``),
+    the quarantined rows with their rules, details and raw record, and the counts per rule.
+    """
     model = SCHEMAS[entity]
     metrics = EntityMetrics(entity=entity)
     valid_rows, quarantine_rows = [], []

@@ -126,6 +126,11 @@ def _not_observed(entities: dict[str, dict]) -> list[str]:
 
 
 def render_quality_report(manifest: list[dict], validation: dict[str, Any], cleaning: dict[str, Any]) -> str:
+    """Render the data quality report markdown from the ingest manifest and the metrics files.
+
+    Sections: summary per entity, completeness against file envelopes, issues by entity with
+    counts per rule, and the registered checks that found nothing in this run.
+    """
     entities = merge_metrics(validation["entities"], cleaning["entities"])
     lines = [
         "# Data Quality Report",

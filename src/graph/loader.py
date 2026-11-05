@@ -54,6 +54,12 @@ def upsert_statement(table: str, records: list[Record], relation: bool) -> str:
 
 
 async def connect(config: SurrealConfig, url: str) -> AsyncSurreal:
+    """Open a SurrealDB connection and select the configured namespace and database.
+
+    Remote URLs (``ws``/``http``) sign in with the configured credentials; a connection failure
+    becomes a ``ConnectionError`` that says how to start the server or use the embedded engine.
+    Embedded URLs (``mem://``, ``surrealkv://``) need no sign-in.
+    """
     db = AsyncSurreal(url)
     if url.split("://", 1)[0] in REMOTE_SCHEMES:
         username, password = config.credentials()

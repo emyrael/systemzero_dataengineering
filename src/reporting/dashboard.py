@@ -304,6 +304,7 @@ def _kpi(label: str, value: str, note: str) -> str:
 
 
 def render_dashboard(d: dict[str, Any]) -> str:
+    """Render the dashboard data as one self-contained HTML page (inline CSS, SVG and JS)."""
     k = d["kpis"]
     start, end = (f"{pd.Timestamp(x).day} {pd.Timestamp(x):%b %Y}" for x in d["window"])
     pct = lambda part, whole: f"{100 * part / whole:.0f}%" if whole else "–"  # noqa: E731
@@ -424,6 +425,7 @@ def render_dashboard(d: dict[str, Any]) -> str:
 
 
 def write_dashboard(config: PipelineConfig) -> Path:
+    """Dashboard stage: read Gold, Silver transactions and quality metrics, write the HTML page."""
     gold = {n: pd.read_parquet(config.paths.gold_dir / f"{n}.parquet") for n in GOLD_TABLES}
     transactions = pd.read_parquet(config.paths.silver_dir / CLEAN_SUBDIR / "transactions.parquet")
     validation = json.loads((config.paths.silver_dir / VALIDATED_SUBDIR / METRICS_FILE).read_text())

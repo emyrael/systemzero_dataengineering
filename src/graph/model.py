@@ -102,6 +102,13 @@ class _Builder:
 
 def build_graph(silver: dict[str, pd.DataFrame], gold: dict[str, pd.DataFrame], country_regions: dict[str, str],
                 batch_id: str) -> Graph:
+    """Turn Silver ``clean`` and Gold feature tables into graph nodes and edges.
+
+    Order: reference nodes (region, country, category), entity nodes with their Gold features
+    merged in, text nodes, then edges. ``purchased`` gets one edge per transaction with a
+    ``recognised`` flag; ``similar_to`` links products bought by the same customer, both ways.
+    An edge whose end is not a node is skipped and counted in ``Graph.skipped``.
+    """
     b = _Builder(batch_id)
     vendors = silver["vendors"].merge(gold["vendor_features"].drop(columns=["vendor_name", "status", "reliability_score"]),
                                       on="vendor_id", how="left")

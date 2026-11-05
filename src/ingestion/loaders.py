@@ -103,6 +103,11 @@ def read_records(path: Path, source: SourceConfig) -> tuple[list[dict[str, Any]]
 def to_bronze_rows(
     source_name: str, records: list[dict[str, Any]], file_meta: dict[str, Any], key_fields: tuple[str, ...]
 ) -> list[dict[str, Any]]:
+    """Wrap source records as Bronze rows: the raw record plus lineage columns.
+
+    Each row gets the file metadata, its 1-based position in the file, the business key and a
+    hash of the record, so any later row can be traced back to the exact source line.
+    """
     return [
         {
             **file_meta,
@@ -149,6 +154,11 @@ def explode_invoice_lines(invoice_rows: list[dict[str, Any]]) -> list[dict[str, 
 def ingest_source(
     name: str, config: PipelineConfig, batch_id: str, ingested_at: str
 ) -> tuple[list[dict], SourceManifest]:
+    """Read one source file and return its Bronze rows and a manifest entry.
+
+    The manifest records the file's hash, size and row count. When the file carries an envelope
+    with ``total_count`` that differs from the records found, a completeness note is added.
+    """
     source = config.sources[name]
     path = config.source_path(name)
     meta = file_metadata(path, batch_id, ingested_at)

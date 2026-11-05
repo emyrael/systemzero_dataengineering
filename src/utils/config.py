@@ -42,6 +42,7 @@ class PathsConfig(_Strict):
         )
 
     def output_dirs(self) -> list[Path]:
+        """Every directory the pipeline writes to, so they can be created up front."""
         return [
             self.output_dir,
             self.bronze_dir,

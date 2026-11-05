@@ -131,6 +131,13 @@ def deduplicate(entity: str, df: pd.DataFrame, key: tuple[str, ...]) -> tuple[pd
 
 
 def check_references(tables: Tables, metrics: dict[str, CleaningMetrics]) -> None:
+    """Flag rows whose foreign key points at a record that does not exist.
+
+    Covers every pair in ``FOREIGN_KEYS`` (e.g. a transaction's ``customer_id`` missing from
+    customers). The row is kept: an orphan is still a real event. Null keys are skipped, since
+    validation already flagged them. Also flags invoice lines whose product belongs to a
+    different vendor than the invoice.
+    """
     for fk in FOREIGN_KEYS:
         if fk.entity not in tables or fk.parent not in tables:
             continue
@@ -150,6 +157,12 @@ def check_references(tables: Tables, metrics: dict[str, CleaningMetrics]) -> Non
 
 
 def check_consistency(tables: Tables, metrics: dict[str, CleaningMetrics]) -> None:
+    """Flag values that must be unique but are shared, and reviews that claim a purchase.
+
+    ``UNIQUE_VALUES`` lists the columns (customer email, product SKU, invoice number). A review
+    marked ``verified_purchase`` with no transaction for that customer and product is flagged
+    ``product_reviews.unverified_purchase``.
+    """
     for entity, column, rule in UNIQUE_VALUES:
         if entity in tables:
             df = tables[entity]
@@ -185,6 +198,12 @@ def _relabel_currency(
 
 
 def fix_currencies(tables: Tables, base: str, metrics: dict[str, CleaningMetrics]) -> None:
+    """Relabel currency codes to ``base`` where the amounts prove they are already ``base``.
+
+    A transaction is confirmed when its unit price equals the catalog price; an invoice when every
+    checkable line's unit cost equals the catalog cost (credit lines by absolute value). Confirmed
+    rows get a fix, the rest a flag; the source label is kept in ``src_currency``.
+    """
     if "products" not in tables:
         return
     catalog = tables["products"].set_index("product_id")
@@ -260,6 +279,11 @@ def clean_tables(
 
 
 def run_cleaning(config: PipelineConfig) -> dict[str, CleaningMetrics]:
+    """Clean stage: read Silver ``validated``, write Silver ``clean`` and the duplicates file.
+
+    Logs counts per entity and writes the cleaning metrics JSON that the quality report and the
+    dashboard read. Returns the metrics per entity.
+    """
     validated_dir = config.paths.silver_dir / VALIDATED_SUBDIR
     out_dir = config.paths.silver_dir / CLEAN_SUBDIR
     validated = json.loads((validated_dir / VALIDATION_METRICS_FILE).read_text())

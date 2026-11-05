@@ -50,6 +50,10 @@ def is_null(value: Any) -> bool:
 
 
 def parse_bool(value: Any) -> bool | None:
+    """Parse any of the boolean spellings in the sources (``yes``, ``Y``, ``1``, ``False``...).
+
+    Null tokens return ``None``; an unknown token raises ``ValueError`` so the caller can flag it.
+    """
     if is_null(value):
         return None
     if isinstance(value, bool):

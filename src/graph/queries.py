@@ -135,6 +135,11 @@ ORDER BY vendor""",
 
 
 def pearson_r(xs: list[float], ys: list[float]) -> float | None:
+    """Pearson correlation of paired values, rounded to 3 decimals.
+
+    Pairs with a missing value are dropped. Returns ``None`` with fewer than three pairs or
+    when either side has no variance.
+    """
     pairs = [(x, y) for x, y in zip(xs, ys) if x is not None and y is not None]
     if len(pairs) < 3:
         return None

@@ -1,0 +1,33 @@
+# Runs the full test suite on every push and pull request, including the graph tests
+# against the same pinned SurrealDB image as docker-compose.yml.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Start SurrealDB
+        # --wait blocks until the container's healthcheck passes.
+        run: docker compose up -d --wait surrealdb
+
+      - name: Run tests with coverage
+        run: pytest --cov=src --cov-report=term-missing --cov-fail-under=70
+
+      - name: SurrealDB logs on failure
+        if: failure()
+        run: docker compose logs surrealdb
